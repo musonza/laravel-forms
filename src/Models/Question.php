@@ -10,6 +10,8 @@ class Question extends Model
     protected $fillable = [
         'title',
         'label',
+        'place_holder',
+        'help_text',
         'description',
         'is_required',
         'properties',

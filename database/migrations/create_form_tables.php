@@ -25,6 +25,8 @@ class CreateFormTables extends Migration
             $table->unsignedInteger('form_id');
             $table->string('title');
             $table->string('label')->nullable();
+            $table->string('place_holder')->nullable();
+            $table->string('help_text')->nullable();
             $table->boolean('is_required')->default(true);
             $table->text('description')->nullable();
             $table->text('field_type');
