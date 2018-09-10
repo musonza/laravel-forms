@@ -21,4 +21,19 @@ class Form extends Model
     {
         return $this->hasMany(Question::class);
     }
+
+    /**
+     * A form has many submissions.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function submissions()
+    {
+        return $this->hasMany(Submission::class);
+    }
+
+    public function addSubmission($submission)
+    {
+        return $this->submissions()->create($submission);
+    }
 }
