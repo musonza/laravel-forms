@@ -28,4 +28,15 @@ class ListTest extends TestCase
             ->assertStatus(200)
             ->assertJsonCount(3, 'data');
     }
+
+    public function testGetForm()
+    {
+        $response = $this->getJson(route('forms.show', $id = 2));
+
+        $response
+            ->assertStatus(200)
+            ->assertJson([
+                'title' => 'Contact Form2',
+            ]);
+    }
 }

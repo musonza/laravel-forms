@@ -36,6 +36,13 @@ class FormController extends Controller
         return response($forms);
     }
 
+    public function show(FormModel $form)
+    {
+        $transformedForm = $this->formTransformer->transformItem($form);
+
+        return response($transformedForm);
+    }
+
     public function store(CreateFormRequest $request)
     {
         $form = Form::create($request->validated());
