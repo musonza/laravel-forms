@@ -2,4 +2,5 @@
 
 Route::group(['middleware' => 'web'], function () {
     Route::resource('forms', 'Musonza\Form\Http\Controllers\FormController');
+    Route::resource('forms.questions', 'Musonza\Form\Http\Controllers\FormQuestionController');
 });

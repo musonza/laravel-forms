@@ -7,11 +7,6 @@ use Musonza\Form\Tests\TestCase;
 
 class ListTest extends TestCase
 {
-    /**
-     * @var Form
-     */
-    private $form;
-
     public function setUp()
     {
         parent::setUp();
