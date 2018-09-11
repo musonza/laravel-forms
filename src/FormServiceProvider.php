@@ -22,6 +22,8 @@ class FormServiceProvider extends ServiceProvider
     {
         $this->publishMigrations();
         $this->publishConfig();
+
+        require __DIR__ . '/Http/routes.php';
     }
 
     /**
@@ -30,16 +32,6 @@ class FormServiceProvider extends ServiceProvider
      * @return void
      */
     public function register()
-    {
-        $this->registerChat();
-    }
-
-    /**
-     * Registers Chat.
-     *
-     * @return void
-     */
-    private function registerChat()
     {
         $this->app->bind('form', function () {
             return $this->app->make(\Musonza\Form\Form::class);
