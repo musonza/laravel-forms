@@ -25,9 +25,10 @@ class FormController extends Controller
     }
 
     /**
-     * List forms
+     * List forms.
      *
-     * @return Response
+     * @param  ListFormRequest $request
+     * @return \Illuminate\Http\Response
      */
     public function index(ListFormRequest $request)
     {
@@ -36,6 +37,12 @@ class FormController extends Controller
         return response($forms);
     }
 
+    /**
+     * Gets the form by id.
+     *
+     * @param  FormModel $form
+     * @return \Illuminate\Http\Response
+     */
     public function show(FormModel $form)
     {
         $transformedForm = $this->formTransformer->transformItem($form);
@@ -43,6 +50,12 @@ class FormController extends Controller
         return response($transformedForm);
     }
 
+    /**
+     * Stores the created form.
+     *
+     * @param  CreateFormRequest $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(CreateFormRequest $request)
     {
         $form = Form::create($request->validated());
@@ -57,6 +70,13 @@ class FormController extends Controller
         return redirect()->route('forms.index');
     }
 
+    /**
+     * Updates form details.
+     *
+     * @param  UpdateFormRequest $request
+     * @param  FormModel         $form
+     * @return \Illuminate\Http\Response
+     */
     public function update(UpdateFormRequest $request, FormModel $form)
     {
         $form->update($request->validated());
@@ -68,6 +88,13 @@ class FormController extends Controller
         }
     }
 
+    /**
+     * Deletes a form.
+     *
+     * @param  DeleteFormRequest $request
+     * @param  FormModel         $form
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(DeleteFormRequest $request, FormModel $form)
     {
         $form->delete();
