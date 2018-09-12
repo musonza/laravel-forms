@@ -50,6 +50,6 @@ class Question extends Model
 
     public function field()
     {
-        return app($this->field_type);
+        return new $this->field_type("field_{$this->id}", $this->form);
     }
 }

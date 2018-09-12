@@ -13,10 +13,10 @@ class TestCase extends \Orchestra\Testbench\TestCase
 {
     public $tablePrefix = 'mc_';
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    // public function __construct()
+    // {
+    //     parent::__construct();
+    // }
 
     public function setUp()
     {
