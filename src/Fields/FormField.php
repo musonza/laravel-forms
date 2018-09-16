@@ -13,26 +13,63 @@ abstract class FormField
     protected $fieldHtmlId;
     protected $form;
 
-    public function __construct($name, Form $form, array $options = [])
+    /**
+     * [__construct description]
+     * @param string $name    [description]
+     * @param Form   $form    [description]
+     * @param array  $options [description]
+     */
+    public function __construct(string $name, Form $form, array $options = [])
     {
         $this->name = $name;
         $this->form = $form;
+        $this->options = $options;
         $this->fieldHtmlId = $this->nameToId();
     }
 
-    protected function getAttributes()
+    /**
+     * [input description]
+     * @param  string $type       [description]
+     * @param  string $name       [description]
+     * @param  [type] $value      [description]
+     * @param  array  $attributes [description]
+     * @return [type]             [description]
+     */
+    protected function input(string $type, string $name, $value, array $attributes = [])
     {
-        if ($this->controlType) {
-            $attributes['type'] = $this->controlType;
+        if (!isset($attributes['name'])) {
+            $attributes['name'] = $this->name;
         }
 
-        $attributes['name'] = $this->name;
-        $attributes['id'] = $this->fieldHtmlId; // ???
+        if (!isset($attributes['id'])) {
+            $attributes['id'] = $this->nameToId();
+        }
 
-        return $this->attributes($attributes);
+        switch ($type) {
+            case 'textarea':
+                $attributes = $this->attributes($attributes);
+                return "<textarea{$attributes}>" . e($value) . "</textarea>";
+                break;
+
+            case 'select':
+                return $this->select($name, $this->options, $selected = '', $attributes);
+                break;
+
+            default:
+                $attributes['type'] = $type;
+                $attributes['value'] = $value;
+                $attributes = $this->attributes($attributes);
+                return '<input' . $attributes . '>';
+                break;
+        }
     }
 
-    protected function attributes($attributes)
+    /**
+     * [attributes description]
+     * @param  array  $attributes [description]
+     * @return [type]             [description]
+     */
+    protected function attributes(array $attributes)
     {
         $html = array();
 
@@ -47,10 +84,21 @@ abstract class FormField
         return empty($html) ? '' : ' ' . implode(' ', $html);
     }
 
+    /**
+     * [nameToId description]
+     * @return [type] [description]
+     */
     protected function nameToId()
     {
         return str_replace(array('.', '[]', '[', ']'), array('_', '', '_', ''), $this->name);
     }
 
-    abstract public function render();
+    /**
+     * [render description]
+     * @return [type] [description]
+     */
+    public function render()
+    {
+        return $this->input($this->controlType, $this->name, $value = '');
+    }
 }

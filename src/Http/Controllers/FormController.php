@@ -32,9 +32,17 @@ class FormController extends Controller
      */
     public function index(ListFormRequest $request)
     {
-        $forms = $this->formTransformer->transformCollection(FormModel::all());
+        $forms = []; // FormModel::all();
 
-        return response($forms);
+        // dd($forms);
+
+        if (request()->wantsJson()) {
+            $transformedForm = $this->formTransformer->transformCollection(FormModel::all());
+
+            return response($transformedForm);
+        }
+
+        return view('laravel-forms::forms.index', compact('forms'));
     }
 
     /**

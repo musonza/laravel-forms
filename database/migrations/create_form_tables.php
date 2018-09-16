@@ -32,6 +32,7 @@ class CreateFormTables extends Migration
             $table->text('field_type');
             $table->text('validations')->nullable();
             $table->json('properties')->nullable();
+            $table->json('options')->default();
             $table->timestamps();
 
             $table->foreign('form_id')

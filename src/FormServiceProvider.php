@@ -59,6 +59,7 @@ class FormServiceProvider extends ServiceProvider
      */
     public function publishConfig()
     {
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'laravel-forms');
         $this->publishes([
             __DIR__ . '/../config' => config_path(),
         ], 'laravel_forms.config');

@@ -16,6 +16,7 @@ class Question extends Model
         'is_required',
         'properties',
         'field_type',
+        'options',
         'form_id',
     ];
     /**
@@ -26,6 +27,11 @@ class Question extends Model
     protected $casts = [
         'is_required' => 'boolean',
         'properties' => 'array',
+        'options' => 'array',
+    ];
+
+    protected $attributes = [
+        'options' => '{}',
     ];
 
     /**
@@ -50,6 +56,8 @@ class Question extends Model
 
     public function field()
     {
-        return new $this->field_type("field_{$this->id}", $this->form);
+        //$this->options = [];
+
+        return new $this->field_type("field_{$this->id}", $this->form, $this->options);
     }
 }

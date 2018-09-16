@@ -15,7 +15,8 @@
         "orchestra/testbench": "~3.3.0|~3.4.2|^3.5.0|~3.7.0",
         "orchestra/database": "~3.3.0|~3.4.2|^3.5.0|~3.7.0",
         "mockery/mockery": "^1.0.0",
-        "spatie/phpunit-watcher": "dev-master"
+        "spatie/phpunit-watcher": "dev-master",
+        "orchestra/testbench-dusk": "^3.7@dev"
     },
     "minimum-stability": "dev",
     "autoload": {

@@ -13,16 +13,11 @@ class TestCase extends \Orchestra\Testbench\TestCase
 {
     public $tablePrefix = 'mc_';
 
-    // public function __construct()
-    // {
-    //     parent::__construct();
-    // }
-
     public function setUp()
     {
         parent::setUp();
 
-        $this->artisan('migrate', ['--database' => 'testbench']);
+        //$this->artisan('migrate', ['--database' => 'testbench']);
         $this->withFactories(__DIR__ . '/../database/factories');
         $this->migrate();
         $this->users = $this->createUsers(6);
