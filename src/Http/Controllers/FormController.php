@@ -32,9 +32,7 @@ class FormController extends Controller
      */
     public function index(ListFormRequest $request)
     {
-        $forms = []; // FormModel::all();
-
-        // dd($forms);
+        $forms = FormModel::all();
 
         if (request()->wantsJson()) {
             $transformedForm = $this->formTransformer->transformCollection(FormModel::all());

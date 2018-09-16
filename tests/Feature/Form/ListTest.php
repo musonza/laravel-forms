@@ -17,9 +17,9 @@ class ListTest extends TestCase
 
     public function testListForms()
     {
-        $response = $this->get(route('forms.index'));
+        // $response = $this->get(route('forms.index'));
 
-        $response->dump();
+        // $response->dump();
 
         $response = $this->getJson(route('forms.index'));
 
