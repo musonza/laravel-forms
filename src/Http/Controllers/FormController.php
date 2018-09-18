@@ -34,13 +34,20 @@ class FormController extends Controller
     {
         $forms = FormModel::all();
 
-        if (request()->wantsJson()) {
-            $transformedForm = $this->formTransformer->transformCollection(FormModel::all());
+        $forms = $this->formTransformer->transformCollection(FormModel::all());
 
-            return response($transformedForm);
+        if (request()->wantsJson()) {
+            return response($forms);
         }
 
         return view('laravel-forms::forms.index', compact('forms'));
+    }
+
+    public function create()
+    {
+        $form = [];
+
+        return view('laravel-forms::forms.create', compact('form'));
     }
 
     /**
@@ -51,9 +58,20 @@ class FormController extends Controller
      */
     public function show(FormModel $form)
     {
-        $transformedForm = $this->formTransformer->transformItem($form);
+        $form = $this->formTransformer->transformItem($form);
 
-        return response($transformedForm);
+        if (request()->wantsJson()) {
+            return response($form);
+        }
+
+        return view('laravel-forms::forms.show', compact('form'));
+    }
+
+    public function edit(FormModel $form)
+    {
+        $form = $this->formTransformer->transformItem($form);
+
+        return view('laravel-forms::forms.edit', compact('form'));
     }
 
     /**
@@ -92,6 +110,10 @@ class FormController extends Controller
         if (request()->wantsJson()) {
             return response($transformedForm);
         }
+
+        $this->flashSuccess('Your form has been updated');
+
+        return redirect()->route('forms.index');
     }
 
     /**
@@ -111,6 +133,6 @@ class FormController extends Controller
 
         $this->flashError('Form has been deleted');
 
-        return back();
+        // return redirect()->route('forms.index');
     }
 }
