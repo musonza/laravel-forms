@@ -31,7 +31,7 @@ class BrowserTestCase extends TestCase
     {
         parent::getEnvironmentSetUp($app);
 
-        //\Orchestra\Testbench\Dusk\Options::withoutUI();
+        \Orchestra\Testbench\Dusk\Options::withoutUI();
 
         $this->disableExceptionHandling($app);
 
