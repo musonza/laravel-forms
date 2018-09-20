@@ -9,6 +9,8 @@ class BrowserTestCase extends TestCase
     use BaseTestCase;
 
     public $tablePrefix = 'mc_';
+    protected static $baseServeHost = '127.0.0.1';
+    protected static $baseServePort = 80;
 
     public function setUp()
     {

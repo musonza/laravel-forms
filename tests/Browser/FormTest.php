@@ -21,7 +21,7 @@ class FormTest extends BrowserTestCase
 
     public function testCreateViewUpdateDeleteForm()
     {
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
 
         $this->browse(function (Browser $browser) {
             $browser->visit(new Forms())
