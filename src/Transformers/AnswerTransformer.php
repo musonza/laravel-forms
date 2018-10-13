@@ -9,7 +9,7 @@ class AnswerTransformer extends Transformer
         return array_merge(
             $answer->toArray(),
             [
-                'response' => 'hello',
+                'response' => $answer->question->options ? $answer->question->options[$answer->value] : $answer->value,
                 'question' => $answer->question,
             ]
         );
