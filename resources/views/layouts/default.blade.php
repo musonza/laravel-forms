@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="https://cloud.typography.com/6194432/6145752/css/fonts.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      var form_field_types = {!! isset($fieldTypes['data']) ? json_encode($fieldTypes['data']) : '' !!}
+    </script>
 </head>
 
 <body class="flex flex-col min-h-screen">
@@ -64,49 +67,40 @@
           if (['POST', 'PUT', 'PATCH', 'DELETE'].indexOf(httpMethod) === -1) {
             return;
           }
-
           // Allow user to optionally provide data-confirm="Are you sure?"
           if (el.hasAttribute('data-confirm') && ! LinkSangar.verifyConfirm(el) ) {
             e.preventDefault()
             return false;
           }
-
           form = LinkSangar.createForm(el)
           form.submit()
           e.preventDefault()
         },
-
         verifyConfirm: function (link) {
           return confirm(link.getAttribute('data-confirm'))
         },
-
         createForm: function (link) {
           var form = document.createElement('form')
           LinkSangar.setAttributes(form, {
             method: 'POST',
             action: link.getAttribute('href')
           })
-
           var laravelToken = document.querySelector("meta[name=csrf-token]").getAttribute('content');
-
           var inputToken = document.createElement('input')
           LinkSangar.setAttributes(inputToken, {
             type: 'hidden',
             name: '_token',
             value: laravelToken
           })
-
           var inputMethod = document.createElement('input')
           LinkSangar.setAttributes(inputMethod, {
             type: 'hidden',
             name: '_method',
             value: link.getAttribute('data-method').toUpperCase()
           })
-
           form.appendChild(inputToken)
           form.appendChild(inputMethod)
           document.body.appendChild(form)
-
           return form
         },
 
@@ -120,6 +114,19 @@
       LinkSangar.init()
 
     })();
+
+    function formFieldTypeChanged() {
+      const fieldTypeId = document.getElementById("field_type").value;
+      let fieldType = form_field_types.filter(obj => {
+        return obj.id === fieldTypeId
+      });
+
+      if (fieldType[0]['has_choices']) {
+        document.getElementById('field_choices').style.display = 'block';
+      } else {
+        document.getElementById('field_choices').style.display = 'none';
+      }
+    }
     </script>
 </body>
 </html>

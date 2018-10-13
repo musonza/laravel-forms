@@ -12,6 +12,7 @@ class FieldTransformer extends Transformer
             'label' => $question->label,
             'field_type' => $question->field_type,
             'render' => $question->field()->render(),
+            'options' => $question->options,
         ];
     }
 }

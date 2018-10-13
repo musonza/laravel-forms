@@ -20,7 +20,7 @@ abstract class FormField
      * @param Form   $form    [description]
      * @param array  $options [description]
      */
-    public function __construct(Form $form, string $name = 'text', array $options = [])
+    public function __construct(Form $form, string $name = 'text', $options = [])
     {
         $this->name = $name;
         $this->form = $form;
@@ -46,19 +46,24 @@ abstract class FormField
             $attributes['id'] = $this->nameToId();
         }
 
-        $attributes['class'] = "form-control";
-
         switch ($type) {
             case 'textarea':
+                $attributes['class'] = "form-control";
                 $attributes = $this->attributes($attributes);
                 return "<textarea{$attributes}>" . e($value) . "</textarea>";
                 break;
 
             case 'select':
+                $attributes['class'] = "form-control";
                 return $this->select($name, $this->options, $selected = '', $attributes);
                 break;
 
+            case 'radio':
+                return $this->radio($name, $this->options, $selected = '', $attributes);
+                break;
+
             default:
+                $attributes['class'] = "form-control";
                 $attributes['type'] = $type;
                 $attributes['value'] = $value;
                 $attributes = $this->attributes($attributes);

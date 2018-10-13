@@ -3,7 +3,9 @@
     <div class="col-md-10">
         <select
                 class="form-control select2"
+                id="field_type"
                 name="field_type"
+                onchange="formFieldTypeChanged()"
                 placeholder="Select...">
             @foreach ($fieldTypes['data'] as $type)
                 <option value="{{ $type['id'] }}">{{ $type['title'] }}</option>
@@ -101,12 +103,5 @@
                 <strong>{{ $errors->first('description') }}</strong>
             </span>
         @endif
-    </div>
-</div>
-
-<!-- Submit Button -->
-<div class="form-group row">
-    <div class="offset-md-2 col-md-10">
-        <button type="submit" class="btn btn-primary">Save</button>
     </div>
 </div>

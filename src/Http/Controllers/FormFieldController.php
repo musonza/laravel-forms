@@ -23,7 +23,24 @@ class FormFieldController extends Controller
 
     public function store(Request $request, FormModel $form)
     {
-        $question = $form->questions()->create($request->all());
-        dd($question);
+        $data = $request->all();
+        $data['options'] = [];
+
+        if ($request->options) {
+            $options = $this->normalizeOptions($request->options);
+            $data['options'] = $options;
+        }
+
+        $question = $form->questions()->create($data);
+
+        return back();
+    }
+
+    protected function normalizeOptions(string $options)
+    {
+        $options = array_map('trim', explode(',', $options));
+        $options = array_unique($options);
+
+        return array_values($options);
     }
 }
