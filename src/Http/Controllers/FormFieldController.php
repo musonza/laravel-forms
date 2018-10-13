@@ -3,6 +3,7 @@
 namespace Musonza\Form\Http\Controllers;
 
 use Form;
+use Illuminate\Http\Request;
 use Musonza\Form\Models\Form as FormModel;
 use Musonza\Form\Transformers\FieldTypeTransformer;
 
@@ -18,5 +19,11 @@ class FormFieldController extends Controller
         $fieldTypes = $this->fieldTransformer->transformCollection(config('laravel_forms.fields'));
 
         return view('laravel-forms::fields.create', compact('form', 'fieldTypes'));
+    }
+
+    public function store(Request $request, FormModel $form)
+    {
+        $question = $form->questions()->create($request->all());
+        dd($question);
     }
 }

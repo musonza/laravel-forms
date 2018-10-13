@@ -5,6 +5,7 @@ namespace Musonza\Form\Fields;
 class Select extends FormField
 {
     protected $controlType = 'select';
+    protected $hasChoices = true;
 
     public function select($name, array $options, $selected, array $attributes = [])
     {

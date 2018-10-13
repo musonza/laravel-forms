@@ -11,7 +11,7 @@
                     New Field
                 </div>
                 <div class="card-body">
-                    <form role="form" method="post" action="{{ route('forms.store') }}">
+                    <form role="form" method="post" action="{{ route('forms.fields.store', $form['id']) }}">
                         {{ csrf_field() }}
                         @include('laravel-forms::fields._field-details')
                     </form>

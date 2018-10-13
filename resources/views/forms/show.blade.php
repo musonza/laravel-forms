@@ -8,8 +8,9 @@
             <div class="card">
                 <div class="card-header">Form Details</div>
                 <div class="card-body">
-
+                	@include('laravel-forms::forms._form-questions')
                 </div>
+            </div>
         </div>
     </div>
 </div>

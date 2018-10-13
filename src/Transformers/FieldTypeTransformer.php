@@ -6,9 +6,12 @@ class FieldTypeTransformer extends Transformer
 {
     public function transform($field)
     {
+        $fieldObj = app($field);
+
         return [
-            'id' => 1,
+            'id' => $field,
             'title' => $this->title($field),
+            'has_choices' => $fieldObj->hasChoices(),
         ];
     }
 

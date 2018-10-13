@@ -12,6 +12,7 @@ abstract class FormField
     protected $name;
     protected $fieldHtmlId;
     protected $form;
+    protected $hasChoices = false;
 
     /**
      * [__construct description]
@@ -19,7 +20,7 @@ abstract class FormField
      * @param Form   $form    [description]
      * @param array  $options [description]
      */
-    public function __construct(string $name, Form $form, array $options = [])
+    public function __construct(Form $form, string $name = 'text', array $options = [])
     {
         $this->name = $name;
         $this->form = $form;
@@ -44,6 +45,8 @@ abstract class FormField
         if (!isset($attributes['id'])) {
             $attributes['id'] = $this->nameToId();
         }
+
+        $attributes['class'] = "form-control";
 
         switch ($type) {
             case 'textarea':
@@ -100,5 +103,10 @@ abstract class FormField
     public function render()
     {
         return $this->input($this->controlType, $this->name, $value = '');
+    }
+
+    public function hasChoices()
+    {
+        return $this->hasChoices;
     }
 }

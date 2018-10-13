@@ -3,9 +3,10 @@
     <div class="col-md-10">
         <select
                 class="form-control select2"
+                name="field_type"
                 placeholder="Select...">
             @foreach ($fieldTypes['data'] as $type)
-                <option>{{ $type['title'] }}</option>
+                <option value="{{ $type['id'] }}">{{ $type['title'] }}</option>
             @endforeach
         </select>
     </div>
