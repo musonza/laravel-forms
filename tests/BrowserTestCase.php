@@ -10,7 +10,7 @@ class BrowserTestCase extends TestCase
 
     public $tablePrefix = 'mc_';
     protected static $baseServeHost = '127.0.0.1';
-    protected static $baseServePort = 80;
+    // protected static $baseServePort = 80;
 
     public function setUp()
     {
@@ -33,7 +33,7 @@ class BrowserTestCase extends TestCase
     {
         parent::getEnvironmentSetUp($app);
 
-        \Orchestra\Testbench\Dusk\Options::withoutUI();
+        // \Orchestra\Testbench\Dusk\Options::withoutUI();
 
         $this->disableExceptionHandling($app);
 

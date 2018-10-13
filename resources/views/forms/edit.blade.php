@@ -4,6 +4,15 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
+            <div class="d-flex flex-row-reverse">
+                <a href="{{ route('forms.fields.create',  $form['id']) }}">
+                    <button type="submit" class="btn btn-primary mb-2">Add Field</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     Edit Form

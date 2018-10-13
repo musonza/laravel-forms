@@ -133,6 +133,6 @@ class FormController extends Controller
 
         $this->flashError('Form has been deleted');
 
-        // return redirect()->route('forms.index');
+        return redirect()->route('forms.index');
     }
 }

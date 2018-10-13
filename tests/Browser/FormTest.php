@@ -49,7 +49,8 @@ class FormTest extends BrowserTestCase
 
             // Delete a Form
                 ->clickLink('Delete')
-                ->acceptDialog();
+                ->acceptDialog()
+                ->assertSee('deleted');
         });
     }
 }

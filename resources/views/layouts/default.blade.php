@@ -3,12 +3,14 @@
 
 <head>
 	<title>Forms</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://cloud.typography.com/6194432/6145752/css/fonts.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body class="flex flex-col min-h-screen">
-    <div class="flex-grow" role="main">
+    <main class="py-4 col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 	    <div class="container">
 	        <div class="row justify-content-center">
 	            <div class="col-md-12">
