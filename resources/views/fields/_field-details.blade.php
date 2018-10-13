@@ -1,18 +1,13 @@
 <div class="form-group row">
     <label for="field_type" class="col-md-2 col-form-label text-md-right">{{ __('Field Type') }}</label>
     <div class="col-md-10">
-        <input
-            id="field_type"
-            type="text"
-            class="form-control{{ $errors->has('field_type') ? ' is-invalid' : '' }}"
-            name="field_type"
-            value="{{ old('field_type', isset($field['field_type']) ? $field['field_type'] : '') }}">
-
-        @if ($errors->has('title'))
-            <span class="invalid-feedback">
-                <strong>{{ $errors->first('title') }}</strong>
-            </span>
-        @endif
+        <select
+                class="form-control select2"
+                placeholder="Select...">
+            @foreach ($fieldTypes['data'] as $type)
+                <option>{{ $type['title'] }}</option>
+            @endforeach
+        </select>
     </div>
 </div>
 
