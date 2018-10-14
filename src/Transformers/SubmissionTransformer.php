@@ -6,7 +6,8 @@ use Musonza\Form\Transformers\Transformer;
 
 class SubmissionTransformer extends Transformer
 {
-    protected $defaultIncludes = ['answers'];
+    protected $availableIncludes = ['answers'];
+    protected $defaultIncludes = [];
 
     public function transform($submission)
     {

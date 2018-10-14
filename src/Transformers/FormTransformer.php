@@ -4,7 +4,8 @@ namespace Musonza\Form\Transformers;
 
 class FormTransformer extends Transformer
 {
-    protected $defaultIncludes = ['questions'];
+    protected $availableIncludes = ['questions'];
+    protected $defaultIncludes = [];
 
     public function transform($form)
     {

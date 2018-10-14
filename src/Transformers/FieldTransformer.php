@@ -11,6 +11,7 @@ class FieldTransformer extends Transformer
             'title' => $question->title,
             'label' => $question->label,
             'field_type' => $question->field_type,
+            'help_text' => $question->help_text,
             'render' => $question->field()->render(),
             'options' => $question->options,
         ];

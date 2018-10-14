@@ -76,10 +76,10 @@
     <label for="title" class="col-md-2 col-form-label text-md-right">{{ __('Help Text') }}</label>
     <div class="col-md-10">
         <input
-            id="title"
+            id="help_text"
             type="text"
             class="form-control{{ $errors->has('help_text') ? ' is-invalid' : '' }}"
-            name="title"
+            name="help_text"
             value="{{ old('help_text', isset($field['help_text']) ? $field['help_text'] : '') }}">
 
         @if ($errors->has('help_text'))

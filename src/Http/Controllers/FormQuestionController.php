@@ -38,6 +38,8 @@ class FormQuestionController extends Controller
         if (request()->wantsJson()) {
             return response('', 201);
         }
+
+        return back();
     }
 
     /**

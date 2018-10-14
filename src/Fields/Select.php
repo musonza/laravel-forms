@@ -7,19 +7,13 @@ class Select extends FormField
     protected $controlType = 'select';
     protected $hasChoices = true;
 
-    public function select($name, array $options, $selected, array $attributes = [])
+    public function input()
     {
-        if (!isset($attributes['name'])) {
-            $attributes['name'] = $name;
-        }
+        $selected = '';
 
-        if (!isset($attributes['id'])) {
-            $attributes['id'] = $this->nameToId();
-        }
-
-        $attributes = $this->attributes($attributes);
+        $attributes = $this->attributes($this->attributes);
         $html = "<select{$attributes}>";
-        foreach ($options as $value => $label) {
+        foreach ($this->options as $value => $label) {
             if ($value == $selected) {
                 $selectedAttribute = ' selected="selected"';
             } else {

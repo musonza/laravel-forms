@@ -56,8 +56,6 @@ class Question extends Model
 
     public function field()
     {
-        //$this->options = [];
-
-        return new $this->field_type($this->form, "field_{$this->id}", $this->options);
+        return new $this->field_type("field_{$this->id}", $this->options);
     }
 }

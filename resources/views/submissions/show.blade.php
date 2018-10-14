@@ -15,7 +15,8 @@
                 </div>
                 <div class="card-body">
                     @foreach ($submission['answers']['data'] as $answer)
-                        <h6>{{ $loop->iteration }}.&nbsp;{{ $answer['question']['label'] }}</h6>
+                        <!-- <h6>{{ $loop->iteration }}.&nbsp;{{ $answer['question']['label'] }}</h6> -->
+                        <h6>{{ $answer['question']['label'] }}</h6>
                         <div class="border border-white mb-2">
                         {{ $answer['response'] }} <br/>
                         </div>

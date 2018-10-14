@@ -9,9 +9,18 @@ class AnswerTransformer extends Transformer
         return array_merge(
             $answer->toArray(),
             [
-                'response' => $answer->question->options ? $answer->question->options[$answer->value] : $answer->value,
+                'response' => $this->getResponse($answer),
                 'question' => $answer->question,
             ]
         );
+    }
+
+    public function getResponse($answer)
+    {
+        if ($answer->question->options && isset($answer->question->options[$answer->value])) {
+            return $answer->question->options[$answer->value];
+        }
+
+        return $answer->value;
     }
 }

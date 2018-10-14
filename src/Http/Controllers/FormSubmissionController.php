@@ -18,9 +18,26 @@ class FormSubmissionController extends Controller
         $this->submissionTransformer = $submissionTransformer;
     }
 
-    public function create(FormModel $form)
+    public function index(FormModel $form)
     {
+        $submissions = $this->submissionTransformer->transformCollection($form->submissions()->orderBy('id', 'DESC')->get());
+        $data = ['form' => $this->formTransformer->transformItem($form), 'submissions' => $submissions];
+
+        if (request()->wantsJson()) {
+            return response($data);
+        }
+
+        return view('laravel-forms::submissions.index', $data);
+    }
+
+    public function create(Request $request, FormModel $form)
+    {
+        request()->query->add(['include' => 'questions']);
         $form = $this->formTransformer->transformItem($form);
+
+        if (request()->wantsJson()) {
+            return response($data);
+        }
 
         return view('laravel-forms::submissions.edit', compact('form'));
     }
@@ -28,6 +45,7 @@ class FormSubmissionController extends Controller
     public function store(Request $request, FormModel $form)
     {
         $data = $request->all();
+
         unset($data['_token']);
 
         $submission = $form->addSubmission($request->all());
@@ -50,6 +68,8 @@ class FormSubmissionController extends Controller
 
     public function show(FormModel $form, Submission $submission)
     {
+        request()->query->add(['include' => 'answers']);
+
         $submission = $this->submissionTransformer->transformItem($submission);
         $form = $this->formTransformer->transformItem($form);
 

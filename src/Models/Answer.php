@@ -12,6 +12,10 @@ class Answer extends Model
         'submission_id',
     ];
 
+    protected $with = [
+        'question',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

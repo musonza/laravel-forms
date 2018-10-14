@@ -7,21 +7,22 @@ class Radio extends FormField
     protected $controlType = 'radio';
     protected $hasChoices = true;
 
-    public function radio($name, array $options, $selected, array $attributes = [])
+    public function input()
     {
-        if (!isset($attributes['name'])) {
-            $attributes['name'] = $name;
-        }
+        $this->attributes['class'] = "";
+        $attributes = $this->attributes($this->attributes);
 
-        if (!isset($attributes['id'])) {
-            $attributes['id'] = $this->nameToId();
-        }
-
-        $attributes = $this->attributes($attributes);
         $html = "";
 
-        foreach ($options as $value => $label) {
-            $html .= '<input type="radio" ' . $attributes . '  value="' . $value . '"> ' . $label . '<br>';
+        foreach ($this->options as $value => $label) {
+            $html .= '<input type="' . $this->controlType
+                . '" '
+                . $attributes
+                . ' value="'
+                . $value
+                . '"> '
+                . $label
+                . '<br>';
         }
         return $html;
     }

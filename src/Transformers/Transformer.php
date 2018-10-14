@@ -32,6 +32,10 @@ abstract class Transformer extends Fractal\TransformerAbstract
 
         $fractal->setSerializer(new ArraySerializer());
 
+        if (request('include', null)) {
+            $fractal->parseIncludes(request('include'));
+        }
+
         return $fractal->createData($resource)->toArray();
     }
 

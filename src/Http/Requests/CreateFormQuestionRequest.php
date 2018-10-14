@@ -9,6 +9,7 @@ class CreateFormQuestionRequest extends FormRequest
     public static $rules = [
         'title' => 'Required',
         'field_type' => 'Required',
+        'help_text' => '',
         'description' => '',
         'label' => '',
     ];

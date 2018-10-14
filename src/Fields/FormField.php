@@ -11,65 +11,58 @@ abstract class FormField
     protected $required = false;
     protected $name;
     protected $fieldHtmlId;
-    protected $form;
     protected $hasChoices = false;
 
     /**
      * [__construct description]
      * @param string $name    [description]
-     * @param Form   $form    [description]
      * @param array  $options [description]
      */
-    public function __construct(Form $form, string $name = 'text', $options = [])
+    public function __construct(string $name = 'text', $options = [])
     {
         $this->name = $name;
-        $this->form = $form;
         $this->options = $options;
         $this->fieldHtmlId = $this->nameToId();
     }
 
-    /**
-     * [input description]
-     * @param  string $type       [description]
-     * @param  string $name       [description]
-     * @param  [type] $value      [description]
-     * @param  array  $attributes [description]
-     * @return [type]             [description]
-     */
-    protected function input(string $type, string $name, $value, array $attributes = [])
+    protected function input()
     {
-        if (!isset($attributes['name'])) {
-            $attributes['name'] = $this->name;
-        }
-
-        if (!isset($attributes['id'])) {
-            $attributes['id'] = $this->nameToId();
-        }
-
         switch ($type) {
-            case 'textarea':
-                $attributes['class'] = "form-control";
-                $attributes = $this->attributes($attributes);
-                return "<textarea{$attributes}>" . e($value) . "</textarea>";
-                break;
+                // case 'textarea':
+                //     $this->attributes['class'] = "form-control";
+                //     $this->attributes = $this->attributes($this->attributes);
+                //     return "<textarea{$attributes}>" . e($value) . "</textarea>";
+                //     break;
 
-            case 'select':
-                $attributes['class'] = "form-control";
-                return $this->select($name, $this->options, $selected = '', $attributes);
-                break;
+                // case 'select':
+                //     $this->attributes['class'] = "form-control";
+                //     $this->attributes = $this->attributes($this->attributes);
+                //     return $this->select($name, $this->options, $selected = '', $this->attributes);
+                //     break;
 
-            case 'radio':
-                return $this->radio($name, $this->options, $selected = '', $attributes);
-                break;
+                // case 'radio':
+                //     $this->attributes = $this->attributes($this->attributes);
+                //     return $this->radio($name, $this->options, $selected = '', $this->attributes);
+                //     break;
 
-            default:
-                $attributes['class'] = "form-control";
-                $attributes['type'] = $type;
-                $attributes['value'] = $value;
-                $attributes = $this->attributes($attributes);
-                return '<input' . $attributes . '>';
-                break;
+                // case 'checkbox':
+                //     $this->attributes = $this->attributes($this->attributes);
+                //     return $this->radio($name, $this->options, $selected = '', $this->attributes);
+                //     break;
+
+                // default:
+                //     $this->attributes['class'] = "form-control";
+                //     $this->attributes['type'] = $type;
+                //     $this->attributes['value'] = $value;
+                //     $this->attributes = $this->attributes($this->attributes);
+                //     return '<input' . $this->attributes . '>';
+                //     break;
         }
+
+        $this->attributes['type'] = $this->controlType;
+        $this->attributes['value'] = '';
+        $this->attributes = $this->attributes($this->attributes);
+        return '<input' . $this->attributes . '>';
     }
 
     /**
@@ -107,7 +100,17 @@ abstract class FormField
      */
     public function render()
     {
-        return $this->input($this->controlType, $this->name, $value = '');
+        if (!isset($this->attributes['name'])) {
+            $this->attributes['name'] = $this->name;
+        }
+
+        if (!isset($this->attributes['id'])) {
+            $this->attributes['id'] = $this->nameToId();
+        }
+
+        $this->attributes['class'] = "form-control";
+
+        return $this->input();
     }
 
     public function hasChoices()

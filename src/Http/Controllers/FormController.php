@@ -34,7 +34,7 @@ class FormController extends Controller
     {
         $forms = FormModel::all();
 
-        $forms = $this->formTransformer->transformCollection(FormModel::all());
+        $forms = $this->formTransformer->transformCollection($forms);
 
         if (request()->wantsJson()) {
             return response($forms);
@@ -58,6 +58,8 @@ class FormController extends Controller
      */
     public function show(FormModel $form)
     {
+        request()->query->add(['include' => 'questions']);
+
         $form = $this->formTransformer->transformItem($form);
 
         if (request()->wantsJson()) {
