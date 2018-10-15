@@ -28,7 +28,7 @@ class CreateTest extends TestCase
             'field_type' => Text::class,
         ];
 
-        $response = $this->postJson(route('forms.questions.store', $this->form->id), $data);
+        $response = $this->postJson(route('forms.fields.store', $this->form->id), $data);
 
         $response
             ->assertStatus(200)
@@ -48,7 +48,7 @@ class CreateTest extends TestCase
             'field_type' => Text::class,
         ];
 
-        $response = $this->postJson(route('forms.questions.store', $this->form->id), $data)
+        $response = $this->postJson(route('forms.fields.store', $this->form->id), $data)
             ->assertStatus(422)
             ->assertJson([
                 'message' => 'The given data was invalid.',
@@ -63,7 +63,7 @@ class CreateTest extends TestCase
             'description' => 'Description',
         ];
 
-        $response = $this->postJson(route('forms.questions.store', $this->form->id), $data)
+        $response = $this->postJson(route('forms.fields.store', $this->form->id), $data)
             ->assertStatus(422)
             ->assertJson([
                 'message' => 'The given data was invalid.',

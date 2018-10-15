@@ -36,30 +36,31 @@ class FieldsRenderTest extends TestCase
         return [
             [
                 TextArea::class, [],
-                '<textarea name="field_1" id="field_1"></textarea>',
+                '<textarea name="field_1" id="field_1" class="form-control"></textarea>',
             ],
             [
                 Text::class, [],
-                '<input name="field_1" id="field_1" type="text" value="">',
+                '<input name="field_1" id="field_1" class="form-control" type="text" value="">',
             ],
             [
                 Password::class, [],
-                '<input name="field_1" id="field_1" type="password" value="">',
+                '<input name="field_1" id="field_1" class="form-control" type="password" value="">',
             ],
             [
-                Radio::class, [],
-                '<input name="field_1" id="field_1" type="radio" value="">',
+                Radio::class,
+                ['male'],
+                '<input type="radio"  name="field_1" id="field_1" class="" value="0"> male<br>',
             ],
 
             [
                 Select::class,
                 ['male', 'female'],
-                '<select name="field_1" id="field_1"><option value="0" selected="selected">male</option><option value="1">female</option></select>',
+                '<select name="field_1" id="field_1" class="form-control"><option value="0" selected="selected">male</option><option value="1">female</option></select>',
             ],
             [
                 Select::class,
                 ['m' => 'male', 'f' => 'female'],
-                '<select name="field_1" id="field_1"><option value="m">male</option><option value="f">female</option></select>',
+                '<select name="field_1" id="field_1" class="form-control"><option value="m">male</option><option value="f">female</option></select>',
             ],
         ];
     }

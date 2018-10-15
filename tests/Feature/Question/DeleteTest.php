@@ -29,7 +29,7 @@ class DeleteTest extends TestCase
     public function testDeleteSuccess()
     {
         $response = $this
-            ->deleteJson(route('forms.questions.destroy', [$this->form->id, $this->question->id]))
+            ->deleteJson(route('forms.fields.destroy', [$this->form->id, $this->question->id]))
             ->assertStatus(201);
     }
 }

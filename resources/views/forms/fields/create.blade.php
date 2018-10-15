@@ -14,10 +14,10 @@
                     <form role="form" method="post" action="{{ route('forms.fields.store', $form['id']) }}">
                         {{ csrf_field() }}
 
-                        @include('laravel-forms::fields._field-details')
+                        @include('laravel-forms::forms.fields._field-details')
 
                         <div id="field_choices">
-                        @include('laravel-forms::fields._field-choices')
+                        @include('laravel-forms::forms.fields._field-choices')
                         </div>
                         <!-- Submit Button -->
                         <div class="form-group row">

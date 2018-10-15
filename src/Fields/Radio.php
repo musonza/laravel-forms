@@ -24,6 +24,7 @@ class Radio extends FormField
                 . $label
                 . '<br>';
         }
+
         return $html;
     }
 }

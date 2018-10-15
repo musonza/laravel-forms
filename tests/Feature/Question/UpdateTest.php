@@ -30,7 +30,7 @@ class UpdateTest extends TestCase
         $this->data['title'] = 'First Name Updated';
 
         $response = $this
-            ->putJson(route('forms.questions.update', [$this->form->id, $this->question->id]), $this->data)
+            ->putJson(route('forms.fields.update', [$this->form->id, $this->question->id]), $this->data)
             ->assertStatus(200)
             ->assertJson([
                 'title' => 'First Name Updated',

@@ -5,6 +5,7 @@ namespace Musonza\Form\Http\Controllers;
 use Form;
 use Illuminate\Http\Request;
 use Musonza\Form\Http\Requests\CreateFormQuestionRequest;
+use Musonza\Form\Http\Requests\UpdateFormQuestionRequest;
 use Musonza\Form\Models\Form as FormModel;
 use Musonza\Form\Models\Question;
 use Musonza\Form\Transformers\FieldTransformer;
@@ -33,7 +34,7 @@ class FormFieldController extends Controller
     {
         $fieldTypes = $this->fieldTypeTransformer->transformCollection(config('laravel_forms.fields'));
 
-        return view('laravel-forms::fields.create', compact('form', 'fieldTypes'));
+        return view('laravel-forms::forms.fields.create', compact('form', 'fieldTypes'));
     }
 
     public function store(CreateFormQuestionRequest $request, FormModel $form)
@@ -46,7 +47,11 @@ class FormFieldController extends Controller
             $data['options'] = $options;
         }
 
-        $question = $form->questions()->create($data);
+        $field = $form->questions()->create($data);
+
+        if (request()->wantsJson()) {
+            return response($field);
+        }
 
         return back();
     }
@@ -60,6 +65,19 @@ class FormFieldController extends Controller
         }
 
         $this->flashError('Field has been deleted');
+
+        return back();
+    }
+
+    public function update(UpdateFormQuestionRequest $request, FormModel $form, Question $field)
+    {
+        $field->update($request->validated());
+
+        if (request()->wantsJson()) {
+            return response($field);
+        }
+
+        $this->flashSuccess('Your form field has been updated');
 
         return back();
     }

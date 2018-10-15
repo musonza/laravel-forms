@@ -11,16 +11,14 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <td>Id</td>
+                                <td>Path</td>
                                 <td>Title</td>
-                                <td>Field Type</td>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($fields['data'] as $field)
                                 <tr>
                                     <td>{{ $field['id'] }}</td>
-                                    <td>{{ $field['title'] }}</td>
                                     <td>{{ $field['title'] }}</td>
                                 </tr>
                             @endforeach
