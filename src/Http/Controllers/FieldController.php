@@ -14,8 +14,12 @@ class FieldController extends Controller
 
     public function index()
     {
-        $fieldTypes = $this->fieldTransformer->transformCollection(config('laravel_forms.fields'));
+        $fields = $this->fieldTransformer->transformCollection(config('laravel_forms.fields'));
 
-        return response($fieldTypes);
+        if (request()->wantsJson()) {
+            return response($fields);
+        }
+
+        return view('laravel-forms::fields.index', compact('fields'));
     }
 }

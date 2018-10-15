@@ -10,7 +10,7 @@
 		@endif
 	</div>
 	<div class="col-md-1">
-		<a href="{{ route('forms.questions.destroy', ['form' => $form['id'], 'question' => $question['id']]) }}" data-method="DELETE" data-confirm="Are you sure?">
+		<a href="{{ route('forms.fields.destroy', ['form' => $form['id'], 'question' => $question['id']]) }}" data-method="DELETE" data-confirm="Are you sure?">
 			<span class="btn btn-link text-danger" >Delete</span>
 		</a>
 	</div>

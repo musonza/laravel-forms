@@ -11,10 +11,19 @@ class FieldTransformer extends Transformer
             'title' => $question->title,
             'label' => $question->label,
             'field_type' => $question->field_type,
+            'field_type_name' => $this->fieldTypeTitle($question->field_type),
             'help_text' => $question->help_text,
             'render' => $question->field()->render(),
+            'is_required' => $question->is_required,
+            'description' => $question->description,
+            'validations' => $question->validations,
             'options' => $question->options,
         ];
+    }
+
+    protected function fieldTypeTitle($field)
+    {
+        return substr($field, strrpos($field, '\\') + 1);
     }
 }
 

@@ -13,7 +13,16 @@
 </head>
 
 <body class="flex flex-col min-h-screen">
-    <main class="py-4 col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+      <h5 class="my-0 mr-md-auto font-weight-normal">Laravel Forms</h5>
+      <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="{{ route('forms.index') }}">Forms</a>
+        <a class="p-2 text-dark" href="{{ route('fields.index') }}">Fields</a>
+      </nav>
+      <a class="btn btn-outline-primary" href="#">Create Form</a>
+    </div>
+
+     <main class="py-4 col-md-12 ml-sm-auto col-lg-12 pt-3 px-4">
 	    <div class="container">
 	        <div class="row justify-content-center">
 	            <div class="col-md-12">
@@ -28,6 +37,7 @@
 	        </div>
 	    </div>
         @yield('content')
+      </main>
     </div>
  <script>
     /**

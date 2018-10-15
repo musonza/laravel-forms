@@ -3,7 +3,7 @@
 	<div class="col-md-10">
 		<textarea class="form-control" name="options"></textarea>
 		<small id="choicesHelpBlock" class="form-text text-muted">
-		  Enter comma separated choices / options.
+		  Enter each option / choice on a separate line.
 		</small>
 	</div>
 </div>

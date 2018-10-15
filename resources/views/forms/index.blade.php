@@ -32,7 +32,9 @@
                                         <a href="{{ route('forms.edit', ['form' => $form['id']]) }}">
                                             <span class="btn btn-link">Edit</span>
                                         </a>&nbsp;&nbsp;
-                                        <a href="{{ route('forms.destroy', ['form' => $form['id']]) }}" data-method="DELETE" data-confirm="Are you sure?">
+                                        <a href="{{ route('forms.destroy', ['form' => $form['id']]) }}"
+                                            data-method="DELETE"
+                                            data-confirm="Are you sure?">
                                             <span class="btn btn-link text-danger" >Delete</span>
                                         </a>&nbsp;&nbsp;
                                         <a href="{{ route('forms.show', ['form' => $form['id']]) }}">
