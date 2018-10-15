@@ -1,7 +1,5 @@
 @extends('laravel-forms::layouts.default')
 
-@section('title', 'Field')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -11,8 +9,13 @@
                     New Field
                 </div>
                 <div class="card-body">
-                    <form role="form" method="post" action="{{ route('forms.fields.store', $form['id']) }}">
+                    <form
+                        role="form"
+                        method="post"
+                        action="{{ route('forms.fields.update', [$form['id'], $field['id']]) }}">
+
                         {{ csrf_field() }}
+                        {{ method_field('put') }}
 
                         @include('laravel-forms::forms.fields._field-details')
 

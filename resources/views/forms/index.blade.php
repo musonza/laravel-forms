@@ -30,15 +30,15 @@
                                     <td>{{ $form['created_at'] }}</td>
                                     <td class="minimal_cell">
                                         <a href="{{ route('forms.edit', ['form' => $form['id']]) }}">
-                                            <span class="btn btn-link">Edit</span>
+                                            <span class="btn btn-link btn-sm">Edit</span>
                                         </a>&nbsp;&nbsp;
                                         <a href="{{ route('forms.destroy', ['form' => $form['id']]) }}"
                                             data-method="DELETE"
                                             data-confirm="Are you sure?">
-                                            <span class="btn btn-link text-danger" >Delete</span>
+                                            <span class="btn btn-link text-danger btn-sm" >Delete</span>
                                         </a>&nbsp;&nbsp;
                                         <a href="{{ route('forms.show', ['form' => $form['id']]) }}">
-                                            <span class="btn btn-sm btn-outline-info">View</span>
+                                            <span class="btn btn-link btn-sm">Preview</span>
                                         </a>
                                     </td>
                                 </tr>

@@ -12,18 +12,26 @@ class FieldTransformer extends Transformer
             'label' => $question->label,
             'field_type' => $question->field_type,
             'field_type_name' => $this->fieldTypeTitle($question->field_type),
+            'has_choices' => $this->hasChoices($question->field_type),
             'help_text' => $question->help_text,
             'render' => $question->field()->render(),
             'is_required' => $question->is_required,
             'description' => $question->description,
             'validations' => $question->validations,
             'options' => $question->options,
+            'options_text' => implode(PHP_EOL, $question->options),
+            'position' => $question->position,
         ];
     }
 
     protected function fieldTypeTitle($field)
     {
         return substr($field, strrpos($field, '\\') + 1);
+    }
+
+    protected function hasChoices($field)
+    {
+        return app($field)->hasChoices();
     }
 }
 

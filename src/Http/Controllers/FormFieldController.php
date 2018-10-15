@@ -32,9 +32,11 @@ class FormFieldController extends Controller
 
     public function create(FormModel $form)
     {
-        $fieldTypes = $this->fieldTypeTransformer->transformCollection(config('laravel_forms.fields'));
+        $fieldTypes = $this->fieldTypes();
 
-        return view('laravel-forms::forms.fields.create', compact('form', 'fieldTypes'));
+        $field = [];
+
+        return view('laravel-forms::forms.fields.create', compact('form', 'fieldTypes', 'field'));
     }
 
     public function store(CreateFormQuestionRequest $request, FormModel $form)
@@ -69,9 +71,25 @@ class FormFieldController extends Controller
         return back();
     }
 
+    public function edit(FormModel $form, Question $field)
+    {
+        $field = $this->fieldTransformer->transformItem($field);
+        $fieldTypes = $this->fieldTypes();
+
+        return view('laravel-forms::forms.fields.edit', compact('form', 'field', 'fieldTypes'));
+    }
+
     public function update(UpdateFormQuestionRequest $request, FormModel $form, Question $field)
     {
-        $field->update($request->validated());
+        $data = $request->all();
+        $data['options'] = [];
+
+        if ($request->options) {
+            $options = $this->normalizeOptions($request->options);
+            $data['options'] = $options;
+        }
+
+        $field->update($data);
 
         if (request()->wantsJson()) {
             return response($field);
@@ -88,5 +106,10 @@ class FormFieldController extends Controller
         $options = array_unique($options);
 
         return array_values($options);
+    }
+
+    protected function fieldTypes($value = '')
+    {
+        return $this->fieldTypeTransformer->transformCollection(config('laravel_forms.fields'));
     }
 }

@@ -1,4 +1,4 @@
-@extends('laravel-forms::layouts.default')
+@extends('laravel-forms::layouts.front')
 
 @section('content')
 

@@ -3,9 +3,12 @@
 namespace Musonza\Form\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use \Lookitsatravis\Listify\Listify;
 
 class Question extends Model
 {
+    use Listify;
+
     protected $table = 'mc_questions';
     protected $fillable = [
         'title',
@@ -33,6 +36,13 @@ class Question extends Model
     protected $attributes = [
         'options' => '{}',
     ];
+
+    public function __construct(array $attributes = array(), $exists = false)
+    {
+        parent::__construct($attributes, $exists);
+
+        $this->initListify();
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

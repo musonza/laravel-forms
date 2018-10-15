@@ -8,7 +8,10 @@
                 onchange="formFieldTypeChanged()"
                 placeholder="Select...">
             @foreach ($fieldTypes['data'] as $type)
-                <option value="{{ $type['id'] }}">{{ $type['title'] }}</option>
+                <option
+                value="{{ $type['id'] }}"
+                @if(isset($field['field_type']) && $field['field_type'] == $type['id']) selected @endif
+                >{{ $type['title'] }}</option>
             @endforeach
         </select>
     </div>
@@ -104,4 +107,8 @@
             </span>
         @endif
     </div>
+</div>
+
+<div id="field_choices" @if(isset($field['has_choices']) && $field['has_choices']) style="display: block;" @endif>
+@include('laravel-forms::forms.fields._field-choices')
 </div>

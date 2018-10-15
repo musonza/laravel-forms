@@ -9,10 +9,15 @@
 			<small class="form-text text-muted">{{ $question['help_text'] }}</small>
 		@endif
 	</div>
-	<div class="col-md-1">
+	@if(Route::current()->getName() !== 'forms.submissions.create')
+	<div class="col-md-2">
+		<a href="{{ route('forms.fields.edit', ['form' => $form['id'], 'question' => $question['id']]) }}">
+			<span class="btn btn-link btn-sm" >Edit</span>
+		</a>
 		<a href="{{ route('forms.fields.destroy', ['form' => $form['id'], 'question' => $question['id']]) }}" data-method="DELETE" data-confirm="Are you sure?">
-			<span class="btn btn-link text-danger" >Delete</span>
+			<span class="btn btn-link text-danger btn-sm" >Delete</span>
 		</a>
 	</div>
+	@endif
 </div>
 @endforeach
