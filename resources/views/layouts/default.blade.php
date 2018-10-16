@@ -19,7 +19,7 @@
         <a class="p-2 text-dark" href="{{ route('forms.index') }}">Forms</a>
         <a class="p-2 text-dark" href="{{ route('fields.index') }}">Fields</a>
       </nav>
-      <a class="btn btn-outline-primary" href="#">Create Form</a>
+      <a class="btn btn-outline-primary" href="{{ route('forms.create') }}">Create Form</a>
     </div>
 
      <main class="py-4 col-md-12 ml-sm-auto col-lg-12 pt-3 px-4">

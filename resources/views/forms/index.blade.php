@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container">
-     @include('laravel-forms::forms._top-bar')
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
@@ -15,6 +14,7 @@
                                 <td>Id</td>
                                 <td>Title</td>
                                 <td>Status</td>
+                                <td>Submissions</td>
                                 <td>Created At</td>
                                 <td>Actions</td>
                             </tr>
@@ -27,6 +27,11 @@
                                     <td>
                                         <span
                                         class="badge badge-{{$form['status']['class']}} p-2">{{ $form['status']['label'] }}</span>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('forms.submissions.index', ['form' => $form['id']]) }}">
+                                            <span class="btn btn-link btn-sm">{{ $form['submissions_count'] }}</span>
+                                        </a>
                                     </td>
                                     <td>{{ $form['created_at'] }}</td>
                                     <td class="minimal_cell">

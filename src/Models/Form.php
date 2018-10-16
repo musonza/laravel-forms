@@ -13,6 +13,10 @@ class Form extends Model
         'status',
     ];
 
+    protected $with = [
+        'submissions',
+    ];
+
     /**
      * A form has many questions.
      *

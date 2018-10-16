@@ -46,6 +46,7 @@ class FormController extends Controller
     public function create()
     {
         $form = [];
+        $form['statuses'] = config('laravel_forms.form_statuses');
 
         return view('laravel-forms::forms.create', compact('form'));
     }

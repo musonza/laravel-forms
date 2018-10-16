@@ -41,7 +41,7 @@
             type="radio"
             name="status"
             value="{{ $key }}"
-            @if($form['status']['value'] == $key) checked @endif
+            @if(isset($form['status']) && $form['status']['value'] == $key) checked @endif
             >
             {{ $status['label'] }}<br>
       @endforeach

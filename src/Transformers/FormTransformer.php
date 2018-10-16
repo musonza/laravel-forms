@@ -22,6 +22,7 @@ class FormTransformer extends Transformer
                 'class' => $statuses[$form->status]['class'],
             ],
             'statuses' => $statuses,
+            'submissions_count' => $form->submissions->count(),
         ];
     }
 

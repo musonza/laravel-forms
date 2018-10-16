@@ -3,7 +3,6 @@
 @section('content')
 
 <div class="container">
-    @include('laravel-forms::forms._top-bar')
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="box box-primary">
