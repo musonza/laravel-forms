@@ -33,6 +33,21 @@
     </div>
 </div>
 
+<div class="form-group row">
+  <label for="description" class="col-md-2 col-form-label text-md-right">{{ __('Status') }}</label>
+  <div class="col-md-10">
+      @foreach($form['statuses'] as $key => $status)
+        <input
+            type="radio"
+            name="status"
+            value="{{ $key }}"
+            @if($form['status']['value'] == $key) checked @endif
+            >
+            {{ $status['label'] }}<br>
+      @endforeach
+  </div>
+</div>
+
 <!-- Submit Button -->
 <div class="form-group row">
     <div class="offset-md-2 col-md-10">

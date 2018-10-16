@@ -9,11 +9,19 @@ class FormTransformer extends Transformer
 
     public function transform($form)
     {
+        $statuses = config('laravel_forms.form_statuses');
+
         return [
             'id' => $form->id,
             'title' => $form->title,
             'description' => $form->description,
             'created_at' => $form->created_at,
+            'status' => [
+                'value' => $form->status,
+                'label' => $statuses[$form->status]['label'],
+                'class' => $statuses[$form->status]['class'],
+            ],
+            'statuses' => $statuses,
         ];
     }
 

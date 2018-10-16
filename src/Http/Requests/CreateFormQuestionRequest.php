@@ -10,6 +10,7 @@ class CreateFormQuestionRequest extends FormRequest
         'title' => 'Required',
         'field_type' => 'Required',
         'help_text' => '',
+        'placeholder' => '',
         'description' => '',
         'label' => '',
     ];

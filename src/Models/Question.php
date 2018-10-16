@@ -13,7 +13,7 @@ class Question extends Model
     protected $fillable = [
         'title',
         'label',
-        'place_holder',
+        'placeholder',
         'help_text',
         'description',
         'is_required',
@@ -64,8 +64,18 @@ class Question extends Model
         return $this;
     }
 
+    /**
+     * Get prefilled value for the field.
+     *
+     * @return mixed
+     */
+    public function getValueAttribute()
+    {
+        return "";
+    }
+
     public function field()
     {
-        return new $this->field_type("field_{$this->id}", $this->options);
+        return new $this->field_type($this, $this->options);
     }
 }

@@ -1,6 +1,9 @@
 <?php
 
 return [
+    /**
+     * Supported field types
+     */
     'fields' => [
         Musonza\Form\Fields\CheckBox::class,
         Musonza\Form\Fields\Date::class,
@@ -10,5 +13,23 @@ return [
         Musonza\Form\Fields\Select::class,
         Musonza\Form\Fields\Text::class,
         Musonza\Form\Fields\TextArea::class,
+    ],
+
+    /**
+     * Form statuses
+     */
+    'form_statuses' => [
+        0 => [
+            'label' => 'Draft',
+            'class' => 'warning',
+        ],
+        1 => [
+            'label' => 'Published',
+            'class' => 'success',
+        ],
+        2 => [
+            'label' => 'Unpublished',
+            'class' => 'danger',
+        ],
     ],
 ];

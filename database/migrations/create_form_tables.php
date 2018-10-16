@@ -17,6 +17,7 @@ class CreateFormTables extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('description')->nullable();
+            $table->unsignedInteger('status')->default(0);
             $table->timestamps();
         });
 
@@ -25,7 +26,7 @@ class CreateFormTables extends Migration
             $table->unsignedInteger('form_id');
             $table->string('title');
             $table->string('label')->nullable();
-            $table->string('place_holder')->nullable();
+            $table->string('placeholder')->nullable();
             $table->string('help_text')->nullable();
             $table->boolean('is_required')->default(true);
             $table->text('description')->nullable();

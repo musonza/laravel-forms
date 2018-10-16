@@ -9,7 +9,7 @@
 			<small class="form-text text-muted">{{ $question['help_text'] }}</small>
 		@endif
 	</div>
-	@if(Route::current()->getName() !== 'forms.submissions.create')
+	@if(Route::current()->getName() === 'forms.edit')
 	<div class="col-md-2">
 		<a href="{{ route('forms.fields.edit', ['form' => $form['id'], 'question' => $question['id']]) }}">
 			<span class="btn btn-link btn-sm" >Edit</span>

@@ -25,7 +25,8 @@
                                     <td>{{ $form['id'] }}</td>
                                     <td>{{ $form['title'] }}</td>
                                     <td>
-                                        <span class="badge badge-success p-2">In Progress</span>
+                                        <span
+                                        class="badge badge-{{$form['status']['class']}} p-2">{{ $form['status']['label'] }}</span>
                                     </td>
                                     <td>{{ $form['created_at'] }}</td>
                                     <td class="minimal_cell">

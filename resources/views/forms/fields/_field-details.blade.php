@@ -60,15 +60,15 @@
     <label for="place_holder" class="col-md-2 col-form-label text-md-right">{{ __('Placeholder') }}</label>
     <div class="col-md-10">
         <input
-            id="place_holder"
+            id="placeholder"
             type="text"
-            class="form-control{{ $errors->has('place_holder') ? ' is-invalid' : '' }}"
-            name="place_holder"
-            value="{{ old('place_holder', isset($field['place_holder']) ? $field['place_holder'] : '') }}">
+            class="form-control{{ $errors->has('placeholder') ? ' is-invalid' : '' }}"
+            name="placeholder"
+            value="{{ old('placeholder', isset($field['placeholder']) ? $field['placeholder'] : '') }}">
 
-        @if ($errors->has('place_holder'))
+        @if ($errors->has('placeholder'))
             <span class="invalid-feedback">
-                <strong>{{ $errors->first('place_holder') }}</strong>
+                <strong>{{ $errors->first('placeholder') }}</strong>
             </span>
         @endif
     </div>

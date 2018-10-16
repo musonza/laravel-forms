@@ -71,6 +71,8 @@ class FormController extends Controller
 
     public function edit(FormModel $form)
     {
+        request()->query->add(['include' => 'questions']);
+
         $form = $this->formTransformer->transformItem($form);
 
         return view('laravel-forms::forms.edit', compact('form'));

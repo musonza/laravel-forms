@@ -3,6 +3,7 @@
 namespace Musonza\Form\Fields;
 
 use Musonza\Form\Models\Form;
+use Musonza\Form\Models\Question;
 
 abstract class FormField
 {
@@ -12,56 +13,28 @@ abstract class FormField
     protected $name;
     protected $fieldHtmlId;
     protected $hasChoices = false;
+    protected $question;
 
     /**
      * [__construct description]
      * @param string $name    [description]
      * @param array  $options [description]
      */
-    public function __construct(string $name = 'text', $options = [])
+    public function __construct(Question $question, $options = [])
     {
-        $this->name = $name;
+        $this->question = $question;
+        $this->name = "field_{$question->id}";
         $this->options = $options;
         $this->fieldHtmlId = $this->nameToId();
     }
 
     protected function input()
     {
-        switch ($type) {
-                // case 'textarea':
-                //     $this->attributes['class'] = "form-control";
-                //     $this->attributes = $this->attributes($this->attributes);
-                //     return "<textarea{$attributes}>" . e($value) . "</textarea>";
-                //     break;
-
-                // case 'select':
-                //     $this->attributes['class'] = "form-control";
-                //     $this->attributes = $this->attributes($this->attributes);
-                //     return $this->select($name, $this->options, $selected = '', $this->attributes);
-                //     break;
-
-                // case 'radio':
-                //     $this->attributes = $this->attributes($this->attributes);
-                //     return $this->radio($name, $this->options, $selected = '', $this->attributes);
-                //     break;
-
-                // case 'checkbox':
-                //     $this->attributes = $this->attributes($this->attributes);
-                //     return $this->radio($name, $this->options, $selected = '', $this->attributes);
-                //     break;
-
-                // default:
-                //     $this->attributes['class'] = "form-control";
-                //     $this->attributes['type'] = $type;
-                //     $this->attributes['value'] = $value;
-                //     $this->attributes = $this->attributes($this->attributes);
-                //     return '<input' . $this->attributes . '>';
-                //     break;
-        }
-
         $this->attributes['type'] = $this->controlType;
-        $this->attributes['value'] = '';
+        $this->attributes['value'] = $this->question->value;
+        $this->attributes['placeholder'] = $this->question->placeholder;
         $this->attributes = $this->attributes($this->attributes);
+
         return '<input' . $this->attributes . '>';
     }
 

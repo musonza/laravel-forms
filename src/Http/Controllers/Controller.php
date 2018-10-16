@@ -21,4 +21,8 @@ class Controller extends BaseController
     {
         Session::flash('alert-success', $message);
     }
+
+    public function response($data = [], $view = null)
+    {
+    }
 }

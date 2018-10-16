@@ -27,5 +27,16 @@
             </div>
         </div>
     </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">Fields</div>
+                <div class="card-body">
+                    @include('laravel-forms::forms._form-questions')
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection

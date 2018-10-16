@@ -9,6 +9,7 @@ class UpdateFormRequest extends FormRequest
     public static $rules = [
         'title' => 'Required',
         'description' => '',
+        'status' => '',
     ];
 
     /**

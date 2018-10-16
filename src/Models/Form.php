@@ -10,6 +10,7 @@ class Form extends Model
     protected $fillable = [
         'title',
         'description',
+        'status',
     ];
 
     /**

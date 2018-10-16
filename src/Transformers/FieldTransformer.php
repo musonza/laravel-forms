@@ -14,6 +14,7 @@ class FieldTransformer extends Transformer
             'field_type_name' => $this->fieldTypeTitle($question->field_type),
             'has_choices' => $this->hasChoices($question->field_type),
             'help_text' => $question->help_text,
+            'placeholder' => $question->placeholder,
             'render' => $question->field()->render(),
             'is_required' => $question->is_required,
             'description' => $question->description,
