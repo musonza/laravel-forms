@@ -4,12 +4,16 @@
 <head>
 	<title>Forms</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" href="https://cloud.typography.com/6194432/6145752/css/fonts.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js"></script>
+<!--     <script src="/js/vendor.js"></script>
+    <script src="/js/render.js"></script> -->
+    @if(isset($fieldTypes['data']))
     <script type="text/javascript">
       var form_field_types = {!! isset($fieldTypes['data']) ? json_encode($fieldTypes['data']) : '' !!}
     </script>
+    @endif
 </head>
 
 <body class="flex flex-col min-h-screen">
@@ -138,5 +142,16 @@
       }
     }
     </script>
+<!--     <script>
+    jQuery(function($) {
+        // $('.build-wrap').formBuilder();
+        var fbEditor = document.getElementById('build-wrap');
+        var formBuilder = $(fbEditor).formBuilder();
+
+        document.getElementById('getJSON').addEventListener('click', function() {
+          console.log(formBuilder.actions.getData('json'));
+        });
+    });
+    </script> -->
 </body>
 </html>

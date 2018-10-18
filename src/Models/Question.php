@@ -20,6 +20,8 @@ class Question extends Model
         'properties',
         'field_type',
         'options',
+        'default_value',
+        'columns_count',
         'form_id',
     ];
     /**

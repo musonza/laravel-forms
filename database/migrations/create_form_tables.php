@@ -34,6 +34,8 @@ class CreateFormTables extends Migration
             $table->text('validations')->nullable();
             $table->json('properties')->nullable();
             $table->json('options')->default();
+            $table->text('default_value')->nullable();
+            $table->unsignedInteger('columns')->default(12);
             $table->unsignedInteger('position')->nullable();
             $table->timestamps();
 

@@ -1,9 +1,6 @@
 <?php
 
 return [
-    /**
-     * Supported field types
-     */
     'fields' => [
         Musonza\Form\Fields\CheckBox::class,
         Musonza\Form\Fields\Date::class,
@@ -13,11 +10,9 @@ return [
         Musonza\Form\Fields\Select::class,
         Musonza\Form\Fields\Text::class,
         Musonza\Form\Fields\TextArea::class,
+        Musonza\Form\Fields\Email::class,
+        Musonza\Form\Fields\Number::class,
     ],
-
-    /**
-     * Form statuses
-     */
     'form_statuses' => [
         0 => [
             'label' => 'Draft',

@@ -33,7 +33,7 @@
             <div class="card">
                 <div class="card-header">Fields</div>
                 <div class="card-body">
-                    @include('laravel-forms::forms._form-questions')
+                    @include('laravel-forms::forms._form-questions-edit')
                 </div>
             </div>
         </div>

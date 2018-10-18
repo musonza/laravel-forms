@@ -17,25 +17,6 @@
     </div>
 </div>
 
-<!-- Field title -->
-<div class="form-group row">
-    <label for="title" class="col-md-2 col-form-label text-md-right">{{ __('Title') }}</label>
-    <div class="col-md-10">
-        <input
-            id="title"
-            type="text"
-            class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}"
-            name="title"
-            value="{{ old('title', isset($field['title']) ? $field['title'] : '') }}">
-
-        @if ($errors->has('title'))
-            <span class="invalid-feedback">
-                <strong>{{ $errors->first('title') }}</strong>
-            </span>
-        @endif
-    </div>
-</div>
-
 <!-- Field label -->
 <div class="form-group row">
     <label for="label" class="col-md-2 col-form-label text-md-right">{{ __('Label') }}</label>
@@ -93,22 +74,47 @@
     </div>
 </div>
 
-<!-- Field description -->
+<!-- Field default value -->
 <div class="form-group row">
-    <label for="description" class="col-md-2 col-form-label text-md-right">{{ __('Description') }}</label>
+    <label for="default_value" class="col-md-2 col-form-label text-md-right">{{ __('Default Value') }}</label>
     <div class="col-md-10">
-        <textarea
-            id="description"
-            class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}"
-            name="description">{{ old('description', isset($field['description']) ? $field['description'] : '') }}</textarea>
-        @if ($errors->has('description'))
+        <input
+            id="default_value"
+            type="text"
+            class="form-control{{ $errors->has('default_value') ? ' is-invalid' : '' }}"
+            name="default_value"
+            value="{{ old('default_value', isset($field['default_value']) ? $field['default_value'] : '') }}">
+        @if ($errors->has('default_value'))
             <span class="invalid-feedback">
-                <strong>{{ $errors->first('description') }}</strong>
+                <strong>{{ $errors->first('default_value') }}</strong>
             </span>
         @endif
     </div>
 </div>
 
-<div id="field_choices" @if(isset($field['has_choices']) && $field['has_choices']) style="display: block;" @endif>
+<div id="field_choices">
 @include('laravel-forms::forms.fields._field-choices')
+</div>
+
+<!-- Spacing -->
+
+<!-- Columns -->
+<div class="form-group row">
+    <label for="columns_count" class="col-md-2 col-form-label text-md-right">{{ __('Columns') }}</label>
+    <div class="col-md-10">
+        <input
+            id="columns_count"
+            type="number"
+            min="1"
+            max="12"
+            class="form-control{{ $errors->has('columns_count') ? ' is-invalid' : '' }}"
+            name="columns_count"
+            value="{{ old('columns_count', isset($field['columns_count']) ? $field['columns_count'] : '12') }}">
+
+        @if ($errors->has('columns_count'))
+            <span class="invalid-feedback">
+                <strong>{{ $errors->first('columns_count') }}</strong>
+            </span>
+        @endif
+    </div>
 </div>

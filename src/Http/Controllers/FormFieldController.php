@@ -36,6 +36,8 @@ class FormFieldController extends Controller
 
         $field = [];
 
+        //return view('laravel-forms::forms.fields.form-builder', compact('form', 'fieldTypes', 'field'));
+
         return view('laravel-forms::forms.fields.create', compact('form', 'fieldTypes', 'field'));
     }
 
@@ -54,6 +56,8 @@ class FormFieldController extends Controller
         if (request()->wantsJson()) {
             return response($field);
         }
+
+        $this->flashSuccess('Your form field has been created');
 
         return back();
     }

@@ -22,6 +22,8 @@ class FieldTransformer extends Transformer
             'options' => $question->options,
             'options_text' => implode(PHP_EOL, $question->options),
             'position' => $question->position,
+            'default_value' => $question->default_value,
+            'columns_count' => $question->columns_count ?? 12,
         ];
     }
 

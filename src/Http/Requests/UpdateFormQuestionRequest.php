@@ -7,10 +7,12 @@ use Illuminate\Foundation\Http\FormRequest;
 class UpdateFormQuestionRequest extends FormRequest
 {
     public static $rules = [
-        'title' => 'Required',
+        'label' => 'Required',
         'field_type' => 'Required',
-        'description' => '',
-        'label' => '',
+        'help_text' => '',
+        'placeholder' => '',
+        'default_value' => '',
+        'columns_count' => '',
     ];
 
     /**

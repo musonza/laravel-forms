@@ -17,14 +17,10 @@
     target="_blank">{{ route('forms.submissions.create', $form['id']) }}</a><br/><br/>
     </small>
 
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">Form Details</div>
-                <div class="card-body">
-                	@include('laravel-forms::forms._form-questions')
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-header">Form Details</div>
+        <div class="card-body">
+        	@include('laravel-forms::forms._form-questions')
         </div>
     </div>
 </div>
