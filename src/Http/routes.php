@@ -7,3 +7,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('forms.fields', 'Musonza\Form\Http\Controllers\FormFieldController');
     Route::resource('forms.submissions', 'Musonza\Form\Http\Controllers\FormSubmissionController');
 });
+
+Route::group(['middleware' => 'web'], function () {
+  Route::get('test', function(){
+    return view('laravel-forms::layout');
+  });
+});
