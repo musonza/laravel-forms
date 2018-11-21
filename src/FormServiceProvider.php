@@ -24,6 +24,10 @@ class FormServiceProvider extends ServiceProvider
         $this->publishConfig();
 
         require __DIR__ . '/Http/routes.php';
+
+        $this->publishes([
+            __DIR__ . '/../public' => public_path('vendor/laravel-forms'),
+        ], 'laravel-forms-assets');
     }
 
     /**

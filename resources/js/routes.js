@@ -3,6 +3,6 @@ export default [
   {
     path: '/forms',
     name: 'forms-index',
-    component: require('./screens/forms/index')
+    component: require('./pages/forms/index')
   },
 ];

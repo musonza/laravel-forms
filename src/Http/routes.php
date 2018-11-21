@@ -9,7 +9,5 @@ Route::group(['middleware' => 'web'], function () {
 });
 
 Route::group(['middleware' => 'web'], function () {
-  Route::get('test', function(){
-    return view('laravel-forms::layout');
-  });
+    Route::get('laravel-forms', 'Musonza\Form\Http\Controllers\HomeController@index');
 });

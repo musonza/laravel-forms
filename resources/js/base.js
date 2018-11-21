@@ -3,12 +3,8 @@ import moment from 'moment-timezone';
 
 export default {
   computed: {
-    Telescope() {
-      return Telescope;
-    }
+
   },
-
-
   methods: {
     /**
      * Show the time ago format for the given time.
@@ -92,5 +88,5 @@ export default {
       this.$root.alert.confirmationProceed = success;
       this.$root.alert.confirmationCancel = failure;
     },
-  }
+  },
 };
