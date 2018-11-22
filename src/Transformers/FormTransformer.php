@@ -17,7 +17,7 @@ class FormTransformer extends Transformer
             'description' => $form->description,
             'created_at' => $form->created_at,
             'status' => [
-                'value' => $form->status,
+                'value' => (int)$form->status,
                 'label' => $statuses[$form->status]['label'],
                 'class' => $statuses[$form->status]['class'],
             ],

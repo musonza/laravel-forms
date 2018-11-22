@@ -1,26 +1,62 @@
 <?php
 
 use Faker\Generator as Faker;
-use Musonza\Form\User;
+use Musonza\Form\Fields\Text;
+use Musonza\Form\Models\Form;
+use Musonza\Form\Models\Question;
+use Musonza\Form\Models\Submission;
+use Musonza\Form\Models\SubmissionResponse;
 
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| This directory should contain each of the model factory definitions for
-| your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
-|
- */
-
-$factory->define(User::class, function (Faker $faker) {
-    static $password;
-
+$factory->define(Form::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'title' => $faker->sentence,
+        'description' => $faker->sentence,
+    ];
+});
+
+$factory->define(Question::class, function (Faker $faker) {
+    return [
+        'title' => $faker->sentence,
+        'description' => $faker->sentence,
+        'form_id' => function () {
+            return factory(Form::class)->create()->id;
+        },
+        'field_type' => Text::class,
+        'is_required' => true,
+    ];
+});
+
+$factory->define(Submission::class, function (Faker $faker) {
+    return [
+        'ip_address' => $faker->ipv4,
+        'response' => [
+            'field1' => [
+                'field_identifier' => 'field1',
+                'response_text' => $faker->sentence,
+            ],
+            'field2' => [
+                'field_identifier' => 'field2',
+                'response_text' => $faker->paragraph,
+            ],
+            'field3' => [
+                'field_identifier' => 'field3',
+                'response_text' => $faker->sentence,
+            ],
+        ],
+        'form_id' => function () {
+            return factory(Form::class)->create()->id;
+        },
+    ];
+});
+
+$factory->define(SubmissionResponse::class, function (Faker $faker) {
+    return [
+        'submission_id' => function () {
+            return factory(Submission::class)->create()->id;
+        },
+        'question_id' => function () {
+            return factory(Question::class)->create()->id;
+        },
+        'response_text' => $faker->sentence,
     ];
 });

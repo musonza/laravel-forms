@@ -1,8 +1,18 @@
 export default [
-  { path: '/', redirect: '/forms' },
+  { path: '/', redirect: '/dashboard' },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: require('./pages/dashboard')
+  },
   {
     path: '/forms',
     name: 'forms-index',
     component: require('./pages/forms/index')
+  },
+  {
+    path: '/forms/:id',
+    name: 'forms-edit',
+    component: require('./pages/forms/edit')
   },
 ];

@@ -6,6 +6,7 @@
     import FormsComponent from '@/components/FormsComponent';
     export default {
       name: 'FormsPage',
+
       components: {
         FormsComponent
       }
