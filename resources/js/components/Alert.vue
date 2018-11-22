@@ -9,16 +9,29 @@
           { title: 'Field Types', icon: 'text_fields', link: '/forms' },
           { title: 'Settings', icon: 'settings', link: '/settings' }
         ],
+        alert: true,
+        timeout: null,
       }),
 
       props: {
         type: String,
         message: String,
+        autoDismiss: Number
       },
 
       methods: {
-        goTo(link) {
-          this.$router.push(link);
+        close(){
+          console.log(this.timeout);
+          clearTimeout(this.timeout);
+          this.alert = false;
+        },
+      },
+
+      mounted() {
+        if (this.autoDismiss && this.type == 'success') {
+          this.timeout = setTimeout(() => {
+            this.close();
+          }, this.autoDismiss);
         }
       }
     }
@@ -27,8 +40,8 @@
 <template>
   <div>
     <v-alert
-      :value="true"
-      type="type"
+      :value="alert"
+      :type="type"
       transition="scale-transition"
     >
     {{ message }}

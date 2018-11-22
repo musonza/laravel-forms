@@ -1644,18 +1644,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   data: function data() {
     return {
-      items: [{ title: 'Dashboard', icon: 'dashboard', link: '/' }, { title: 'Forms', icon: 'list', link: '/forms' }, { title: 'Field Types', icon: 'text_fields', link: '/forms' }, { title: 'Settings', icon: 'settings', link: '/settings' }]
+      items: [{ title: 'Dashboard', icon: 'dashboard', link: '/' }, { title: 'Forms', icon: 'list', link: '/forms' }, { title: 'Field Types', icon: 'text_fields', link: '/forms' }, { title: 'Settings', icon: 'settings', link: '/settings' }],
+      alert: true,
+      timeout: null
     };
   },
 
   props: {
     type: String,
-    message: String
+    message: String,
+    autoDismiss: Number
   },
 
   methods: {
-    goTo: function goTo(link) {
-      this.$router.push(link);
+    close: function close() {
+      console.log(this.timeout);
+      clearTimeout(this.timeout);
+      this.alert = false;
+    }
+  },
+
+  mounted: function mounted() {
+    var _this = this;
+
+    if (this.autoDismiss && this.type == 'success') {
+      this.timeout = setTimeout(function () {
+        _this.close();
+      }, this.autoDismiss);
     }
   }
 });
@@ -1837,8 +1852,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         description: '',
         status: null
       },
-      formModel: {},
-      alert: false
+      formModel: {}
     };
   },
 
@@ -1877,6 +1891,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     }(),
     submit: function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+        var _this = this;
+
         var valid, response;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
           while (1) {
@@ -1889,22 +1905,21 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 valid = _context2.sent;
 
                 if (!valid) {
-                  _context2.next = 8;
+                  _context2.next = 7;
                   break;
                 }
 
                 _context2.next = 6;
-                return this.formModel.sync(this.payload);
+                return this.formModel.sync(this.payload).then(function (response) {
+                  _this.alertSuccess('Successfully saved!');
+                }).catch(function (error) {
+                  _this.alertError(_this.formatErrorMessage(error.response));
+                });
 
               case 6:
                 response = _context2.sent;
 
-                if (response.status == 200) {
-                  this.alert = true;
-                  this.alertSuccess('hello', true);
-                }
-
-              case 8:
+              case 7:
               case 'end':
                 return _context2.stop();
             }
@@ -53657,7 +53672,11 @@ var render = function() {
       _c(
         "v-alert",
         {
-          attrs: { value: true, type: "type", transition: "scale-transition" }
+          attrs: {
+            value: _vm.alert,
+            type: _vm.type,
+            transition: "scale-transition"
+          }
         },
         [_vm._v("\n  " + _vm._s(_vm.message) + "\n  ")]
       )
@@ -91221,7 +91240,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     return {
       alert: {
         type: null,
-        autoClose: 0,
+        autoDismiss: 5000,
         message: ''
       }
     };
@@ -91238,6 +91257,8 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment_timezone__ = __webpack_require__("./node_modules/moment-timezone/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment_timezone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment_timezone__);
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 
 
 
@@ -91248,7 +91269,10 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     /**
      * Show an error message.
      */
-    alertError: function alertError(message) {},
+    alertError: function alertError(message) {
+      this.$root.alert.type = 'error';
+      this.$root.alert.message = message;
+    },
 
 
     /**
@@ -91263,7 +91287,48 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     /**
      * Show confirmation message.
      */
-    alertConfirm: function alertConfirm(message, success, failure) {}
+    alertConfirm: function alertConfirm(message, success, failure) {},
+    formatErrorMessage: function formatErrorMessage(response) {
+      var message = '';
+      if (response.data) {
+        var data = response.data;
+        message += data.message;
+
+        if (data.errors) {
+          var _iteratorNormalCompletion = true;
+          var _didIteratorError = false;
+          var _iteratorError = undefined;
+
+          try {
+            for (var _iterator = Object.entries(data.errors)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+              var _ref = _step.value;
+
+              var _ref2 = _slicedToArray(_ref, 2);
+
+              var key = _ref2[0];
+              var value = _ref2[1];
+
+              message += ' ' + value;
+              break;
+            }
+          } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
+          } finally {
+            try {
+              if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+              }
+            } finally {
+              if (_didIteratorError) {
+                throw _iteratorError;
+              }
+            }
+          }
+        }
+      }
+      return message;
+    }
   }
 });
 

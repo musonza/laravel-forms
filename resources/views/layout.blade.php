@@ -21,6 +21,7 @@
           <v-flex xs10>
             <alert :message="alert.message"
                   :type="alert.type"
+                  :auto-dismiss="alert.autoDismiss"
                   v-if="alert.type"></alert>
             <router-view></router-view>
           </v-flex>

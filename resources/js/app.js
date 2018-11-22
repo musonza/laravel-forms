@@ -43,7 +43,7 @@ new Vue({
     return {
       alert: {
         type: null,
-        autoClose: 0,
+        autoDismiss: 5000,
         message: ''
       },
     }

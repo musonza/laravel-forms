@@ -19,7 +19,6 @@
           status: null,
         },
         formModel: {},
-        alert: false,
       }),
 
       methods: {
@@ -34,11 +33,13 @@
         async submit () {
           let valid = await this.$validator.validateAll();
           if (valid) {
-            let response = await this.formModel.sync(this.payload);
-            if (response.status == 200) {
-              this.alert = true;
-              this.alertSuccess('hello', true);
-            }
+            let response = await this.formModel
+                .sync(this.payload)
+                .then(response => {
+                  this.alertSuccess('Successfully saved!');
+                }).catch(error => {
+                  this.alertError(this.formatErrorMessage(error.response));
+                });
           }
         },
         clear () {
