@@ -1,36 +1,42 @@
 <script>
+    import DialogComponent from '@/components/DialogComponent';
     export default {
-      name: 'NavComponent',
+      name: 'Alert',
+
+      components: {
+        DialogComponent,
+      },
 
       data: () => ({
-        items: [
-          { title: 'Dashboard', icon: 'dashboard', link: '/'},
-          { title: 'Forms', icon: 'list', link: '/forms' },
-          { title: 'Field Types', icon: 'text_fields', link: '/forms' },
-          { title: 'Settings', icon: 'settings', link: '/settings' }
-        ],
-        alert: true,
         timeout: null,
       }),
 
       props: {
         type: String,
+        title: null,
         message: String,
-        autoDismiss: Number
+        autoDismiss: Number,
+        show: Boolean,
       },
 
       methods: {
         close(){
-          console.log(this.timeout);
           clearTimeout(this.timeout);
-          this.alert = false;
+          this.$root.alert.type = null;
         },
+      },
+
+      computed: {
+        alert: function () {
+          return this.$root.alert.show;
+        }
       },
 
       mounted() {
         if (this.autoDismiss && this.type == 'success') {
           this.timeout = setTimeout(() => {
             this.close();
+            this.dismissAlert();
           }, this.autoDismiss);
         }
       }
@@ -39,12 +45,19 @@
 
 <template>
   <div>
-    <v-alert
-      :value="alert"
-      :type="type"
-      transition="scale-transition"
-    >
-    {{ message }}
-    </v-alert>
+    <div v-if="type == 'confirmation'">
+      <dialog-component
+        :title="title"
+        :message="message"></dialog-component>
+    </div>
+    <div v-else>
+      <v-alert
+        :value="show"
+        :type="type"
+        transition="scale-transition"
+      >
+      {{ message }}
+      </v-alert>
+    </div>
   </div>
 </template>

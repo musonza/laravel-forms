@@ -16,7 +16,7 @@
         <td>
           <a><span>Preview</span></a> |
           <a @click="edit(props.item.id)"><span>Edit</span></a> |
-          <a class="red--text"><span>Delete</span></a>
+          <a @click="deleteForm(props.item.id)" class="red--text"><span>Delete</span></a>
         </td>
       </template>
     </v-data-table>
@@ -43,6 +43,10 @@
           },
           edit(id) {
             this.$router.push({name: 'forms-edit', params: { id: id}});
+          },
+          deleteForm(id) {
+            let message = `Are you sure you want to delete form #${id}`;
+            this.alertConfirm(message);
           }
         },
         created() {
