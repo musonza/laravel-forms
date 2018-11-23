@@ -90,8 +90,14 @@
 
 <template>
   <div>
-  <v-card class="pl-2 pr-2 pt-2 pb-2">
-    <h1 id="introduction" class="primary--text mb-1" v-if="formModel.id">Form #{{ formModel.id }}</h1>
+
+  <v-expansion-panel>
+    <v-expansion-panel-content>
+        <div slot="header">
+          <h1 class="primary--text mb-1" v-if="formModel.id">Form #{{ formModel.id }} details</h1>
+        </div>
+
+    <v-card class="pl-2 pr-2 pt-2 pb-2">
       <form>
         <v-text-field
           outline
@@ -125,7 +131,10 @@
       </form>
     </v-card>
 
-    <form-fields-component :form-model="formModel" v-if="!creatingForm"></form-fields-component>
+    </v-expansion-panel-content>
+  </v-expansion-panel>
+
+  <form-fields-component :form-model="formModel" v-if="!creatingForm"></form-fields-component>
 
   </div>
 </template>

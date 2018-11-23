@@ -1,52 +1,3 @@
-<template>
-  <div>
-    <v-btn color="primary" class="right" @click="newForm()">Create Form</v-btn>
-    <v-data-table
-      :headers="headers"
-      :items="forms"
-      class="elevation-1"
-    >
-      <template slot="items" slot-scope="props">
-        <td>{{ props.item.id }}</td>
-        <td>{{ props.item.title }}</td>
-        <td>
-          <v-chip label :color="props.item.status.class" text-color="white" class="status-label font-weight-bold">
-            {{ props.item.status.label }}
-          </v-chip>
-        </td>
-        <td>{{ props.item.submissions_count }}</td>
-        <td>
-          <v-icon
-            small
-            class="mr-2"
-            @click="previewForm(props.item)"
-          >
-            visibility
-          </v-icon>
-
-          <v-icon
-            small
-            color="blue"
-            class="mr-2"
-            @click="editForm(props.item)"
-          >
-            edit
-          </v-icon>
-
-          <v-icon
-            small
-            color="red"
-            @click="deleteForm(props.item)"
-          >
-            delete
-          </v-icon>
-
-        </td>
-      </template>
-    </v-data-table>
-  </div>
-</template>
-
 <script>
     import Form from '@/models/Form';
     export default {
@@ -104,10 +55,56 @@
     }
 </script>
 
-<style>
-.status-label {
-  width: 90px;
-  height: 22px;
-}
-</style>
+<template>
+  <div>
+    <v-btn color="primary" class="right" @click="newForm()">Create Form</v-btn>
+    <v-data-table
+      :headers="headers"
+      :items="forms"
+      class="elevation-1"
+    >
+      <template slot="items" slot-scope="props">
+        <td>{{ props.item.id }}</td>
+        <td>{{ props.item.title }}</td>
+        <td>
+          <v-chip
+          label
+          small
+          :color="props.item.status.class"
+          text-color="white"
+          class="status-label font-weight-bold ml-0">
+            {{ props.item.status.label }}
+          </v-chip>
+        </td>
+        <td>{{ props.item.submissions_count }}</td>
+        <td>
+          <v-icon
+            small
+            class="mr-2"
+            @click="previewForm(props.item)"
+          >
+            visibility
+          </v-icon>
 
+          <v-icon
+            small
+            color="blue"
+            class="mr-2"
+            @click="editForm(props.item)"
+          >
+            edit
+          </v-icon>
+
+          <v-icon
+            small
+            color="red"
+            @click="deleteForm(props.item)"
+          >
+            delete
+          </v-icon>
+
+        </td>
+      </template>
+    </v-data-table>
+  </div>
+</template>

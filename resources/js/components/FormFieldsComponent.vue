@@ -30,39 +30,31 @@
 
 <template>
   <div class="mt-3">
-    <v-btn color="primary" small @click="addField()">Add Field</v-btn>
-    <v-card class="pl-2 pr-2 pt-2 pb-2">
+    <v-btn color="primary" small @click="addField()" class="right mb-3">Add Field</v-btn>
       <div>
+
         <h2>Fields</h2>
-        <div v-for="field in formFields" :key="field.id">
-          <label>{{ field.title }}</label>
-          <div v-html="field.render"></div>
-        </div>
+
+        <v-expansion-panel popout>
+          <v-expansion-panel-content
+              v-for="(field, i) in formFields"
+              :key="i"
+            >
+              <div slot="header">
+                <strong>#{{ field.id }}</strong>
+                {{ field.title }}
+              </div>
+              <v-card class="pl-2 pr-2 pt-2 pb-2">
+                <v-text-field
+                  outline
+                  v-model="field.title"
+                  label="Label"
+                  data-vv-name="label"
+                ></v-text-field>
+              </v-card>
+            </v-expansion-panel-content>
+        </v-expansion-panel>
+
       </div>
-    </v-card>
   </div>
 </template>
-
-<style>
-.form-control {
-  display: block;
-  width: 100%;
-  height: calc(2.25rem + 2px);
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-label {
-  padding-top: calc(0.375rem + 1px);
-  padding-bottom: calc(0.375rem + 1px);
-  margin-bottom: 0;
-  font-size: inherit;
-  line-height: 1.5;
-}
-</style>
