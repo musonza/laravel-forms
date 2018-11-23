@@ -1,6 +1,7 @@
 <script>
     import Form from '@/models/Form';
-    import FormActionsComponent from "@/components/FormActionsComponent";
+    import FormActionsComponent from '@/components/FormActionsComponent';
+    import FormFieldsComponent from '@/components/FormFieldsComponent';
     export default {
       name: 'FormEditPage',
 
@@ -9,7 +10,8 @@
       },
 
       components: {
-        FormActionsComponent
+        FormActionsComponent,
+        FormFieldsComponent
       },
 
       data: () => ({
@@ -19,6 +21,7 @@
           status: null,
         },
         formModel: {},
+        creatingForm: true,
       }),
 
       methods: {
@@ -78,6 +81,7 @@
       mounted() {
         const id = this.$route.params.id;
         if (id && id != 0) {
+          this.creatingForm = false;
           this.getForm(id);
         }
       },
@@ -86,10 +90,8 @@
 
 <template>
   <div>
-  <!-- <form-actions-component></form-actions-component> -->
   <v-card class="pl-2 pr-2 pt-2 pb-2">
     <h1 id="introduction" class="primary--text mb-1" v-if="formModel.id">Form #{{ formModel.id }}</h1>
-
       <form>
         <v-text-field
           outline
@@ -121,7 +123,9 @@
         <v-btn @click="cancel">cancel</v-btn>
         <!-- <v-btn @click="clear">clear</v-btn> -->
       </form>
-
     </v-card>
+
+    <form-fields-component v-if="!creatingForm"></form-fields-component>
+
   </div>
 </template>

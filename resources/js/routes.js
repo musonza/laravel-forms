@@ -20,4 +20,9 @@ export default [
     name: 'fields-index',
     component: require('./pages/fields/index')
   },
+  {
+    path: '/forms/:id/fields/create',
+    name: 'formFieldCreate',
+    component: require('./pages/forms/fields/create')
+  },
 ];

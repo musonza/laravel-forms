@@ -15,8 +15,7 @@
 <script>
     import Field from '@/models/Field';
     export default {
-
-      name: 'FieldsComponent',
+        name: 'FieldsComponent',
         data: () => ({
           headers: [
             { text: 'ID', value: 'id' },

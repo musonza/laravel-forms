@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div>
-      <v-btn color="primary" class="right" @click="newForm()">Create Form</v-btn>
-    </div>
+    <v-btn color="primary" class="right" @click="newForm()">Create Form</v-btn>
     <v-data-table
       :headers="headers"
       :items="forms"

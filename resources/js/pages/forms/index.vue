@@ -1,5 +1,5 @@
 <template>
-    <forms-component></forms-component>
+  <forms-component></forms-component>
 </template>
 
 <script>
