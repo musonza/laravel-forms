@@ -1742,21 +1742,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'FieldsComponent',
@@ -1885,7 +1870,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       }
 
       return getFormFields;
-    }()
+    }(),
+
+
+    //Move this to vuex state
+    getItems: function getItems() {
+      return ['Musonza\\Form\\Fields\\CheckBox', 'Musonza\\Form\\Fields\\Date', 'Musonza\\Form\\Fields\\File', 'Musonza\\Form\\Fields\\Password', 'Musonza\\Form\\Fields\\Radio', 'Musonza\\Form\\Fields\\Select', 'Musonza\\Form\\Fields\\Text', 'Musonza\\Form\\Fields\\TextArea', 'Musonza\\Form\\Fields\\Email', 'Musonza\\Form\\Fields\\Number'];
+    }
   },
 
   mounted: function mounted() {
@@ -49311,6 +49302,32 @@ var render = function() {
                             _vm.$set(field, "title", $$v)
                           },
                           expression: "field.title"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.getItems(),
+                          label: "Field Type",
+                          outline: ""
+                        },
+                        model: {
+                          value: field.field_type,
+                          callback: function($$v) {
+                            _vm.$set(field, "field_type", $$v)
+                          },
+                          expression: "field.field_type"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-switch", {
+                        attrs: { label: "Required" },
+                        model: {
+                          value: field.is_required,
+                          callback: function($$v) {
+                            _vm.$set(field, "is_required", $$v)
+                          },
+                          expression: "field.is_required"
                         }
                       })
                     ],

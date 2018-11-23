@@ -1,17 +1,3 @@
-<template>
-    <v-data-table
-      :headers="headers"
-      :items="fieldTypes"
-      class="elevation-1"
-    >
-      <template slot="items" slot-scope="props">
-        <td>{{ props.item.id }}</td>
-        <td>{{ props.item.title }}</td>
-        <td>{{ props.item.has_choices }}</td>
-      </template>
-    </v-data-table>
-</template>
-
 <script>
     import Field from '@/models/Field';
     export default {
@@ -37,4 +23,18 @@
         }
     }
 </script>
+
+<template>
+    <v-data-table
+      :headers="headers"
+      :items="fieldTypes"
+      class="elevation-1"
+    >
+      <template slot="items" slot-scope="props">
+        <td>{{ props.item.id }}</td>
+        <td>{{ props.item.title }}</td>
+        <td>{{ props.item.has_choices }}</td>
+      </template>
+    </v-data-table>
+</template>
 
