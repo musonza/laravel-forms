@@ -17,6 +17,7 @@
         message: String,
         autoDismiss: Number,
         show: Boolean,
+        confirmationAgree: null,
       },
 
       methods: {
@@ -33,7 +34,7 @@
       },
 
       mounted() {
-        if (this.autoDismiss && this.type == 'success') {
+        if (this.autoDismiss) {
           this.timeout = setTimeout(() => {
             this.close();
             this.dismissAlert();
@@ -48,7 +49,8 @@
     <div v-if="type == 'confirmation'">
       <dialog-component
         :title="title"
-        :message="message"></dialog-component>
+        :message="message"
+        :confirmationAgree="confirmationAgree"></dialog-component>
     </div>
     <div v-else>
       <v-alert

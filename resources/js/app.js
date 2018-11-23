@@ -47,6 +47,7 @@ new Vue({
         autoDismiss: 5000,
         message: '',
         title: '',
+        confirmationAgree: null,
       },
     }
   },

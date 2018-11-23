@@ -6,7 +6,7 @@
         items: [
           { title: 'Dashboard', icon: 'dashboard', link: '/'},
           { title: 'Forms', icon: 'list', link: '/forms' },
-          { title: 'Field Types', icon: 'text_fields', link: '/forms' },
+          { title: 'Field Types', icon: 'text_fields', link: '/fields' },
           { title: 'Settings', icon: 'settings', link: '/settings' }
         ],
       }),

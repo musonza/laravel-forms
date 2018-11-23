@@ -14,6 +14,11 @@ export default {
       this.$root.alert.show = true;
     },
 
+    alertWarning(message) {
+      this.$root.alert.type = 'warning';
+      this.$root.alert.message = message;
+      this.$root.alert.show = true;
+    },
 
     /**
      * Show a success message.
@@ -24,7 +29,6 @@ export default {
       this.$root.alert.show = true;
     },
 
-
     /**
      * Show confirmation message.
      */
@@ -33,7 +37,7 @@ export default {
       this.$root.alert.autoClose = false;
       this.$root.alert.title = title;
       this.$root.alert.message = message;
-      this.$root.alert.confirmationProceed = success;
+      this.$root.alert.confirmationAgree = success;
       this.$root.alert.confirmationCancel = failure;
       this.$root.alert.show = true;
     },

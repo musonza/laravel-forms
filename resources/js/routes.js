@@ -15,4 +15,9 @@ export default [
     name: 'forms-edit',
     component: require('./pages/forms/edit')
   },
+  {
+    path: '/fields',
+    name: 'fields-index',
+    component: require('./pages/fields/index')
+  },
 ];

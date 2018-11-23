@@ -30,29 +30,54 @@
             'status': parseInt(this.formModel.status.value)
           };
         },
+
         async submit () {
           let valid = await this.$validator.validateAll();
           if (valid) {
-            let response = await this.formModel
-                .sync(this.payload)
-                .then(response => {
-                  this.alertSuccess('Successfully saved!');
-                }).catch(error => {
-                  this.alertError(this.formatErrorMessage(error.response));
-                });
+            this.formModel.id ? this.updateForm() : this.createForm();
           }
         },
-        clear () {
+
+        async createForm() {
+          this.payload.status = 0;
+          let form = new Form(this.payload);
+          form.save()
+          .then(response => {
+            this.alertSuccess('Successfully created!');
+            this.$router.push({name: 'forms-edit', params: { id: response.id}});
+            this.$router.go();
+          })
+          .catch(error => {
+            this.alertError(this.formatErrorMessage(error.response));
+          });
+        },
+
+        async updateForm() {
+          await this.formModel
+          .sync(this.payload)
+          .then(response => {
+            this.alertSuccess('Successfully saved!');
+          })
+          .catch(error => {
+            this.alertError(this.formatErrorMessage(error.response));
+          });
+        },
+
+        clear() {
           this.title = ''
           this.description = ''
           this.status = null
           this.$validator.reset()
         },
+
+        cancel() {
+          this.$router.go(-1);
+        }
       },
 
       mounted() {
         const id = this.$route.params.id;
-        if (id) {
+        if (id && id != 0) {
           this.getForm(id);
         }
       },
@@ -93,6 +118,7 @@
         </v-radio-group>
 
         <v-btn @click="submit" color="primary">save</v-btn>
+        <v-btn @click="cancel">cancel</v-btn>
         <!-- <v-btn @click="clear">clear</v-btn> -->
       </form>
 

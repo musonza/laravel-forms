@@ -24,6 +24,7 @@
                   :type="alert.type"
                   :show="alert.show"
                   :auto-dismiss="alert.autoDismiss"
+                  :confirmation-agree="alert.confirmationAgree"
                   v-if="alert.type"></alert>
             <router-view></router-view>
           </v-flex>

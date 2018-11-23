@@ -10,10 +10,14 @@
         title: null,
         message: String,
         show: Boolean,
+        confirmationAgree: null
       },
 
       methods: {
-
+        confirm() {
+          this.confirmationAgree();
+          this.dismissAlert();
+        }
       },
 
       computed: {
@@ -55,7 +59,7 @@
           <v-btn
             color="red darken-1"
             flat="flat"
-            @click="dismissAlert()"
+            @click="confirm()"
           >
             Delete
           </v-btn>
