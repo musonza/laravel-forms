@@ -36,9 +36,10 @@
           let valid = await this.$validator.validateAll();
           if (valid) {
             alert('cool');
+          } else {
+            this.alertError('Invalid input provided');
           }
         },
-
       },
 
       mounted() {

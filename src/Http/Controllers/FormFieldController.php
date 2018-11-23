@@ -45,6 +45,7 @@ class FormFieldController extends Controller
     {
         $data = $request->all();
         $data['options'] = [];
+        $data['title'] = 'Foo';
 
         if ($request->options) {
             $options = $this->normalizeOptions($request->options);

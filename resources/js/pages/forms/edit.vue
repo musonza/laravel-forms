@@ -125,7 +125,7 @@
       </form>
     </v-card>
 
-    <form-fields-component v-if="!creatingForm"></form-fields-component>
+    <form-fields-component :form-model="formModel" v-if="!creatingForm"></form-fields-component>
 
   </div>
 </template>
