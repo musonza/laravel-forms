@@ -2,6 +2,7 @@
     import Form from '@/models/Form';
     import FormActionsComponent from '@/components/FormActionsComponent';
     import FormFieldsComponent from '@/components/FormFieldsComponent';
+    import FormSubmissionsComponent from '@/components/FormSubmissionsComponent';
     export default {
       name: 'FormEditPage',
 
@@ -11,7 +12,8 @@
 
       components: {
         FormActionsComponent,
-        FormFieldsComponent
+        FormFieldsComponent,
+        FormSubmissionsComponent
       },
 
       data: () => ({
@@ -92,8 +94,13 @@
   <div>
     <h2 class="primary--text mb-1" v-if="formModel.id">Form #{{ formModel.id }}</h2>
     <v-tabs fixed-tabs>
-      <v-tab>Questions</v-tab>
-      <v-tab>Submissions</v-tab>
+      <v-tab>Fields</v-tab>
+      <v-tab>
+        <span class="mr-2">Submissions</span>
+        <v-badge right>
+          <span slot="badge">{{ formModel.submissions_count }}</span>
+        </v-badge>
+      </v-tab>
       <v-tabs-items>
         <v-tab-item>
           <v-expansion-panel>
@@ -139,7 +146,7 @@
             <form-fields-component :form-model="formModel" v-if="!creatingForm"></form-fields-component>
         </v-tab-item>
         <v-tab-item>
-        Submissions
+          <form-submissions-component></form-submissions-component>
         </v-tab-item>
       </v-tabs-items>
     </v-tabs>

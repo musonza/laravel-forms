@@ -1745,6 +1745,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'FieldsComponent',
+
   data: function data() {
     return {
       headers: [{ text: 'ID', value: 'id' }, { text: 'Title', value: 'title' }, { text: 'Choices', value: 'has_choices' }],
@@ -1961,6 +1962,108 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/FormSubmissionsComponent.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__("./node_modules/babel-runtime/regenerator/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_Form__ = __webpack_require__("./resources/js/models/Form.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_Submission__ = __webpack_require__("./resources/js/models/Submission.js");
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'FormSubmissionsComponent',
+
+  data: function data() {
+    return {
+      formSubmissions: [],
+      formId: null,
+      currentSubmission: {},
+      headers: [{ text: 'ID', value: 'id' }, { text: 'Created', value: 'created_at_readable' }, { text: 'Status', value: 'is_complete' }]
+    };
+  },
+
+  methods: {
+    getFormSubmissions: function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var form, response;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                form = new __WEBPACK_IMPORTED_MODULE_1__models_Form__["a" /* default */]({ id: this.formId });
+                _context.next = 3;
+                return form.submissions().get();
+
+              case 3:
+                response = _context.sent;
+
+                this.formSubmissions = response[0].submissions.data;
+
+              case 5:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getFormSubmissions() {
+        return _ref.apply(this, arguments);
+      }
+
+      return getFormSubmissions;
+    }(),
+
+
+    // store in vuex for current session
+    getSubmission: function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(props) {
+        var form, response;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                props.expanded = !props.expanded;
+                form = new __WEBPACK_IMPORTED_MODULE_1__models_Form__["a" /* default */]({ id: this.formId });
+                _context2.next = 4;
+                return form.submissions().find(props.item.id);
+
+              case 4:
+                response = _context2.sent;
+
+                this.currentSubmission = response.submission;
+
+              case 6:
+              case 'end':
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function getSubmission(_x) {
+        return _ref2.apply(this, arguments);
+      }
+
+      return getSubmission;
+    }()
+  },
+
+  mounted: function mounted() {
+    this.formId = this.$route.params.id;
+    this.getFormSubmissions();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/FormsComponent.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2134,9 +2237,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_FormActionsComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_FormActionsComponent__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_FormFieldsComponent__ = __webpack_require__("./resources/js/components/FormFieldsComponent.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_FormFieldsComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_FormFieldsComponent__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_FormSubmissionsComponent__ = __webpack_require__("./resources/js/components/FormSubmissionsComponent.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_FormSubmissionsComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_FormSubmissionsComponent__);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 
 
 
@@ -2150,7 +2256,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
   components: {
     FormActionsComponent: __WEBPACK_IMPORTED_MODULE_2__components_FormActionsComponent___default.a,
-    FormFieldsComponent: __WEBPACK_IMPORTED_MODULE_3__components_FormFieldsComponent___default.a
+    FormFieldsComponent: __WEBPACK_IMPORTED_MODULE_3__components_FormFieldsComponent___default.a,
+    FormSubmissionsComponent: __WEBPACK_IMPORTED_MODULE_4__components_FormSubmissionsComponent___default.a
   },
 
   data: function data() {
@@ -48899,9 +49006,21 @@ var render = function() {
         "v-tabs",
         { attrs: { "fixed-tabs": "" } },
         [
-          _c("v-tab", [_vm._v("Questions")]),
+          _c("v-tab", [_vm._v("Fields")]),
           _vm._v(" "),
-          _c("v-tab", [_vm._v("Submissions")]),
+          _c(
+            "v-tab",
+            [
+              _c("span", { staticClass: "mr-2" }, [_vm._v("Submissions")]),
+              _vm._v(" "),
+              _c("v-badge", { attrs: { right: "" } }, [
+                _c("span", { attrs: { slot: "badge" }, slot: "badge" }, [
+                  _vm._v(_vm._s(_vm.formModel.submissions_count))
+                ])
+              ])
+            ],
+            1
+          ),
           _vm._v(" "),
           _c(
             "v-tabs-items",
@@ -49032,7 +49151,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("v-tab-item", [_vm._v("\n      Submissions\n      ")])
+              _c("v-tab-item", [_c("form-submissions-component")], 1)
             ],
             1
           )
@@ -49597,6 +49716,101 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-7b2bf401", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-83e05936\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/FormSubmissionsComponent.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("v-data-table", {
+    staticClass: "elevation-1",
+    attrs: { headers: _vm.headers, items: _vm.formSubmissions },
+    scopedSlots: _vm._u([
+      {
+        key: "items",
+        fn: function(props) {
+          return [
+            _c(
+              "tr",
+              {
+                on: {
+                  click: function($event) {
+                    _vm.getSubmission(props)
+                  }
+                }
+              },
+              [
+                _c("td", [_vm._v(_vm._s(props.item.id))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(props.item.created_at_readable))]),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  [
+                    _c(
+                      "v-chip",
+                      {
+                        staticClass: "status-label font-weight-bold ml-0",
+                        attrs: {
+                          label: "",
+                          small: "",
+                          color: props.item.is_complete ? "success" : "warning",
+                          "text-color": "white"
+                        }
+                      },
+                      [
+                        props.item.is_complete
+                          ? _c("span", [_vm._v("Complete")])
+                          : _c("span", [_vm._v("In Progress")])
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ]
+            )
+          ]
+        }
+      },
+      {
+        key: "expand",
+        fn: function(props) {
+          return [
+            _vm.currentSubmission && _vm.currentSubmission.answers
+              ? _c(
+                  "v-card",
+                  { staticClass: "pa-3", attrs: { flat: "" } },
+                  _vm._l(_vm.currentSubmission.answers.data, function(
+                    answer,
+                    i
+                  ) {
+                    return _c("div", { key: i, staticClass: "pa-2" }, [
+                      _c("h3", [_vm._v(_vm._s(answer.question.label))]),
+                      _vm._v(" "),
+                      _c("span", [_vm._v(_vm._s(answer.response))])
+                    ])
+                  })
+                )
+              : _vm._e()
+          ]
+        }
+      }
+    ])
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-83e05936", module.exports)
   }
 }
 
@@ -87498,6 +87712,54 @@ module.exports = Component.exports
 
 /***/ }),
 
+/***/ "./resources/js/components/FormSubmissionsComponent.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/FormSubmissionsComponent.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-83e05936\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/FormSubmissionsComponent.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/FormSubmissionsComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-83e05936", Component.options)
+  } else {
+    hotAPI.reload("data-v-83e05936", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
 /***/ "./resources/js/components/FormsComponent.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -87638,6 +87900,7 @@ var Field = function (_Model) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Model__ = __webpack_require__("./resources/js/models/Model.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Field__ = __webpack_require__("./resources/js/models/Field.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Submission__ = __webpack_require__("./resources/js/models/Submission.js");
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -87645,6 +87908,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -87667,6 +87931,11 @@ var Form = function (_Model) {
     key: 'fields',
     value: function fields() {
       return this.hasMany(__WEBPACK_IMPORTED_MODULE_1__Field__["a" /* default */]);
+    }
+  }, {
+    key: 'submissions',
+    value: function submissions() {
+      return this.hasMany(__WEBPACK_IMPORTED_MODULE_2__Submission__["a" /* default */]);
     }
   }]);
 
@@ -87724,6 +87993,44 @@ var Model = function (_BaseModel) {
 }(__WEBPACK_IMPORTED_MODULE_0_vue_api_query__["Model"]);
 
 /* harmony default export */ __webpack_exports__["a"] = (Model);
+
+/***/ }),
+
+/***/ "./resources/js/models/Submission.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Model__ = __webpack_require__("./resources/js/models/Model.js");
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var Submission = function (_Model) {
+  _inherits(Submission, _Model);
+
+  function Submission() {
+    _classCallCheck(this, Submission);
+
+    return _possibleConstructorReturn(this, (Submission.__proto__ || Object.getPrototypeOf(Submission)).apply(this, arguments));
+  }
+
+  _createClass(Submission, [{
+    key: 'resource',
+    value: function resource() {
+      return 'submissions';
+    }
+  }]);
+
+  return Submission;
+}(__WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Submission);
 
 /***/ }),
 
