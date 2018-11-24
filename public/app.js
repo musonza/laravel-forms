@@ -1875,40 +1875,26 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(field) {
         var _this = this;
 
-        var message, formId;
+        var message;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 message = 'Are you sure you want to delete field #' + field.id;
-                formId = this.$route.params.id;
-
 
                 this.alertConfirm(message, _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-                  var form, fieldModel;
                   return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
                       switch (_context2.prev = _context2.next) {
                         case 0:
-                          _context2.next = 2;
-                          return __WEBPACK_IMPORTED_MODULE_1__models_Form__["a" /* default */].find(formId);
-
-                        case 2:
-                          form = _context2.sent;
-                          _context2.next = 5;
-                          return form.fields().find(field.id);
-
-                        case 5:
-                          fieldModel = _context2.sent;
-
-                          fieldModel.delete().then(function (response) {
+                          field.delete().then(function (response) {
                             _this.formFields.splice(_this.formFields.indexOf(field), 1);
-                            _this.alertWarning('Successfully deleted the form!');
+                            _this.alertWarning('Successfully deleted the field!');
                           }).catch(function (error) {
                             _this.alertError(_this.formatErrorMessage(error.response));
                           });
 
-                        case 7:
+                        case 1:
                         case 'end':
                           return _context2.stop();
                       }
@@ -1916,7 +1902,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   }, _callee2, _this);
                 })));
 
-              case 3:
+              case 2:
               case 'end':
                 return _context3.stop();
             }

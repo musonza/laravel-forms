@@ -22,19 +22,15 @@
 
         async deleteField(field) {
           const message = `Are you sure you want to delete field #${field.id}`;
-          const formId = this.$route.params.id;
-
           this.alertConfirm(message, async() => {
-              const form = await Form.find(formId);
-              const fieldModel = await form.fields().find(field.id);
-              fieldModel.delete()
-              .then(response => {
-                this.formFields.splice(this.formFields.indexOf(field), 1);
-                this.alertWarning('Successfully deleted the form!');
-              })
-              .catch(error => {
-                this.alertError(this.formatErrorMessage(error.response));
-              });
+            field.delete()
+            .then(response => {
+              this.formFields.splice(this.formFields.indexOf(field), 1);
+              this.alertWarning('Successfully deleted the field!');
+            })
+            .catch(error => {
+              this.alertError(this.formatErrorMessage(error.response));
+            });
           });
         },
 
