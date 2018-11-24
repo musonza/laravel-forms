@@ -5,19 +5,55 @@
 
       data: () => ({
         formFields: null,
+        cloneFormFields: null,
       }),
 
       props: ['formModel'],
 
+      watch: {
+        formFields: {
+          handler: function (val, oldVal) {
+            var vm = this;
+            val.filter( function(field, idx) {
+                return Object.keys(field).some( function( prop ) {
+                    var diff = field[prop] !== vm.cloneFormFields[idx][prop];
+                    if(diff) {
+                        field.changed = true;
+                        vm.updateField(field);
+                    }
+                })
+            });
+          },
+          deep: true
+        }
+      },
+
       methods: {
+        setValue:function(){
+          this.$data.oldFormFields = _.cloneDeep(this.$data.formFields);
+        },
+
         addField() {
           this.$router.push({name: 'formFieldCreate', params: { id: this.$route.params.id}});
+        },
+
+        async updateField(field) {
+          field.title = 'tinashe';
+          field.label = 'tinashe';
+          await field.save();
+          this.cloneFields();
+        },
+
+        //bad idea
+        cloneFields() {
+          this.cloneFormFields = this.formFields.map(a => Object.assign({}, a));
         },
 
         async getFormFields(formId) {
           let form = await Form.find(formId);
           let fields = await form.fields().get();
           this.formFields = fields.data;
+          this.cloneFields();
         },
 
         async deleteField(field) {

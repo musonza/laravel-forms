@@ -1827,37 +1827,54 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
   data: function data() {
     return {
-      formFields: null
+      formFields: null,
+      cloneFormFields: null
     };
   },
 
   props: ['formModel'],
 
+  watch: {
+    formFields: {
+      handler: function handler(val, oldVal) {
+        var vm = this;
+        val.filter(function (field, idx) {
+          return Object.keys(field).some(function (prop) {
+            var diff = field[prop] !== vm.cloneFormFields[idx][prop];
+            if (diff) {
+              field.changed = true;
+              vm.updateField(field);
+            }
+          });
+        });
+      },
+      deep: true
+    }
+  },
+
   methods: {
+    setValue: function setValue() {
+      this.$data.oldFormFields = _.cloneDeep(this.$data.formFields);
+    },
+
     addField: function addField() {
       this.$router.push({ name: 'formFieldCreate', params: { id: this.$route.params.id } });
     },
-    getFormFields: function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(formId) {
-        var form, fields;
+    updateField: function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(field) {
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return __WEBPACK_IMPORTED_MODULE_1__models_Form__["a" /* default */].find(formId);
+                field.title = 'tinashe';
+                field.label = 'tinashe';
+                _context.next = 4;
+                return field.save();
 
-              case 2:
-                form = _context.sent;
-                _context.next = 5;
-                return form.fields().get();
+              case 4:
+                this.cloneFields();
 
               case 5:
-                fields = _context.sent;
-
-                this.formFields = fields.data;
-
-              case 7:
               case 'end':
                 return _context.stop();
             }
@@ -1865,27 +1882,70 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         }, _callee, this);
       }));
 
-      function getFormFields(_x) {
+      function updateField(_x) {
         return _ref.apply(this, arguments);
+      }
+
+      return updateField;
+    }(),
+
+
+    //bad idea
+    cloneFields: function cloneFields() {
+      this.cloneFormFields = this.formFields.map(function (a) {
+        return Object.assign({}, a);
+      });
+    },
+    getFormFields: function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(formId) {
+        var form, fields;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return __WEBPACK_IMPORTED_MODULE_1__models_Form__["a" /* default */].find(formId);
+
+              case 2:
+                form = _context2.sent;
+                _context2.next = 5;
+                return form.fields().get();
+
+              case 5:
+                fields = _context2.sent;
+
+                this.formFields = fields.data;
+                this.cloneFields();
+
+              case 8:
+              case 'end':
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function getFormFields(_x2) {
+        return _ref2.apply(this, arguments);
       }
 
       return getFormFields;
     }(),
     deleteField: function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(field) {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(field) {
         var _this = this;
 
         var message;
-        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
                 message = 'Are you sure you want to delete field #' + field.id;
 
-                this.alertConfirm(message, _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-                  return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                this.alertConfirm(message, _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+                  return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
                     while (1) {
-                      switch (_context2.prev = _context2.next) {
+                      switch (_context3.prev = _context3.next) {
                         case 0:
                           field.delete().then(function (response) {
                             _this.formFields.splice(_this.formFields.indexOf(field), 1);
@@ -1896,22 +1956,22 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                         case 1:
                         case 'end':
-                          return _context2.stop();
+                          return _context3.stop();
                       }
                     }
-                  }, _callee2, _this);
+                  }, _callee3, _this);
                 })));
 
               case 2:
               case 'end':
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3, this);
+        }, _callee4, this);
       }));
 
-      function deleteField(_x2) {
-        return _ref2.apply(this, arguments);
+      function deleteField(_x3) {
+        return _ref3.apply(this, arguments);
       }
 
       return deleteField;
