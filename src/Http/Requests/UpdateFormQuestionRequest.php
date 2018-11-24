@@ -9,6 +9,7 @@ class UpdateFormQuestionRequest extends FormRequest
     public static $rules = [
         'label' => 'Required',
         'field_type' => 'Required',
+        'is_required' => '',
         'help_text' => '',
         'placeholder' => '',
         'default_value' => '',

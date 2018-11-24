@@ -17,6 +17,8 @@
         async updateField(field) {
             field.save()
             .then(response => {
+              console.log(response);
+              console.log('tinashe');
               this.alertWarning('Successfully updated the field!');
             })
             .catch(error => {
@@ -125,7 +127,7 @@
 
                     <v-switch
                       label="Required"
-                      :input-value="field.is_required"
+                      v-model="field.is_required"
                       @change="updateField(field)"
                     ></v-switch>
                   </v-card-actions>

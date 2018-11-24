@@ -1846,6 +1846,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             switch (_context.prev = _context.next) {
               case 0:
                 field.save().then(function (response) {
+                  console.log(response);
+                  console.log('tinashe');
                   _this.alertWarning('Successfully updated the field!');
                 }).catch(function (error) {
                   _this.alertError(_this.formatErrorMessage(error.response));
@@ -48887,111 +48889,156 @@ var render = function() {
   return _c(
     "div",
     [
+      _vm.formModel.id
+        ? _c("h2", { staticClass: "primary--text mb-1" }, [
+            _vm._v("Form #" + _vm._s(_vm.formModel.id))
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _c(
-        "v-expansion-panel",
+        "v-tabs",
+        { attrs: { "fixed-tabs": "" } },
         [
+          _c("v-tab", [_vm._v("Questions")]),
+          _vm._v(" "),
+          _c("v-tab", [_vm._v("Submissions")]),
+          _vm._v(" "),
           _c(
-            "v-expansion-panel-content",
+            "v-tabs-items",
             [
-              _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-                _vm.formModel.id
-                  ? _c("h1", { staticClass: "primary--text mb-1" }, [
-                      _vm._v("Form #" + _vm._s(_vm.formModel.id) + " details")
-                    ])
-                  : _vm._e()
-              ]),
-              _vm._v(" "),
-              _c("v-card", { staticClass: "pl-2 pr-2 pt-2 pb-2" }, [
-                _c(
-                  "form",
-                  [
-                    _c("v-text-field", {
-                      directives: [
-                        {
-                          name: "validate",
-                          rawName: "v-validate",
-                          value: "required",
-                          expression: "'required'"
-                        }
-                      ],
-                      attrs: {
-                        outline: "",
-                        "error-messages": _vm.errors.collect("title"),
-                        label: "Title",
-                        "data-vv-name": "title",
-                        required: ""
-                      },
-                      model: {
-                        value: _vm.payload.title,
-                        callback: function($$v) {
-                          _vm.$set(_vm.payload, "title", $$v)
-                        },
-                        expression: "payload.title"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("v-textarea", {
-                      attrs: {
-                        outline: "",
-                        name: "description",
-                        label: "Description"
-                      },
-                      model: {
-                        value: _vm.payload.description,
-                        callback: function($$v) {
-                          _vm.$set(_vm.payload, "description", $$v)
-                        },
-                        expression: "payload.description"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "v-radio-group",
-                      {
-                        model: {
-                          value: _vm.payload.status,
-                          callback: function($$v) {
-                            _vm.$set(_vm.payload, "status", $$v)
-                          },
-                          expression: "payload.status"
-                        }
-                      },
-                      _vm._l(_vm.formModel.statuses, function(status, index) {
-                        return _c("v-radio", {
-                          key: index,
-                          attrs: { label: "" + status.label, value: index }
-                        })
+              _c(
+                "v-tab-item",
+                [
+                  _c(
+                    "v-expansion-panel",
+                    [
+                      _c(
+                        "v-expansion-panel-content",
+                        [
+                          _c(
+                            "div",
+                            { attrs: { slot: "header" }, slot: "header" },
+                            [
+                              _vm.formModel.id
+                                ? _c(
+                                    "h2",
+                                    { staticClass: "primary--text mb-1" },
+                                    [_vm._v("Details")]
+                                  )
+                                : _vm._e()
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("v-card", { staticClass: "pl-2 pr-2 pt-2 pb-2" }, [
+                            _c(
+                              "form",
+                              [
+                                _c("v-text-field", {
+                                  directives: [
+                                    {
+                                      name: "validate",
+                                      rawName: "v-validate",
+                                      value: "required",
+                                      expression: "'required'"
+                                    }
+                                  ],
+                                  attrs: {
+                                    outline: "",
+                                    "error-messages": _vm.errors.collect(
+                                      "title"
+                                    ),
+                                    label: "Title",
+                                    "data-vv-name": "title",
+                                    required: ""
+                                  },
+                                  model: {
+                                    value: _vm.payload.title,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.payload, "title", $$v)
+                                    },
+                                    expression: "payload.title"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("v-textarea", {
+                                  attrs: {
+                                    outline: "",
+                                    name: "description",
+                                    label: "Description"
+                                  },
+                                  model: {
+                                    value: _vm.payload.description,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.payload, "description", $$v)
+                                    },
+                                    expression: "payload.description"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "v-radio-group",
+                                  {
+                                    model: {
+                                      value: _vm.payload.status,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.payload, "status", $$v)
+                                      },
+                                      expression: "payload.status"
+                                    }
+                                  },
+                                  _vm._l(_vm.formModel.statuses, function(
+                                    status,
+                                    index
+                                  ) {
+                                    return _c("v-radio", {
+                                      key: index,
+                                      attrs: {
+                                        label: "" + status.label,
+                                        value: index
+                                      }
+                                    })
+                                  })
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-btn",
+                                  {
+                                    attrs: { color: "primary" },
+                                    on: { click: _vm.submit }
+                                  },
+                                  [_vm._v("save")]
+                                ),
+                                _vm._v(" "),
+                                _c("v-btn", { on: { click: _vm.cancel } }, [
+                                  _vm._v("cancel")
+                                ])
+                              ],
+                              1
+                            )
+                          ])
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  !_vm.creatingForm
+                    ? _c("form-fields-component", {
+                        attrs: { "form-model": _vm.formModel }
                       })
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "v-btn",
-                      {
-                        attrs: { color: "primary" },
-                        on: { click: _vm.submit }
-                      },
-                      [_vm._v("save")]
-                    ),
-                    _vm._v(" "),
-                    _c("v-btn", { on: { click: _vm.cancel } }, [
-                      _vm._v("cancel")
-                    ])
-                  ],
-                  1
-                )
-              ])
+                    : _vm._e()
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-tab-item", [_vm._v("\n      Submissions\n      ")])
             ],
             1
           )
         ],
         1
-      ),
-      _vm._v(" "),
-      !_vm.creatingForm
-        ? _c("form-fields-component", {
-            attrs: { "form-model": _vm.formModel }
-          })
-        : _vm._e()
+      )
     ],
     1
   )
@@ -49453,14 +49500,18 @@ var render = function() {
                               }),
                               _vm._v(" "),
                               _c("v-switch", {
-                                attrs: {
-                                  label: "Required",
-                                  "input-value": field.is_required
-                                },
+                                attrs: { label: "Required" },
                                 on: {
                                   change: function($event) {
                                     _vm.updateField(field)
                                   }
+                                },
+                                model: {
+                                  value: field.is_required,
+                                  callback: function($$v) {
+                                    _vm.$set(field, "is_required", $$v)
+                                  },
+                                  expression: "field.is_required"
                                 }
                               })
                             ],
@@ -49524,10 +49575,12 @@ var render = function() {
             _c(
               "v-alert",
               {
+                staticClass: "mb-3",
                 attrs: {
                   value: _vm.show,
                   type: _vm.type,
-                  transition: "scale-transition"
+                  transition: "scale-transition",
+                  outline: ""
                 }
               },
               [_vm._v("\n    " + _vm._s(_vm.message) + "\n    ")]

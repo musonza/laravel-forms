@@ -57,6 +57,8 @@
         :value="show"
         :type="type"
         transition="scale-transition"
+        outline
+        class="mb-3"
       >
       {{ message }}
       </v-alert>

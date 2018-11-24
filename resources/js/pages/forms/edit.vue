@@ -90,51 +90,58 @@
 
 <template>
   <div>
+    <h2 class="primary--text mb-1" v-if="formModel.id">Form #{{ formModel.id }}</h2>
+    <v-tabs fixed-tabs>
+      <v-tab>Questions</v-tab>
+      <v-tab>Submissions</v-tab>
+      <v-tabs-items>
+        <v-tab-item>
+          <v-expansion-panel>
+              <v-expansion-panel-content>
+                <div slot="header">
+                  <h2 class="primary--text mb-1" v-if="formModel.id">Details</h2>
+                </div>
+                <v-card class="pl-2 pr-2 pt-2 pb-2">
+                  <form>
+                    <v-text-field
+                      outline
+                      v-validate="'required'"
+                      v-model="payload.title"
+                      :error-messages="errors.collect('title')"
+                      label="Title"
+                      data-vv-name="title"
+                      required
+                    ></v-text-field>
 
-  <v-expansion-panel>
-    <v-expansion-panel-content>
-        <div slot="header">
-          <h1 class="primary--text mb-1" v-if="formModel.id">Form #{{ formModel.id }} details</h1>
-        </div>
+                    <v-textarea
+                      outline
+                      v-model="payload.description"
+                      name="description"
+                      label="Description"
+                    ></v-textarea>
 
-    <v-card class="pl-2 pr-2 pt-2 pb-2">
-      <form>
-        <v-text-field
-          outline
-          v-validate="'required'"
-          v-model="payload.title"
-          :error-messages="errors.collect('title')"
-          label="Title"
-          data-vv-name="title"
-          required
-        ></v-text-field>
+                    <v-radio-group v-model="payload.status">
+                      <v-radio
+                        v-for="(status, index) in formModel.statuses"
+                        :key="index"
+                        :label="`${status.label}`"
+                        :value="index"
+                      ></v-radio>
+                    </v-radio-group>
 
-        <v-textarea
-          outline
-          v-model="payload.description"
-          name="description"
-          label="Description"
-        ></v-textarea>
-
-        <v-radio-group v-model="payload.status">
-          <v-radio
-            v-for="(status, index) in formModel.statuses"
-            :key="index"
-            :label="`${status.label}`"
-            :value="index"
-          ></v-radio>
-        </v-radio-group>
-
-        <v-btn @click="submit" color="primary">save</v-btn>
-        <v-btn @click="cancel">cancel</v-btn>
-        <!-- <v-btn @click="clear">clear</v-btn> -->
-      </form>
-    </v-card>
-
-    </v-expansion-panel-content>
-  </v-expansion-panel>
-
-  <form-fields-component :form-model="formModel" v-if="!creatingForm"></form-fields-component>
-
+                    <v-btn @click="submit" color="primary">save</v-btn>
+                    <v-btn @click="cancel">cancel</v-btn>
+                    <!-- <v-btn @click="clear">clear</v-btn> -->
+                  </form>
+                </v-card>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+            <form-fields-component :form-model="formModel" v-if="!creatingForm"></form-fields-component>
+        </v-tab-item>
+        <v-tab-item>
+        Submissions
+        </v-tab-item>
+      </v-tabs-items>
+    </v-tabs>
   </div>
 </template>
