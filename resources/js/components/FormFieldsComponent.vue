@@ -76,10 +76,32 @@
                   outline
                 ></v-select>
 
-                <v-switch
-                  label="Required"
-                  v-model="field.is_required"
-                ></v-switch>
+                <div class="right">
+                  <v-card-actions>
+
+                    <v-tooltip bottom class="mr-3">
+                      <a slot="activator"><v-icon>file_copy</v-icon></a>
+                      <span>Duplicate</span>
+                    </v-tooltip>
+
+                    <v-tooltip bottom>
+                      <a slot="activator"><v-icon>delete</v-icon></a>
+                      <span>Delete</span>
+                    </v-tooltip>
+
+                    <v-divider
+                      class="mx-3"
+                      inset
+                      vertical
+                    ></v-divider>
+
+                    <v-switch
+                      label="Required"
+                      v-model="field.is_required"
+                    ></v-switch>
+                  </v-card-actions>
+                </div>
+
               </v-card>
             </v-expansion-panel-content>
         </v-expansion-panel>

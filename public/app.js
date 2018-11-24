@@ -49320,16 +49320,66 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _c("v-switch", {
-                        attrs: { label: "Required" },
-                        model: {
-                          value: field.is_required,
-                          callback: function($$v) {
-                            _vm.$set(field, "is_required", $$v)
-                          },
-                          expression: "field.is_required"
-                        }
-                      })
+                      _c(
+                        "div",
+                        { staticClass: "right" },
+                        [
+                          _c(
+                            "v-card-actions",
+                            [
+                              _c(
+                                "v-tooltip",
+                                { staticClass: "mr-3", attrs: { bottom: "" } },
+                                [
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: { slot: "activator" },
+                                      slot: "activator"
+                                    },
+                                    [_c("v-icon", [_vm._v("file_copy")])],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("span", [_vm._v("Duplicate")])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("v-tooltip", { attrs: { bottom: "" } }, [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: { slot: "activator" },
+                                    slot: "activator"
+                                  },
+                                  [_c("v-icon", [_vm._v("delete")])],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c("span", [_vm._v("Delete")])
+                              ]),
+                              _vm._v(" "),
+                              _c("v-divider", {
+                                staticClass: "mx-3",
+                                attrs: { inset: "", vertical: "" }
+                              }),
+                              _vm._v(" "),
+                              _c("v-switch", {
+                                attrs: { label: "Required" },
+                                model: {
+                                  value: field.is_required,
+                                  callback: function($$v) {
+                                    _vm.$set(field, "is_required", $$v)
+                                  },
+                                  expression: "field.is_required"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
                     ],
                     1
                   )
