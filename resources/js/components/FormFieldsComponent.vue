@@ -20,6 +20,24 @@
           this.formFields = fields.data;
         },
 
+        async deleteField(field) {
+          const message = `Are you sure you want to delete field #${field.id}`;
+          const formId = this.$route.params.id;
+
+          this.alertConfirm(message, async() => {
+              const form = await Form.find(formId);
+              const fieldModel = await form.fields().find(field.id);
+              fieldModel.delete()
+              .then(response => {
+                this.formFields.splice(this.formFields.indexOf(field), 1);
+                this.alertWarning('Successfully deleted the form!');
+              })
+              .catch(error => {
+                this.alertError(this.formatErrorMessage(error.response));
+              });
+          });
+        },
+
         //Move this to vuex state
         getItems(){
           return [
@@ -85,7 +103,9 @@
                     </v-tooltip>
 
                     <v-tooltip bottom>
-                      <a slot="activator"><v-icon>delete</v-icon></a>
+                      <a slot="activator" @click="deleteField(field)">
+                        <v-icon>delete</v-icon>
+                      </a>
                       <span>Delete</span>
                     </v-tooltip>
 

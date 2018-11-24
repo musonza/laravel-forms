@@ -1680,7 +1680,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   mounted: function mounted() {
     var _this = this;
 
-    if (this.autoDismiss) {
+    if (this.autoDismiss && this.$root.alert.type != 'confirmation') {
       this.timeout = setTimeout(function () {
         _this.close();
         _this.dismissAlert();
@@ -1870,6 +1870,65 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       }
 
       return getFormFields;
+    }(),
+    deleteField: function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(field) {
+        var _this = this;
+
+        var message, formId;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                message = 'Are you sure you want to delete field #' + field.id;
+                formId = this.$route.params.id;
+
+
+                this.alertConfirm(message, _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+                  var form, fieldModel;
+                  return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                    while (1) {
+                      switch (_context2.prev = _context2.next) {
+                        case 0:
+                          _context2.next = 2;
+                          return __WEBPACK_IMPORTED_MODULE_1__models_Form__["a" /* default */].find(formId);
+
+                        case 2:
+                          form = _context2.sent;
+                          _context2.next = 5;
+                          return form.fields().find(field.id);
+
+                        case 5:
+                          fieldModel = _context2.sent;
+
+                          fieldModel.delete().then(function (response) {
+                            _this.formFields.splice(_this.formFields.indexOf(field), 1);
+                            _this.alertWarning('Successfully deleted the form!');
+                          }).catch(function (error) {
+                            _this.alertError(_this.formatErrorMessage(error.response));
+                          });
+
+                        case 7:
+                        case 'end':
+                          return _context2.stop();
+                      }
+                    }
+                  }, _callee2, _this);
+                })));
+
+              case 3:
+              case 'end':
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function deleteField(_x2) {
+        return _ref2.apply(this, arguments);
+      }
+
+      return deleteField;
     }(),
 
 
@@ -49350,6 +49409,11 @@ var render = function() {
                                   "a",
                                   {
                                     attrs: { slot: "activator" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.deleteField(field)
+                                      }
+                                    },
                                     slot: "activator"
                                   },
                                   [_c("v-icon", [_vm._v("delete")])],

@@ -34,7 +34,7 @@
       },
 
       mounted() {
-        if (this.autoDismiss) {
+        if (this.autoDismiss && this.$root.alert.type != 'confirmation') {
           this.timeout = setTimeout(() => {
             this.close();
             this.dismissAlert();
