@@ -99,7 +99,7 @@
 <!-- Spacing -->
 
 <!-- Columns -->
-<div class="form-group row">
+<!-- <div class="form-group row">
     <label for="columns_count" class="col-md-2 col-form-label text-md-right">{{ __('Columns') }}</label>
     <div class="col-md-10">
         <input
@@ -117,4 +117,4 @@
             </span>
         @endif
     </div>
-</div>
+</div> -->

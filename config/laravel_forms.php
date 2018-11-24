@@ -24,7 +24,7 @@ return [
         ],
         2 => [
             'label' => 'Unpublished',
-            'class' => 'danger',
+            'class' => 'error',
         ],
     ],
 ];

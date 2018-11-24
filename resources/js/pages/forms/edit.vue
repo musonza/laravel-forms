@@ -1,0 +1,140 @@
+<script>
+    import Form from '@/models/Form';
+    import FormActionsComponent from '@/components/FormActionsComponent';
+    import FormFieldsComponent from '@/components/FormFieldsComponent';
+    export default {
+      name: 'FormEditPage',
+
+      $_veeValidate: {
+        validator: 'new'
+      },
+
+      components: {
+        FormActionsComponent,
+        FormFieldsComponent
+      },
+
+      data: () => ({
+        payload: {
+          title: '',
+          description: '',
+          status: null,
+        },
+        formModel: {},
+        creatingForm: true,
+      }),
+
+      methods: {
+        async getForm(id) {
+          this.formModel = await Form.find(id);
+          this.payload = {
+            'title': this.formModel.title,
+            'description': this.formModel.description,
+            'status': parseInt(this.formModel.status.value)
+          };
+        },
+
+        async submit () {
+          let valid = await this.$validator.validateAll();
+          if (valid) {
+            this.formModel.id ? this.updateForm() : this.createForm();
+          }
+        },
+
+        async createForm() {
+          this.payload.status = 0;
+          let form = new Form(this.payload);
+          form.save()
+          .then(response => {
+            this.alertSuccess('Successfully created!');
+            this.$router.push({name: 'forms-edit', params: { id: response.id}});
+            this.$router.go();
+          })
+          .catch(error => {
+            this.alertError(this.formatErrorMessage(error.response));
+          });
+        },
+
+        async updateForm() {
+          await this.formModel
+          .sync(this.payload)
+          .then(response => {
+            this.alertSuccess('Successfully saved!');
+          })
+          .catch(error => {
+            this.alertError(this.formatErrorMessage(error.response));
+          });
+        },
+
+        clear() {
+          this.title = ''
+          this.description = ''
+          this.status = null
+          this.$validator.reset()
+        },
+
+        cancel() {
+          this.$router.go(-1);
+        }
+      },
+
+      mounted() {
+        const id = this.$route.params.id;
+        if (id && id != 0) {
+          this.creatingForm = false;
+          this.getForm(id);
+        }
+      },
+    }
+</script>
+
+<template>
+  <div>
+
+  <v-expansion-panel>
+    <v-expansion-panel-content>
+        <div slot="header">
+          <h1 class="primary--text mb-1" v-if="formModel.id">Form #{{ formModel.id }} details</h1>
+        </div>
+
+    <v-card class="pl-2 pr-2 pt-2 pb-2">
+      <form>
+        <v-text-field
+          outline
+          v-validate="'required'"
+          v-model="payload.title"
+          :error-messages="errors.collect('title')"
+          label="Title"
+          data-vv-name="title"
+          required
+        ></v-text-field>
+
+        <v-textarea
+          outline
+          v-model="payload.description"
+          name="description"
+          label="Description"
+        ></v-textarea>
+
+        <v-radio-group v-model="payload.status">
+          <v-radio
+            v-for="(status, index) in formModel.statuses"
+            :key="index"
+            :label="`${status.label}`"
+            :value="index"
+          ></v-radio>
+        </v-radio-group>
+
+        <v-btn @click="submit" color="primary">save</v-btn>
+        <v-btn @click="cancel">cancel</v-btn>
+        <!-- <v-btn @click="clear">clear</v-btn> -->
+      </form>
+    </v-card>
+
+    </v-expansion-panel-content>
+  </v-expansion-panel>
+
+  <form-fields-component :form-model="formModel" v-if="!creatingForm"></form-fields-component>
+
+  </div>
+</template>

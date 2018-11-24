@@ -21,9 +21,14 @@ class FormServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishMigrations();
+        $this->publishDatabaseSeeds();
         $this->publishConfig();
 
         require __DIR__ . '/Http/routes.php';
+
+        $this->publishes([
+            __DIR__ . '/../public' => public_path('vendor/laravel-forms'),
+        ], 'laravel-forms-assets');
     }
 
     /**
@@ -49,7 +54,19 @@ class FormServiceProvider extends ServiceProvider
         $stub = __DIR__ . '/../database/migrations/create_form_tables.php';
         $target = $this->app->databasePath() . '/migrations/' . $timestamp . '_create_form_tables.php';
 
-        $this->publishes([$stub => $target], 'form.migrations');
+        $this->publishes([$stub => $target], 'laravel_forms.migrations');
+    }
+
+    /**
+     * Publish database seeds.
+     *
+     * @return void
+     */
+    public function publishDatabaseSeeds()
+    {
+        $this->publishes([
+            __DIR__ . '/../database/seeds' => database_path() . '/seeds',
+        ], 'laravel_forms.database_seeds');
     }
 
     /**

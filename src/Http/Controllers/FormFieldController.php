@@ -41,10 +41,16 @@ class FormFieldController extends Controller
         return view('laravel-forms::forms.fields.create', compact('form', 'fieldTypes', 'field'));
     }
 
+    public function show(FormModel $form, Question $field)
+    {
+        return response($field);
+    }
+
     public function store(CreateFormQuestionRequest $request, FormModel $form)
     {
         $data = $request->all();
         $data['options'] = [];
+        $data['title'] = 'Foo';
 
         if ($request->options) {
             $options = $this->normalizeOptions($request->options);
