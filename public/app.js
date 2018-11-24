@@ -1827,54 +1827,31 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
   data: function data() {
     return {
-      formFields: null,
-      cloneFormFields: null
+      formFields: null
     };
   },
 
   props: ['formModel'],
 
-  watch: {
-    formFields: {
-      handler: function handler(val, oldVal) {
-        var vm = this;
-        val.filter(function (field, idx) {
-          return Object.keys(field).some(function (prop) {
-            var diff = field[prop] !== vm.cloneFormFields[idx][prop];
-            if (diff) {
-              field.changed = true;
-              vm.updateField(field);
-            }
-          });
-        });
-      },
-      deep: true
-    }
-  },
-
   methods: {
-    setValue: function setValue() {
-      this.$data.oldFormFields = _.cloneDeep(this.$data.formFields);
-    },
-
     addField: function addField() {
       this.$router.push({ name: 'formFieldCreate', params: { id: this.$route.params.id } });
     },
     updateField: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(field) {
+        var _this = this;
+
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                field.title = 'tinashe';
-                field.label = 'tinashe';
-                _context.next = 4;
-                return field.save();
+                field.save().then(function (response) {
+                  _this.alertWarning('Successfully updated the field!');
+                }).catch(function (error) {
+                  _this.alertError(_this.formatErrorMessage(error.response));
+                });
 
-              case 4:
-                this.cloneFields();
-
-              case 5:
+              case 1:
               case 'end':
                 return _context.stop();
             }
@@ -1888,14 +1865,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
       return updateField;
     }(),
-
-
-    //bad idea
-    cloneFields: function cloneFields() {
-      this.cloneFormFields = this.formFields.map(function (a) {
-        return Object.assign({}, a);
-      });
-    },
     getFormFields: function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(formId) {
         var form, fields;
@@ -1915,9 +1884,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 fields = _context2.sent;
 
                 this.formFields = fields.data;
-                this.cloneFields();
 
-              case 8:
+              case 7:
               case 'end':
                 return _context2.stop();
             }
@@ -1933,7 +1901,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     }(),
     deleteField: function () {
       var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(field) {
-        var _this = this;
+        var _this2 = this;
 
         var message;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
@@ -1948,10 +1916,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                       switch (_context3.prev = _context3.next) {
                         case 0:
                           field.delete().then(function (response) {
-                            _this.formFields.splice(_this.formFields.indexOf(field), 1);
-                            _this.alertWarning('Successfully deleted the field!');
+                            _this2.formFields.splice(_this2.formFields.indexOf(field), 1);
+                            _this2.alertWarning('Successfully deleted the field!');
                           }).catch(function (error) {
-                            _this.alertError(_this.formatErrorMessage(error.response));
+                            _this2.alertError(_this2.formatErrorMessage(error.response));
                           });
 
                         case 1:
@@ -1959,7 +1927,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                           return _context3.stop();
                       }
                     }
-                  }, _callee3, _this);
+                  }, _callee3, _this2);
                 })));
 
               case 2:
@@ -49386,7 +49354,7 @@ var render = function() {
                     _c("strong", [_vm._v("#" + _vm._s(field.id))]),
                     _vm._v(
                       "\n              " +
-                        _vm._s(field.title) +
+                        _vm._s(field.label) +
                         "\n            "
                     )
                   ]),
@@ -49401,12 +49369,17 @@ var render = function() {
                           label: "Label",
                           "data-vv-name": "label"
                         },
+                        on: {
+                          change: function($event) {
+                            _vm.updateField(field)
+                          }
+                        },
                         model: {
-                          value: field.title,
+                          value: field.label,
                           callback: function($$v) {
-                            _vm.$set(field, "title", $$v)
+                            _vm.$set(field, "label", $$v)
                           },
-                          expression: "field.title"
+                          expression: "field.label"
                         }
                       }),
                       _vm._v(" "),
@@ -49415,6 +49388,11 @@ var render = function() {
                           items: _vm.getItems(),
                           label: "Field Type",
                           outline: ""
+                        },
+                        on: {
+                          change: function($event) {
+                            _vm.updateField(field)
+                          }
                         },
                         model: {
                           value: field.field_type,
@@ -49475,13 +49453,14 @@ var render = function() {
                               }),
                               _vm._v(" "),
                               _c("v-switch", {
-                                attrs: { label: "Required" },
-                                model: {
-                                  value: field.is_required,
-                                  callback: function($$v) {
-                                    _vm.$set(field, "is_required", $$v)
-                                  },
-                                  expression: "field.is_required"
+                                attrs: {
+                                  label: "Required",
+                                  "input-value": field.is_required
+                                },
+                                on: {
+                                  change: function($event) {
+                                    _vm.updateField(field)
+                                  }
                                 }
                               })
                             ],

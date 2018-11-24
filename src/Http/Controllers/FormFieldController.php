@@ -91,7 +91,7 @@ class FormFieldController extends Controller
 
     public function update(UpdateFormQuestionRequest $request, FormModel $form, Question $field)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $data['options'] = [];
 
         if ($request->options) {

@@ -5,55 +5,29 @@
 
       data: () => ({
         formFields: null,
-        cloneFormFields: null,
       }),
 
       props: ['formModel'],
 
-      watch: {
-        formFields: {
-          handler: function (val, oldVal) {
-            var vm = this;
-            val.filter( function(field, idx) {
-                return Object.keys(field).some( function( prop ) {
-                    var diff = field[prop] !== vm.cloneFormFields[idx][prop];
-                    if(diff) {
-                        field.changed = true;
-                        vm.updateField(field);
-                    }
-                })
-            });
-          },
-          deep: true
-        }
-      },
-
       methods: {
-        setValue:function(){
-          this.$data.oldFormFields = _.cloneDeep(this.$data.formFields);
-        },
-
         addField() {
           this.$router.push({name: 'formFieldCreate', params: { id: this.$route.params.id}});
         },
 
         async updateField(field) {
-          field.title = 'tinashe';
-          field.label = 'tinashe';
-          await field.save();
-          this.cloneFields();
-        },
-
-        //bad idea
-        cloneFields() {
-          this.cloneFormFields = this.formFields.map(a => Object.assign({}, a));
+            field.save()
+            .then(response => {
+              this.alertWarning('Successfully updated the field!');
+            })
+            .catch(error => {
+              this.alertError(this.formatErrorMessage(error.response));
+            });
         },
 
         async getFormFields(formId) {
           let form = await Form.find(formId);
           let fields = await form.fields().get();
           this.formFields = fields.data;
-          this.cloneFields();
         },
 
         async deleteField(field) {
@@ -108,15 +82,16 @@
             >
               <div slot="header">
                 <strong>#{{ field.id }}</strong>
-                {{ field.title }}
+                {{ field.label }}
               </div>
               <v-card class="pl-2 pr-2 pt-2 pb-2">
 
                 <v-text-field
                   outline
-                  v-model="field.title"
+                  v-model="field.label"
                   label="Label"
                   data-vv-name="label"
+                  @change="updateField(field)"
                 ></v-text-field>
 
                 <v-select
@@ -124,6 +99,7 @@
                   label="Field Type"
                   v-model="field.field_type"
                   outline
+                  @change="updateField(field)"
                 ></v-select>
 
                 <div class="right">
@@ -149,7 +125,8 @@
 
                     <v-switch
                       label="Required"
-                      v-model="field.is_required"
+                      :input-value="field.is_required"
+                      @change="updateField(field)"
                     ></v-switch>
                   </v-card-actions>
                 </div>

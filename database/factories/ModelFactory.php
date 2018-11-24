@@ -17,6 +17,7 @@ $factory->define(Form::class, function (Faker $faker) {
 $factory->define(Question::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence,
+        'label' => $faker->sentence,
         'description' => $faker->sentence,
         'form_id' => function () {
             return factory(Form::class)->create()->id;

@@ -12,7 +12,7 @@ class UpdateFormQuestionRequest extends FormRequest
         'help_text' => '',
         'placeholder' => '',
         'default_value' => '',
-        'columns_count' => '',
+        //'columns_count' => '',
     ];
 
     /**
