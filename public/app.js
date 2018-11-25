@@ -1755,20 +1755,17 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   methods: {
     getFields: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-        var response;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return __WEBPACK_IMPORTED_MODULE_1__models_Field__["a" /* default */].get();
+                return __WEBPACK_IMPORTED_MODULE_1__models_Field__["a" /* default */].$get();
 
               case 2:
-                response = _context.sent;
+                this.fieldTypes = _context.sent;
 
-                this.fieldTypes = response.data;
-
-              case 4:
+              case 3:
               case 'end':
                 return _context.stop();
             }
@@ -1846,8 +1843,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             switch (_context.prev = _context.next) {
               case 0:
                 field.save().then(function (response) {
-                  console.log(response);
-                  console.log('tinashe');
                   _this.alertWarning('Successfully updated the field!');
                 }).catch(function (error) {
                   _this.alertError(_this.formatErrorMessage(error.response));
@@ -1869,25 +1864,17 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     }(),
     getFormFields: function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(formId) {
-        var form, fields;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return __WEBPACK_IMPORTED_MODULE_1__models_Form__["a" /* default */].find(formId);
+                return new __WEBPACK_IMPORTED_MODULE_1__models_Form__["a" /* default */]({ 'id': formId }).fields().$get();
 
               case 2:
-                form = _context2.sent;
-                _context2.next = 5;
-                return form.fields().get();
+                this.formFields = _context2.sent;
 
-              case 5:
-                fields = _context2.sent;
-
-                this.formFields = fields.data;
-
-              case 7:
+              case 3:
               case 'end':
                 return _context2.stop();
             }
@@ -1981,6 +1968,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
   data: function data() {
     return {
+      form: null,
       formSubmissions: [],
       formId: null,
       currentSubmission: {},
@@ -2024,15 +2012,15 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     // store in vuex for current session
     getSubmission: function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(props) {
-        var form, response;
+        var response;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 props.expanded = !props.expanded;
-                form = new __WEBPACK_IMPORTED_MODULE_1__models_Form__["a" /* default */]({ id: this.formId });
+                this.form = new __WEBPACK_IMPORTED_MODULE_1__models_Form__["a" /* default */]({ id: this.formId });
                 _context2.next = 4;
-                return form.submissions().find(props.item.id);
+                return this.form.submissions().find(props.item.id);
 
               case 4:
                 response = _context2.sent;
@@ -2062,28 +2050,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                confirmation = this.getConfirmationMessages().delete_submission;
+                alert(this.currentSubmission.id);
+                return _context4.abrupt('return');
 
-                this.alertConfirm(confirmation.message, _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
-                  return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
-                    while (1) {
-                      switch (_context3.prev = _context3.next) {
-                        case 0:
-                          _this.currentSubmission.delete().then(function (response) {
-                            _this.alertWarning('Successfully deleted the submission!');
-                          }).catch(function (error) {
-                            _this.alertError(_this.formatErrorMessage(error.response));
-                          });
-
-                        case 1:
-                        case 'end':
-                          return _context3.stop();
-                      }
-                    }
-                  }, _callee3, _this);
-                })), null, confirmation.title);
-
-              case 2:
+              case 4:
               case 'end':
                 return _context4.stop();
             }
@@ -2133,20 +2103,17 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   methods: {
     getForms: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-        var response;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return __WEBPACK_IMPORTED_MODULE_1__models_Form__["a" /* default */].get();
+                return __WEBPACK_IMPORTED_MODULE_1__models_Form__["a" /* default */].$get();
 
               case 2:
-                response = _context.sent;
+                this.forms = _context.sent;
 
-                this.forms = response.data;
-
-              case 4:
+              case 3:
               case 'end':
                 return _context.stop();
             }

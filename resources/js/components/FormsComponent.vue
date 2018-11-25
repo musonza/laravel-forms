@@ -17,8 +17,7 @@
         methods: {
 
           async getForms() {
-            let response = await Form.get();
-            this.forms = response.data;
+            this.forms = await Form.$get()
           },
 
           previewForm(form) {

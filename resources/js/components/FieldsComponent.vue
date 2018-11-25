@@ -13,8 +13,7 @@
 
         methods: {
           async getFields() {
-            let response = await Field.get();
-            this.fieldTypes = response.data;
+            this.fieldTypes = await Field.$get();
           },
         },
 

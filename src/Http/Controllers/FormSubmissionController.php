@@ -61,6 +61,10 @@ class FormSubmissionController extends Controller
 
         $submission->answers()->insert($answers);
 
+        // Do this in an event listener
+        $submission->is_complete = true;
+        $submission->save();
+
         $this->flashSuccess('Your submission was stored');
 
         return back();

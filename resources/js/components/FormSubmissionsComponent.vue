@@ -5,6 +5,7 @@
       name: 'FormSubmissionsComponent',
 
       data: () => ({
+        form: null,
         formSubmissions: [],
         formId: null,
         currentSubmission: {},
@@ -26,12 +27,14 @@
         // store in vuex for current session
         async getSubmission(props) {
           props.expanded = !props.expanded;
-          let form = new Form({id: this.formId});
-          let response = await form.submissions().find(props.item.id);
+          this.form = new Form({id: this.formId});
+          let response = await this.form.submissions().find(props.item.id);
           this.currentSubmission = response.submission;
         },
 
         async deleteSubmission() {
+          alert(this.currentSubmission.id);
+          return;
           const confirmation = this.getConfirmationMessages().delete_submission;
           this.alertConfirm(confirmation.message, async() => {
             this.currentSubmission.delete()

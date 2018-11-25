@@ -17,8 +17,6 @@
         async updateField(field) {
             field.save()
             .then(response => {
-              console.log(response);
-              console.log('tinashe');
               this.alertWarning('Successfully updated the field!');
             })
             .catch(error => {
@@ -27,9 +25,9 @@
         },
 
         async getFormFields(formId) {
-          let form = await Form.find(formId);
-          let fields = await form.fields().get();
-          this.formFields = fields.data;
+          this.formFields = await (new Form({'id': formId}))
+            .fields()
+            .$get();
         },
 
         async deleteField(field) {
