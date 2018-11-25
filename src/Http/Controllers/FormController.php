@@ -34,21 +34,7 @@ class FormController extends Controller
     {
         $forms = FormModel::all();
 
-        $forms = $this->formTransformer->transformCollection($forms);
-
-        if (request()->wantsJson()) {
-            return response($forms);
-        }
-
-        return view('laravel-forms::forms.index', compact('forms'));
-    }
-
-    public function create()
-    {
-        $form = [];
-        $form['statuses'] = config('laravel_forms.form_statuses');
-
-        return view('laravel-forms::forms.create', compact('form'));
+        return response($this->formTransformer->transformCollection($forms));
     }
 
     /**
