@@ -57,11 +57,8 @@
         :value="show"
         :type="type"
         transition="scale-transition"
-<<<<<<< HEAD
         outline
         class="mb-3"
-=======
->>>>>>> 8c281ca63b4ba2e1f3a974fd84f7565930920b67
       >
       {{ message }}
       </v-alert>

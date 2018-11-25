@@ -75,10 +75,11 @@ class FormSubmissionController extends Controller
         request()->query->add(['include' => 'answers']);
 
         $submission = $this->submissionTransformer->transformItem($submission);
-        $form = $this->formTransformer->transformItem($form);
+        // $form = $this->formTransformer->transformItem($form);
 
         if (request()->wantsJson()) {
-            return response(['submission' => $submission, 'form' => $form]);
+            // return response(['submission' => $submission, 'form' => $form]);
+            return response($submission);
         }
 
         return view('laravel-forms::submissions.show', compact('submission', 'form'));

@@ -3,6 +3,7 @@
     import FormActionsComponent from '@/components/FormActionsComponent';
     import FormFieldsComponent from '@/components/FormFieldsComponent';
     import FormSubmissionsComponent from '@/components/FormSubmissionsComponent';
+    import { EventBus } from '../../event-bus.js';
     export default {
       name: 'FormEditPage',
 
@@ -78,6 +79,12 @@
         cancel() {
           this.$router.go(-1);
         }
+      },
+
+      created() {
+        EventBus.$on('delete_submission', () => {
+          this.formModel.submissions_count--;
+        });
       },
 
       mounted() {

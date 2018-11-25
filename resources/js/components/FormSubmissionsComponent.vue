@@ -1,6 +1,7 @@
 <script>
     import Form from '@/models/Form';
     import Submission from '@/models/Submission';
+    import { EventBus } from '../event-bus.js';
     export default {
       name: 'FormSubmissionsComponent',
 
@@ -28,25 +29,23 @@
         async getSubmission(props) {
           props.expanded = !props.expanded;
           this.form = new Form({id: this.formId});
-          let response = await this.form.submissions().find(props.item.id);
-          this.currentSubmission = response.submission;
+          this.currentSubmission = await this.form.submissions().find(props.item.id);
         },
 
         async deleteSubmission() {
-          alert(this.currentSubmission.id);
-          return;
           const confirmation = this.getConfirmationMessages().delete_submission;
           this.alertConfirm(confirmation.message, async() => {
             this.currentSubmission.delete()
             .then(response => {
+              this.formSubmissions.splice(this.formSubmissions.indexOf(this.currentSubmission), 1);
               this.alertWarning('Successfully deleted the submission!');
+              EventBus.$emit('delete_submission');
             })
             .catch(error => {
               this.alertError(this.formatErrorMessage(error.response));
             });
           }, null, confirmation.title);
         },
-
       },
 
       mounted() {

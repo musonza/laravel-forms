@@ -1957,9 +1957,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_Form__ = __webpack_require__("./resources/js/models/Form.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_Submission__ = __webpack_require__("./resources/js/models/Submission.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__event_bus_js__ = __webpack_require__("./resources/js/event-bus.js");
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 
 
 
@@ -2012,7 +2014,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     // store in vuex for current session
     getSubmission: function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(props) {
-        var response;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -2023,11 +2024,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 return this.form.submissions().find(props.item.id);
 
               case 4:
-                response = _context2.sent;
+                this.currentSubmission = _context2.sent;
 
-                this.currentSubmission = response.submission;
-
-              case 6:
+              case 5:
               case 'end':
                 return _context2.stop();
             }
@@ -2050,10 +2049,30 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                alert(this.currentSubmission.id);
-                return _context4.abrupt('return');
+                confirmation = this.getConfirmationMessages().delete_submission;
 
-              case 4:
+                this.alertConfirm(confirmation.message, _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+                  return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                    while (1) {
+                      switch (_context3.prev = _context3.next) {
+                        case 0:
+                          _this.currentSubmission.delete().then(function (response) {
+                            _this.formSubmissions.splice(_this.formSubmissions.indexOf(_this.currentSubmission), 1);
+                            _this.alertWarning('Successfully deleted the submission!');
+                            __WEBPACK_IMPORTED_MODULE_3__event_bus_js__["a" /* EventBus */].$emit('delete_submission');
+                          }).catch(function (error) {
+                            _this.alertError(_this.formatErrorMessage(error.response));
+                          });
+
+                        case 1:
+                        case 'end':
+                          return _context3.stop();
+                      }
+                    }
+                  }, _callee3, _this);
+                })), null, confirmation.title);
+
+              case 2:
               case 'end':
                 return _context4.stop();
             }
@@ -2249,9 +2268,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_FormFieldsComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_FormFieldsComponent__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_FormSubmissionsComponent__ = __webpack_require__("./resources/js/components/FormSubmissionsComponent.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_FormSubmissionsComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_FormSubmissionsComponent__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__event_bus_js__ = __webpack_require__("./resources/js/event-bus.js");
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 
 
 
@@ -2420,6 +2441,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     }
   },
 
+  created: function created() {
+    var _this3 = this;
+
+    __WEBPACK_IMPORTED_MODULE_5__event_bus_js__["a" /* EventBus */].$on('delete_submission', function () {
+      _this3.formModel.submissions_count--;
+    });
+  },
   mounted: function mounted() {
     var id = this.$route.params.id;
     if (id && id != 0) {
@@ -49698,13 +49726,25 @@ var render = function() {
           ],
           1
         )
-      : _c("div", [
-          _vm._v(
-            '\n<<<<<<< HEAD\n        outline\n        class="mb-3"\n=======\n>>>>>>> 8c281ca63b4ba2e1f3a974fd84f7565930920b67\n      >\n      ' +
-              _vm._s(_vm.message) +
-              "\n      "
-          )
-        ])
+      : _c(
+          "div",
+          [
+            _c(
+              "v-alert",
+              {
+                staticClass: "mb-3",
+                attrs: {
+                  value: _vm.show,
+                  type: _vm.type,
+                  transition: "scale-transition",
+                  outline: ""
+                }
+              },
+              [_vm._v("\n    " + _vm._s(_vm.message) + "\n    ")]
+            )
+          ],
+          1
+        )
   ])
 }
 var staticRenderFns = []
@@ -87902,6 +87942,18 @@ if (false) {(function () {
 
 module.exports = Component.exports
 
+
+/***/ }),
+
+/***/ "./resources/js/event-bus.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EventBus; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__("./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+
+var EventBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
 
 /***/ }),
 
