@@ -60,6 +60,23 @@ export default {
         }
       }
       return message;
+    },
+
+    getConfirmationMessages() {
+      return {
+        'delete_form': {
+          'title': 'Delete Form',
+          'message': 'Are you sure you want to delete this form? This action cannot be undone.'
+        },
+        'delete_field': {
+          'title': 'Delete Field',
+          'message': 'Are you sure you want to delete this field? This action cannot be undone.'
+        },
+        'delete_submission': {
+          'title': 'Delete Submission',
+          'message': 'Are you sure you want to delete this submission? This action cannot be undone.'
+        },
+      }
     }
   }
 };

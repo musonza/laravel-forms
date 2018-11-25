@@ -33,8 +33,8 @@
         },
 
         async deleteField(field) {
-          const message = `Are you sure you want to delete field #${field.id}`;
-          this.alertConfirm(message, async() => {
+          const confirmation = this.getConfirmationMessages().delete_field;
+          this.alertConfirm(confirmation.message, async() => {
             field.delete()
             .then(response => {
               this.formFields.splice(this.formFields.indexOf(field), 1);
@@ -43,7 +43,7 @@
             .catch(error => {
               this.alertError(this.formatErrorMessage(error.response));
             });
-          });
+          }, null, confirmation.title);
         },
 
         //Move this to vuex state

@@ -30,8 +30,8 @@
           },
 
           deleteForm(form) {
-            let message = `Are you sure you want to delete form #${form.id}`;
-            this.alertConfirm(message, async() => {
+            const confirmation = this.getConfirmationMessages().delete_form;
+            this.alertConfirm(confirmation.message, async() => {
                let formModel = await Form.find(form.id);
                formModel.delete()
                 .then(response => {
@@ -41,7 +41,7 @@
                 .catch(error => {
                   this.alertError(this.formatErrorMessage(error.response));
                 });
-            });
+            }, null, confirmation.title);
           },
 
           newForm() {

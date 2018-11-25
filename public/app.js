@@ -1906,14 +1906,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(field) {
         var _this2 = this;
 
-        var message;
+        var confirmation;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                message = 'Are you sure you want to delete field #' + field.id;
+                confirmation = this.getConfirmationMessages().delete_field;
 
-                this.alertConfirm(message, _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+                this.alertConfirm(confirmation.message, _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
                   return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
                     while (1) {
                       switch (_context3.prev = _context3.next) {
@@ -1931,7 +1931,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                       }
                     }
                   }, _callee3, _this2);
-                })));
+                })), null, confirmation.title);
 
               case 2:
               case 'end':
@@ -2053,6 +2053,50 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       }
 
       return getSubmission;
+    }(),
+    deleteSubmission: function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4() {
+        var _this = this;
+
+        var confirmation;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                confirmation = this.getConfirmationMessages().delete_submission;
+
+                this.alertConfirm(confirmation.message, _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+                  return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                    while (1) {
+                      switch (_context3.prev = _context3.next) {
+                        case 0:
+                          _this.currentSubmission.delete().then(function (response) {
+                            _this.alertWarning('Successfully deleted the submission!');
+                          }).catch(function (error) {
+                            _this.alertError(_this.formatErrorMessage(error.response));
+                          });
+
+                        case 1:
+                        case 'end':
+                          return _context3.stop();
+                      }
+                    }
+                  }, _callee3, _this);
+                })), null, confirmation.title);
+
+              case 2:
+              case 'end':
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function deleteSubmission() {
+        return _ref3.apply(this, arguments);
+      }
+
+      return deleteSubmission;
     }()
   },
 
@@ -2126,8 +2170,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     deleteForm: function deleteForm(form) {
       var _this = this;
 
-      var message = 'Are you sure you want to delete form #' + form.id;
-      this.alertConfirm(message, _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+      var confirmation = this.getConfirmationMessages().delete_form;
+      this.alertConfirm(confirmation.message, _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
         var formModel;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
           while (1) {
@@ -2152,7 +2196,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             }
           }
         }, _callee2, _this);
-      })));
+      })), null, confirmation.title);
     },
     newForm: function newForm() {
       this.$router.push({ name: 'forms-edit', params: { id: 0 } });
@@ -49786,16 +49830,51 @@ var render = function() {
               ? _c(
                   "v-card",
                   { staticClass: "pa-3", attrs: { flat: "" } },
-                  _vm._l(_vm.currentSubmission.answers.data, function(
-                    answer,
-                    i
-                  ) {
-                    return _c("div", { key: i, staticClass: "pa-2" }, [
-                      _c("h3", [_vm._v(_vm._s(answer.question.label))]),
-                      _vm._v(" "),
-                      _c("span", [_vm._v(_vm._s(answer.response))])
-                    ])
-                  })
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "right" },
+                      [
+                        _c(
+                          "v-card-actions",
+                          [
+                            _c("v-tooltip", { attrs: { bottom: "" } }, [
+                              _c(
+                                "a",
+                                {
+                                  attrs: { slot: "activator" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.deleteSubmission()
+                                    }
+                                  },
+                                  slot: "activator"
+                                },
+                                [_c("v-icon", [_vm._v("delete")])],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("span", [_vm._v("Delete submission")])
+                            ])
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.currentSubmission.answers.data, function(
+                      answer,
+                      i
+                    ) {
+                      return _c("div", { key: i, staticClass: "pa-2" }, [
+                        _c("h3", [_vm._v(_vm._s(answer.question.label))]),
+                        _vm._v(" "),
+                        _c("span", [_vm._v(_vm._s(answer.response))])
+                      ])
+                    })
+                  ],
+                  2
                 )
               : _vm._e()
           ]
@@ -87466,6 +87545,22 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
         }
       }
       return message;
+    },
+    getConfirmationMessages: function getConfirmationMessages() {
+      return {
+        'delete_form': {
+          'title': 'Delete Form',
+          'message': 'Are you sure you want to delete this form? This action cannot be undone.'
+        },
+        'delete_field': {
+          'title': 'Delete Field',
+          'message': 'Are you sure you want to delete this field? This action cannot be undone.'
+        },
+        'delete_submission': {
+          'title': 'Delete Submission',
+          'message': 'Are you sure you want to delete this submission? This action cannot be undone.'
+        }
+      };
     }
   }
 });

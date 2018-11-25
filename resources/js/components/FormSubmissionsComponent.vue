@@ -29,7 +29,20 @@
           let form = new Form({id: this.formId});
           let response = await form.submissions().find(props.item.id);
           this.currentSubmission = response.submission;
-        }
+        },
+
+        async deleteSubmission() {
+          const confirmation = this.getConfirmationMessages().delete_submission;
+          this.alertConfirm(confirmation.message, async() => {
+            this.currentSubmission.delete()
+            .then(response => {
+              this.alertWarning('Successfully deleted the submission!');
+            })
+            .catch(error => {
+              this.alertError(this.formatErrorMessage(error.response));
+            });
+          }, null, confirmation.title);
+        },
 
       },
 
@@ -69,6 +82,17 @@
           v-if="currentSubmission && currentSubmission.answers"
           class="pa-3"
         >
+          <div class="right">
+            <v-card-actions>
+              <v-tooltip bottom>
+                <a slot="activator" @click="deleteSubmission()">
+                  <v-icon>delete</v-icon>
+                </a>
+                <span>Delete submission</span>
+              </v-tooltip>
+
+            </v-card-actions>
+          </div>
           <div
             v-for="(answer, i) in currentSubmission.answers.data"
             :key="i"
