@@ -2,7 +2,10 @@
     import Field from '@/models/Field';
     export default {
         name: 'FieldsComponent',
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8c281ca63b4ba2e1f3a974fd84f7565930920b67
         data: () => ({
           headers: [
             { text: 'ID', value: 'id' },

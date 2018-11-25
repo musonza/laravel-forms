@@ -1731,64 +1731,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ }),
 
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/FieldsComponent.vue":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__("./node_modules/babel-runtime/regenerator/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_Field__ = __webpack_require__("./resources/js/models/Field.js");
-
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'FieldsComponent',
-
-  data: function data() {
-    return {
-      headers: [{ text: 'ID', value: 'id' }, { text: 'Title', value: 'title' }, { text: 'Choices', value: 'has_choices' }],
-      fieldTypes: []
-    };
-  },
-
-  methods: {
-    getFields: function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-        var response;
-        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return __WEBPACK_IMPORTED_MODULE_1__models_Field__["a" /* default */].get();
-
-              case 2:
-                response = _context.sent;
-
-                this.fieldTypes = response.data;
-
-              case 4:
-              case 'end':
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function getFields() {
-        return _ref.apply(this, arguments);
-      }
-
-      return getFields;
-    }()
-  },
-
-  created: function created() {
-    this.getFields();
-  }
-});
+throw new Error("Module build failed: SyntaxError: Unexpected token (5:0)\n\n\u001b[0m \u001b[90m 3 | \u001b[39m    \u001b[36mexport\u001b[39m \u001b[36mdefault\u001b[39m {\n \u001b[90m 4 | \u001b[39m        name\u001b[33m:\u001b[39m \u001b[32m'FieldsComponent'\u001b[39m\u001b[33m,\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 5 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\n \u001b[90m   | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 6 | \u001b[39m\n \u001b[90m 7 | \u001b[39m\u001b[33m===\u001b[39m\u001b[33m===\u001b[39m\u001b[33m=\u001b[39m\n \u001b[90m 8 | \u001b[39m\u001b[33m>>>\u001b[39m\u001b[33m>>>\u001b[39m\u001b[33m>\u001b[39m \u001b[35m8\u001b[39mc281ca63b4ba2e1f3a974fd84f7565930920b67\u001b[0m\n");
 
 /***/ }),
 
@@ -49732,25 +49677,13 @@ var render = function() {
           ],
           1
         )
-      : _c(
-          "div",
-          [
-            _c(
-              "v-alert",
-              {
-                staticClass: "mb-3",
-                attrs: {
-                  value: _vm.show,
-                  type: _vm.type,
-                  transition: "scale-transition",
-                  outline: ""
-                }
-              },
-              [_vm._v("\n    " + _vm._s(_vm.message) + "\n    ")]
-            )
-          ],
-          1
-        )
+      : _c("div", [
+          _vm._v(
+            '\n<<<<<<< HEAD\n        outline\n        class="mb-3"\n=======\n>>>>>>> 8c281ca63b4ba2e1f3a974fd84f7565930920b67\n      >\n      ' +
+              _vm._s(_vm.message) +
+              "\n      "
+          )
+        ])
   ])
 }
 var staticRenderFns = []
