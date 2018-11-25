@@ -23,11 +23,7 @@ class FormFieldController extends Controller
     {
         $questions = $this->fieldTransformer->transformCollection($form->questions);
 
-        if (request()->wantsJson()) {
-            return response($questions);
-        }
-
-        return view('laravel-forms::fields.index', compact('form', 'questions'));
+        return response($questions);
     }
 
     public function create(FormModel $form)
@@ -59,26 +55,14 @@ class FormFieldController extends Controller
 
         $field = $form->questions()->create($data);
 
-        if (request()->wantsJson()) {
-            return response($field);
-        }
-
-        $this->flashSuccess('Your form field has been created');
-
-        return back();
+        return response($field);
     }
 
     public function destroy(Request $request, FormModel $form, Question $field)
     {
         $field->delete();
 
-        if (request()->wantsJson()) {
-            return response('', 201);
-        }
-
-        $this->flashError('Field has been deleted');
-
-        return back();
+        return response('', 201);
     }
 
     public function edit(FormModel $form, Question $field)
@@ -101,13 +85,7 @@ class FormFieldController extends Controller
 
         $field->update($data);
 
-        if (request()->wantsJson()) {
-            return response($field);
-        }
-
-        $this->flashSuccess('Your form field has been updated');
-
-        return back();
+        return response($field);
     }
 
     protected function normalizeOptions(string $options)

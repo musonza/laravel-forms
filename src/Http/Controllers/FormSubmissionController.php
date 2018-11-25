@@ -23,23 +23,14 @@ class FormSubmissionController extends Controller
         $submissions = $this->submissionTransformer->transformCollection($form->submissions()->orderBy('id', 'DESC')->get());
         $data = ['form' => $this->formTransformer->transformItem($form), 'submissions' => $submissions];
 
-        if (request()->wantsJson()) {
-            return response($data);
-        }
-
-        return view('laravel-forms::submissions.index', $data);
+        return response($data);
     }
 
     public function create(Request $request, FormModel $form)
     {
         request()->query->add(['include' => 'questions']);
-        $form = $this->formTransformer->transformItem($form);
 
-        if (request()->wantsJson()) {
-            return response($data);
-        }
-
-        return view('laravel-forms::submissions.edit', compact('form'));
+        return response($this->formTransformer->transformItem($form));
     }
 
     public function store(Request $request, FormModel $form)
@@ -74,14 +65,6 @@ class FormSubmissionController extends Controller
     {
         request()->query->add(['include' => 'answers']);
 
-        $submission = $this->submissionTransformer->transformItem($submission);
-        // $form = $this->formTransformer->transformItem($form);
-
-        if (request()->wantsJson()) {
-            // return response(['submission' => $submission, 'form' => $form]);
-            return response($submission);
-        }
-
-        return view('laravel-forms::submissions.show', compact('submission', 'form'));
+        return response($this->submissionTransformer->transformItem($submission));
     }
 }

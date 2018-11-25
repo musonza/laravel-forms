@@ -61,22 +61,7 @@ class FormController extends Controller
     {
         request()->query->add(['include' => 'questions']);
 
-        $form = $this->formTransformer->transformItem($form);
-
-        if (request()->wantsJson()) {
-            return response($form);
-        }
-
-        return view('laravel-forms::forms.show', compact('form'));
-    }
-
-    public function edit(FormModel $form)
-    {
-        request()->query->add(['include' => 'questions']);
-
-        $form = $this->formTransformer->transformItem($form);
-
-        return view('laravel-forms::forms.edit', compact('form'));
+        return response($this->formTransformer->transformItem($form));
     }
 
     /**
@@ -88,15 +73,8 @@ class FormController extends Controller
     public function store(CreateFormRequest $request)
     {
         $form = Form::create($request->validated());
-        $transformedForm = $this->formTransformer->transformItem($form);
 
-        if (request()->wantsJson()) {
-            return response($transformedForm);
-        }
-
-        $this->flashSuccess('Your form has been created');
-
-        return redirect()->route('forms.index');
+        return response($this->formTransformer->transformItem($form));
     }
 
     /**
@@ -110,15 +88,7 @@ class FormController extends Controller
     {
         $form->update($request->validated());
 
-        $transformedForm = $this->formTransformer->transformItem($form);
-
-        if (request()->wantsJson()) {
-            return response($transformedForm);
-        }
-
-        $this->flashSuccess('Your form has been updated');
-
-        return redirect()->route('forms.index');
+        return response($this->formTransformer->transformItem($form));
     }
 
     /**
@@ -132,12 +102,6 @@ class FormController extends Controller
     {
         $form->delete();
 
-        if (request()->wantsJson()) {
-            return response('', 201);
-        }
-
-        $this->flashError('Form has been deleted');
-
-        return redirect()->route('forms.index');
+        return response('', 201);
     }
 }

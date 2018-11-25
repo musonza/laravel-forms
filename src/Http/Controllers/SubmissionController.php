@@ -11,8 +11,6 @@ class SubmissionController extends Controller
     {
         $submission->delete();
 
-        if (request()->wantsJson()) {
-            return response('', 201);
-        }
+        return response('', 201);
     }
 }
