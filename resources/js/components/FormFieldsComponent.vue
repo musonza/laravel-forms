@@ -33,8 +33,8 @@
             });
         },
 
-        async getFormFields(formId) {
-          this.formFields = await (new Form({'id': formId}))
+        async getFormFields() {
+          this.formFields = await (new Form({'id': this.formId}))
             .fields()
             .$get();
         },
@@ -72,14 +72,21 @@
       },
 
       mounted() {
-        this.getFormFields(this.$route.params.id);
+        this.formId = this.$route.params.id;
+        this.getFormFields();
         let fieldsList = document.querySelector("#form-fields-list");
         const _self = this;
         Sortable.create(fieldsList, {
           onEnd({ newIndex, oldIndex }) {
+            if (newIndex == oldIndex) {
+              return;
+            }
             const fieldSelected = _self.formFields.splice(oldIndex, 1)[0];
-            console.log(fieldSelected);
             _self.formFields.splice(newIndex, 0, fieldSelected);
+            fieldSelected.position = fieldSelected.position + (newIndex - oldIndex);
+            fieldSelected.save().then(resp => {
+              _self.getFormFields();
+            });
           }
         });
       }
@@ -101,7 +108,7 @@
             >
               <div slot="header">
                 <div class="left">
-                  <span class="sorting-handle">:::</span> {{ field.label }} ({{i}})
+                  <span class="sorting-handle">:::</span> {{ field.label }} ({{field.position}})
                   <!-- <strong><span class="handle">::</span></strong> {{ field.label }} -->
                 </div>
                 <div class="right">

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
+    use \Lookitsatravis\Listify\Listify;
     protected $table = 'mc_questions';
     protected $fillable = [
         'title',
@@ -30,11 +31,18 @@ class Question extends Model
         'is_required' => 'boolean',
         'properties' => 'array',
         'options' => 'array',
+        'position' => 'integer',
     ];
 
     protected $attributes = [
         'options' => '{}',
     ];
+
+    public function __construct(array $attributes = array(), $exists = false) {
+        parent::__construct($attributes, $exists);
+
+        $this->initListify();
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

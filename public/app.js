@@ -1875,13 +1875,13 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       return updateField;
     }(),
     getFormFields: function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(formId) {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return new __WEBPACK_IMPORTED_MODULE_1__models_Form__["a" /* default */]({ 'id': formId }).fields().$get();
+                return new __WEBPACK_IMPORTED_MODULE_1__models_Form__["a" /* default */]({ 'id': this.formId }).fields().$get();
 
               case 2:
                 this.formFields = _context2.sent;
@@ -1894,7 +1894,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         }, _callee2, this);
       }));
 
-      function getFormFields(_x2) {
+      function getFormFields() {
         return _ref2.apply(this, arguments);
       }
 
@@ -1939,7 +1939,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         }, _callee4, this);
       }));
 
-      function deleteField(_x3) {
+      function deleteField(_x2) {
         return _ref3.apply(this, arguments);
       }
 
@@ -1954,7 +1954,8 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
   },
 
   mounted: function mounted() {
-    this.getFormFields(this.$route.params.id);
+    this.formId = this.$route.params.id;
+    this.getFormFields();
     var fieldsList = document.querySelector("#form-fields-list");
     var _self = this;
     __WEBPACK_IMPORTED_MODULE_2_sortablejs___default.a.create(fieldsList, {
@@ -1962,9 +1963,15 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         var newIndex = _ref5.newIndex,
             oldIndex = _ref5.oldIndex;
 
+        if (newIndex == oldIndex) {
+          return;
+        }
         var fieldSelected = _self.formFields.splice(oldIndex, 1)[0];
-        console.log(fieldSelected);
         _self.formFields.splice(newIndex, 0, fieldSelected);
+        fieldSelected.position = fieldSelected.position + (newIndex - oldIndex);
+        fieldSelected.save().then(function (resp) {
+          _self.getFormFields();
+        });
       }
     });
   }
@@ -51175,7 +51182,7 @@ var render = function() {
                         " " +
                           _vm._s(field.label) +
                           " (" +
-                          _vm._s(i) +
+                          _vm._s(field.position) +
                           ")\n                "
                       )
                     ]),

@@ -21,9 +21,11 @@ class FormFieldController extends Controller
 
     public function index(FormModel $form)
     {
-        $questions = $this->fieldTransformer->transformCollection($form->questions);
+        $fields = $form->questions()->orderBy('position')->get();
 
-        return response($questions);
+        $fields = $this->fieldTransformer->transformCollection($fields);
+
+        return response($fields);
     }
 
     public function create(FormModel $form)
@@ -78,6 +80,10 @@ class FormFieldController extends Controller
         if ($request->options) {
             $options = $this->normalizeOptions($request->options);
             $data['options'] = $options;
+        }
+
+        if ($request->position && $request->position != $field->position) {
+          $field->insertAt($request->position);
         }
 
         $field->update($data);
