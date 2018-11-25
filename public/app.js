@@ -1818,19 +1818,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'FormFieldsComponent',
 
   data: function data() {
     return {
-      formFields: null
+      formFields: null,
+      items: []
     };
   },
 
   props: ['formModel'],
 
   methods: {
+    remove: function remove(item, field) {
+      field.options.splice(field.options.indexOf(item), 1);
+      field.options = [].concat(_toConsumableArray(field.options));
+    },
     addField: function addField() {
       this.$router.push({ name: 'formFieldCreate', params: { id: this.$route.params.id } });
     },
@@ -1843,6 +1850,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             switch (_context.prev = _context.next) {
               case 0:
                 field.save().then(function (response) {
+                  field = response;
                   _this.alertSuccess('Successfully updated the field!');
                 }).catch(function (error) {
                   _this.alertError(_this.formatErrorMessage(error.response));
@@ -2298,7 +2306,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         description: '',
         status: null
       },
-      formModel: {},
+      formModel: {
+        'submissions_count': 0
+      },
       creatingForm: true
     };
   },
@@ -49038,7 +49048,7 @@ var render = function() {
         ? _c("h2", { staticClass: "primary--text mb-1" }, [
             _vm._v("Form #" + _vm._s(_vm.formModel.id))
           ])
-        : _vm._e(),
+        : _c("h2", { staticClass: "primary--text mb-1" }, [_vm._v("New Form")]),
       _vm._v(" "),
       _c(
         "v-tabs",
@@ -49555,11 +49565,45 @@ var render = function() {
                 { key: i },
                 [
                   _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-                    _c("strong", [_vm._v("#" + _vm._s(field.id))]),
-                    _vm._v(
-                      "\n              " +
-                        _vm._s(field.label) +
-                        "\n            "
+                    _c("div", { staticClass: "left" }, [
+                      _c("strong", [_vm._v("#" + _vm._s(field.id))]),
+                      _vm._v(" " + _vm._s(field.label) + "\n              ")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "right" },
+                      [
+                        _c(
+                          "v-card-actions",
+                          [
+                            _c(
+                              "v-tooltip",
+                              { staticClass: "mr-3", attrs: { bottom: "" } },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: { slot: "activator" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.updateField(field)
+                                      }
+                                    },
+                                    slot: "activator"
+                                  },
+                                  [_c("v-icon", [_vm._v("save")])],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c("span", [_vm._v("Save")])
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
                     )
                   ]),
                   _vm._v(" "),
@@ -49606,6 +49650,65 @@ var render = function() {
                           expression: "field.field_type"
                         }
                       }),
+                      _vm._v(" "),
+                      field.has_choices
+                        ? _c(
+                            "div",
+                            [
+                              [
+                                _c("v-combobox", {
+                                  attrs: {
+                                    items: _vm.items,
+                                    label: "Choices",
+                                    chips: "",
+                                    clearable: "",
+                                    solo: "",
+                                    multiple: ""
+                                  },
+                                  scopedSlots: _vm._u([
+                                    {
+                                      key: "selection",
+                                      fn: function(data) {
+                                        return [
+                                          _c(
+                                            "v-chip",
+                                            {
+                                              attrs: {
+                                                selected: data.selected,
+                                                close: ""
+                                              },
+                                              on: {
+                                                input: function($event) {
+                                                  _vm.remove(data.item, field)
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("strong", [
+                                                _vm._v(_vm._s(data.item))
+                                              ]),
+                                              _vm._v(
+                                                " \n                      "
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      }
+                                    }
+                                  ]),
+                                  model: {
+                                    value: field.options,
+                                    callback: function($$v) {
+                                      _vm.$set(field, "options", $$v)
+                                    },
+                                    expression: "field.options"
+                                  }
+                                })
+                              ]
+                            ],
+                            2
+                          )
+                        : _vm._e(),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -49726,25 +49829,61 @@ var render = function() {
           ],
           1
         )
-      : _c(
-          "div",
-          [
-            _c(
-              "v-alert",
-              {
-                staticClass: "mb-3",
-                attrs: {
-                  value: _vm.show,
-                  type: _vm.type,
-                  transition: "scale-transition",
-                  outline: ""
-                }
-              },
-              [_vm._v("\n    " + _vm._s(_vm.message) + "\n    ")]
-            )
-          ],
-          1
-        )
+      : _vm.type == "success" || _vm.type == "warning"
+        ? _c(
+            "div",
+            [
+              _c(
+                "v-snackbar",
+                {
+                  attrs: { bottom: true, left: true, "multi-line": true },
+                  model: {
+                    value: _vm.show,
+                    callback: function($$v) {
+                      _vm.show = $$v
+                    },
+                    expression: "show"
+                  }
+                },
+                [
+                  _vm._v("\n      " + _vm._s(_vm.message) + "\n      "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "pink", flat: "" },
+                      on: {
+                        click: function($event) {
+                          _vm.close()
+                        }
+                      }
+                    },
+                    [_vm._v("\n        Close\n      ")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        : _c(
+            "div",
+            [
+              _c(
+                "v-alert",
+                {
+                  staticClass: "mb-3",
+                  attrs: {
+                    value: _vm.show,
+                    type: _vm.type,
+                    transition: "scale-transition",
+                    outline: ""
+                  }
+                },
+                [_vm._v("\n    " + _vm._s(_vm.message) + "\n    ")]
+              )
+            ],
+            1
+          )
   ])
 }
 var staticRenderFns = []

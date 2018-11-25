@@ -5,18 +5,26 @@
 
       data: () => ({
         formFields: null,
+        items: [],
       }),
 
       props: ['formModel'],
 
       methods: {
+        remove (item, field) {
+          field.options.splice(field.options.indexOf(item), 1)
+          field.options = [...field.options]
+        },
+
         addField() {
           this.$router.push({name: 'formFieldCreate', params: { id: this.$route.params.id}});
         },
 
+
         async updateField(field) {
             field.save()
             .then(response => {
+              field = response;
               this.alertSuccess('Successfully updated the field!');
             })
             .catch(error => {
@@ -81,11 +89,22 @@
               :key="i"
             >
               <div slot="header">
-                <strong>#{{ field.id }}</strong>
-                {{ field.label }}
+                <div class="left">
+                  <strong>#{{ field.id }}</strong> {{ field.label }}
+                </div>
+                <div class="right">
+                  <v-card-actions>
+                    <v-tooltip bottom class="mr-3">
+                      <a slot="activator" @click="updateField(field)">
+                        <v-icon>save</v-icon>
+                      </a>
+                      <span>Save</span>
+                    </v-tooltip>
+                  </v-card-actions>
+                </div>
               </div>
-              <v-card class="pl-2 pr-2 pt-2 pb-2">
 
+              <v-card class="pl-2 pr-2 pt-2 pb-2">
                 <v-text-field
                   outline
                   v-model="field.label"
@@ -101,6 +120,31 @@
                   outline
                   @change="updateField(field)"
                 ></v-select>
+
+                <!-- Choices -->
+                <div v-if="field.has_choices">
+                  <template>
+                    <v-combobox
+                      v-model="field.options"
+                      :items="items"
+                      label="Choices"
+                      chips
+                      clearable
+                      solo
+                      multiple
+                    >
+                      <template slot="selection" slot-scope="data">
+                        <v-chip
+                          :selected="data.selected"
+                          close
+                          @input="remove(data.item, field)"
+                        >
+                          <strong>{{ data.item }}</strong>&nbsp;
+                        </v-chip>
+                      </template>
+                    </v-combobox>
+                  </template>
+                </div><!-- Choices -->
 
                 <div class="right">
                   <v-card-actions>

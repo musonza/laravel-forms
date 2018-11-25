@@ -52,6 +52,23 @@
         :message="message"
         :confirmationAgree="confirmationAgree"></dialog-component>
     </div>
+    <div v-else-if="type == 'success' || type == 'warning'">
+      <v-snackbar
+        v-model="show"
+        :bottom="true"
+        :left="true"
+        :multi-line="true"
+      >
+        {{ message }}
+        <v-btn
+          color="pink"
+          flat
+          @click="close()"
+        >
+          Close
+        </v-btn>
+      </v-snackbar>
+    </div>
     <div v-else>
       <v-alert
         :value="show"

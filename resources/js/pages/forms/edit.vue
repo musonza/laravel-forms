@@ -23,7 +23,9 @@
           description: '',
           status: null,
         },
-        formModel: {},
+        formModel: {
+          'submissions_count': 0,
+        },
         creatingForm: true,
       }),
 
@@ -100,6 +102,7 @@
 <template>
   <div>
     <h2 class="primary--text mb-1" v-if="formModel.id">Form #{{ formModel.id }}</h2>
+    <h2 class="primary--text mb-1" v-else>New Form</h2>
     <v-tabs fixed-tabs>
       <v-tab>Fields</v-tab>
       <v-tab>

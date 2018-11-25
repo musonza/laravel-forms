@@ -54,14 +54,12 @@ class FormFieldController extends Controller
         }
 
         $field = $form->questions()->create($data);
-
         return response($field);
     }
 
     public function destroy(Request $request, FormModel $form, Question $field)
     {
         $field->delete();
-
         return response('', 201);
     }
 
@@ -69,7 +67,6 @@ class FormFieldController extends Controller
     {
         $field = $this->fieldTransformer->transformItem($field);
         $fieldTypes = $this->fieldTypes();
-
         return view('laravel-forms::forms.fields.edit', compact('form', 'field', 'fieldTypes'));
     }
 
@@ -85,14 +82,12 @@ class FormFieldController extends Controller
 
         $field->update($data);
 
-        return response($field);
+        return response($this->fieldTransformer->transformItem($field));
     }
 
-    protected function normalizeOptions(string $options)
+    protected function normalizeOptions($options)
     {
-        $options = array_map('trim', explode(PHP_EOL, $options));
         $options = array_unique($options);
-
         return array_values($options);
     }
 
