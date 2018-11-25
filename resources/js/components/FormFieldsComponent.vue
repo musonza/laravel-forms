@@ -20,7 +20,6 @@
           this.$router.push({name: 'formFieldCreate', params: { id: this.$route.params.id}});
         },
 
-
         async updateField(field) {
             field.save()
             .then(response => {

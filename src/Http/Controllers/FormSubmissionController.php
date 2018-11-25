@@ -49,11 +49,15 @@ class FormSubmissionController extends Controller
         $answers = [];
 
         foreach ($data as $key => $value) {
+          if ($value) {
             $questionId = str_replace('field_', '', $key);
             $answers[$questionId]['question_id'] = $questionId;
             $answers[$questionId]['value'] = $value;
             $answers[$questionId]['submission_id'] = $submission->id;
+          }
         }
+
+        // return response($answers);
 
         $submission->answers()->insert($answers);
 

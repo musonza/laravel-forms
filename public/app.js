@@ -2477,9 +2477,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__("./node_modules/babel-runtime/regenerator/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_Field__ = __webpack_require__("./resources/js/models/Field.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_Form__ = __webpack_require__("./resources/js/models/Form.js");
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2490,6 +2492,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
   data: function data() {
     return {
+      formId: null,
       fieldTypes: null,
       payload: {
         field_type: '',
@@ -2562,6 +2565,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     },
     submit: function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+        var _this = this;
+
         var valid;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
           while (1) {
@@ -2573,13 +2578,27 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
               case 2:
                 valid = _context2.sent;
 
-                if (valid) {
-                  alert('cool');
-                } else {
-                  this.alertError('Invalid input provided');
+                if (!valid) {
+                  _context2.next = 8;
+                  break;
                 }
 
-              case 4:
+                _context2.next = 6;
+                return new __WEBPACK_IMPORTED_MODULE_2__models_Form__["a" /* default */]({ 'id': this.formId }).fields().attach(this.payload).then(function (response) {
+                  _this.alertSuccess('Successfully created field!');
+                  _this.$router.go(-1);
+                }).catch(function (error) {
+                  _this.alertError(_this.formatErrorMessage(error.response));
+                });
+
+              case 6:
+                _context2.next = 9;
+                break;
+
+              case 8:
+                this.alertError('Invalid input provided');
+
+              case 9:
               case 'end':
                 return _context2.stop();
             }
@@ -2596,6 +2615,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   },
 
   mounted: function mounted() {
+    this.formId = this.$route.params.id;
     this.getFieldTypes();
   }
 });

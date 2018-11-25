@@ -1,5 +1,6 @@
 <script>
     import Field from '@/models/Field';
+    import Form from '@/models/Form';
     export default {
 
       $_veeValidate: {
@@ -7,6 +8,7 @@
       },
 
       data: () => ({
+        formId: null,
         fieldTypes: null,
         payload: {
           field_type: '',
@@ -35,7 +37,16 @@
         async submit () {
           let valid = await this.$validator.validateAll();
           if (valid) {
-            alert('cool');
+            await (new Form({'id': this.formId}))
+              .fields()
+              .attach(this.payload)
+              .then(response => {
+                this.alertSuccess('Successfully created field!');
+                this.$router.go(-1);
+              })
+              .catch(error => {
+                this.alertError(this.formatErrorMessage(error.response));
+              });
           } else {
             this.alertError('Invalid input provided');
           }
@@ -43,6 +54,7 @@
       },
 
       mounted() {
+        this.formId = this.$route.params.id;
         this.getFieldTypes();
       },
     }
