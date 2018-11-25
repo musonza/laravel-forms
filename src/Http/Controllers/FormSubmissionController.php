@@ -29,8 +29,13 @@ class FormSubmissionController extends Controller
     public function create(Request $request, FormModel $form)
     {
         request()->query->add(['include' => 'questions']);
+        $form = $this->formTransformer->transformItem($form);
 
-        return response($this->formTransformer->transformItem($form));
+        if (request()->wantsJson()) {
+            return response($data);
+        }
+
+        return view('laravel-forms::submissions.edit', compact('form'));
     }
 
     public function store(Request $request, FormModel $form)

@@ -17,7 +17,7 @@
         async updateField(field) {
             field.save()
             .then(response => {
-              this.alertWarning('Successfully updated the field!');
+              this.alertSuccess('Successfully updated the field!');
             })
             .catch(error => {
               this.alertError(this.formatErrorMessage(error.response));

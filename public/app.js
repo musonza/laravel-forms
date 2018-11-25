@@ -1843,7 +1843,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             switch (_context.prev = _context.next) {
               case 0:
                 field.save().then(function (response) {
-                  _this.alertWarning('Successfully updated the field!');
+                  _this.alertSuccess('Successfully updated the field!');
                 }).catch(function (error) {
                   _this.alertError(_this.formatErrorMessage(error.response));
                 });
