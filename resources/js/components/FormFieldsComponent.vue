@@ -1,5 +1,7 @@
 <script>
     import Form from '@/models/Form';
+    import Sortable from 'sortablejs';
+
     export default {
       name: 'FormFieldsComponent',
 
@@ -71,6 +73,15 @@
 
       mounted() {
         this.getFormFields(this.$route.params.id);
+        let fieldsList = document.querySelector("#form-fields-list");
+        const _self = this;
+        Sortable.create(fieldsList, {
+          onEnd({ newIndex, oldIndex }) {
+            const fieldSelected = _self.formFields.splice(oldIndex, 1)[0];
+            console.log(fieldSelected);
+            _self.formFields.splice(newIndex, 0, fieldSelected);
+          }
+        });
       }
     }
 </script>
@@ -82,14 +93,16 @@
 
         <h2>Fields</h2>
 
-        <v-expansion-panel popout>
+        <v-expansion-panel popout id="form-fields-list">
           <v-expansion-panel-content
               v-for="(field, i) in formFields"
               :key="i"
+              class="fields-expansion-panel"
             >
               <div slot="header">
                 <div class="left">
-                  <strong>#{{ field.id }}</strong> {{ field.label }}
+                  <span class="sorting-handle">:::</span> {{ field.label }} ({{i}})
+                  <!-- <strong><span class="handle">::</span></strong> {{ field.label }} -->
                 </div>
                 <div class="right">
                   <v-card-actions>
@@ -145,8 +158,7 @@
                   </template>
                 </div><!-- Choices -->
 
-                <div class="right">
-                  <v-card-actions>
+                <v-card-actions>
 
                     <v-tooltip bottom class="mr-3">
                       <a slot="activator"><v-icon>file_copy</v-icon></a>
@@ -172,12 +184,20 @@
                       @change="updateField(field)"
                     ></v-switch>
                   </v-card-actions>
-                </div>
 
               </v-card>
             </v-expansion-panel-content>
         </v-expansion-panel>
-
       </div>
   </div>
 </template>
+
+<style>
+.sorting-handle {
+  max-width: 30px;
+  cursor: move !important;
+  corsor: -webkit-grabbing !important;
+  font-weight: bolder;
+}
+</style>
+

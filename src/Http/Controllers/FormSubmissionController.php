@@ -41,11 +41,8 @@ class FormSubmissionController extends Controller
     public function store(Request $request, FormModel $form)
     {
         $data = $request->all();
-
         unset($data['_token']);
-
         $submission = $form->addSubmission($request->all());
-
         $answers = [];
 
         foreach ($data as $key => $value) {
@@ -56,8 +53,6 @@ class FormSubmissionController extends Controller
             $answers[$questionId]['submission_id'] = $submission->id;
           }
         }
-
-        // return response($answers);
 
         $submission->answers()->insert($answers);
 
