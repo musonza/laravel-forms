@@ -27,6 +27,7 @@
           'submissions_count': 0,
         },
         creatingForm: true,
+        panel: [true]
       }),
 
       methods: {
@@ -113,7 +114,7 @@
       </v-tab>
       <v-tabs-items>
         <v-tab-item>
-          <v-expansion-panel>
+          <v-expansion-panel v-model="panel" expand>
               <v-expansion-panel-content>
                 <div slot="header">
                   <h2 class="primary--text mb-1" v-if="formModel.id">Details</h2>
@@ -155,7 +156,7 @@
             </v-expansion-panel>
             <form-fields-component :form-model="formModel" v-if="!creatingForm"></form-fields-component>
         </v-tab-item>
-        <v-tab-item>
+        <v-tab-item v-if="formModel.id">
           <form-submissions-component></form-submissions-component>
         </v-tab-item>
       </v-tabs-items>
