@@ -1959,6 +1959,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     var fieldsList = document.querySelector("#form-fields-list");
     var _self = this;
     __WEBPACK_IMPORTED_MODULE_2_sortablejs___default.a.create(fieldsList, {
+      ghostClass: "sortable-ghost",
+      sort: true,
+      handle: ".sorting-handle",
       onEnd: function onEnd(_ref5) {
         var newIndex = _ref5.newIndex,
             oldIndex = _ref5.oldIndex;
@@ -1970,7 +1973,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         _self.formFields.splice(newIndex, 0, fieldSelected);
         fieldSelected.position = fieldSelected.position + (newIndex - oldIndex);
         fieldSelected.save().then(function (resp) {
-          _self.getFormFields();
+          // _self.$router.go();
+          // _self.$forceUpdate();
+          _self.$router.go();
         });
       }
     });
@@ -6635,7 +6640,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.sorting-handle {\n  max-width: 30px;\n  cursor: move !important;\n  corsor: -webkit-grabbing !important;\n  font-weight: bolder;\n}\n", ""]);
+exports.push([module.i, "\n.sorting-handle {\n  max-width: 30px;\n  cursor: move !important;\n  corsor: -webkit-grabbing !important;\n  font-weight: bolder;\n}\n.sortable-ghost {\n  border: thick solid #3477cb;\n}\n", ""]);
 
 // exports
 

@@ -77,6 +77,9 @@
         let fieldsList = document.querySelector("#form-fields-list");
         const _self = this;
         Sortable.create(fieldsList, {
+          ghostClass: "sortable-ghost",
+          sort: true,
+          handle: ".sorting-handle",
           onEnd({ newIndex, oldIndex }) {
             if (newIndex == oldIndex) {
               return;
@@ -85,9 +88,12 @@
             _self.formFields.splice(newIndex, 0, fieldSelected);
             fieldSelected.position = fieldSelected.position + (newIndex - oldIndex);
             fieldSelected.save().then(resp => {
-              _self.getFormFields();
+              // _self.$router.go();
+              // _self.$forceUpdate();
+              _self.$router.go();
             });
-          }
+          },
+
         });
       }
     }
@@ -205,6 +211,9 @@
   cursor: move !important;
   corsor: -webkit-grabbing !important;
   font-weight: bolder;
+}
+.sortable-ghost {
+  border: thick solid #3477cb;
 }
 </style>
 

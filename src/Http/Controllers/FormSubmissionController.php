@@ -29,10 +29,11 @@ class FormSubmissionController extends Controller
     public function create(Request $request, FormModel $form)
     {
         request()->query->add(['include' => 'questions']);
+
         $form = $this->formTransformer->transformItem($form);
 
         if (request()->wantsJson()) {
-            return response($data);
+            return response($form);
         }
 
         return view('laravel-forms::submissions.edit', compact('form'));

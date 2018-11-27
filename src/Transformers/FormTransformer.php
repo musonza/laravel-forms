@@ -28,6 +28,9 @@ class FormTransformer extends Transformer
 
     public function includeQuestions($form)
     {
-        return $this->collection($form->questions, new FieldTransformer());
+        return $this->collection(
+          $form->questions()->orderBy('position')->get(),
+          new FieldTransformer()
+        );
     }
 }
