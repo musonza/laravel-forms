@@ -1,14 +1,14 @@
-<template>
-    <fields-component></fields-component>
-</template>
-
 <script>
-    import FieldsComponent from '@/components/FieldsComponent';
-    export default {
-      name: 'FormsPage',
+import FieldsComponent from "@/components/FieldsComponent";
+export default {
+  name: "FormsPage",
 
-      components: {
-        FieldsComponent
-      }
-    }
+  components: {
+    FieldsComponent
+  }
+};
 </script>
+
+<template>
+  <fields-component></fields-component>
+</template>

@@ -43,3 +43,6 @@ composer.lock
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+docs/
+phpDocumentor.phar

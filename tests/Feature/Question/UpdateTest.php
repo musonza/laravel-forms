@@ -28,12 +28,13 @@ class UpdateTest extends TestCase
     public function testUpdateSuccess()
     {
         $this->data['title'] = 'First Name Updated';
+        $this->data['label'] = 'First Name Updated';
 
         $response = $this
             ->putJson(route('forms.fields.update', [$this->form->id, $this->question->id]), $this->data)
             ->assertStatus(200)
             ->assertJson([
-                'title' => 'First Name Updated',
+                'label' => 'First Name Updated',
             ]);
     }
 }

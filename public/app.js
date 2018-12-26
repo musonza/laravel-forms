@@ -1741,13 +1741,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-<<<<<<< HEAD
 
 
-=======
-
-
->>>>>>> cac7ca342bc8bf6e77a5865ac5a4d1ff14e05f20
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'FieldsComponent',
   data: function data() {
@@ -1831,7 +1826,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'FormFieldsComponent',
+  name: "FormFieldsComponent",
 
   data: function data() {
     return {
@@ -1840,7 +1835,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     };
   },
 
-  props: ['formModel'],
+  props: ["formModel"],
 
   methods: {
     remove: function remove(item, field) {
@@ -1848,7 +1843,10 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       field.options = [].concat(_toConsumableArray(field.options));
     },
     addField: function addField() {
-      this.$router.push({ name: 'formFieldCreate', params: { id: this.$route.params.id } });
+      this.$router.push({
+        name: "formFieldCreate",
+        params: { id: this.$route.params.id }
+      });
     },
     updateField: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(field) {
@@ -1860,13 +1858,13 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
               case 0:
                 field.save().then(function (response) {
                   field = response;
-                  _this.alertSuccess('Successfully updated the field!');
+                  _this.alertSuccess("Successfully updated the field!");
                 }).catch(function (error) {
                   _this.alertError(_this.formatErrorMessage(error.response));
                 });
 
               case 1:
-              case 'end':
+              case "end":
                 return _context.stop();
             }
           }
@@ -1886,13 +1884,13 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return new __WEBPACK_IMPORTED_MODULE_1__models_Form__["a" /* default */]({ 'id': this.formId }).fields().$get();
+                return new __WEBPACK_IMPORTED_MODULE_1__models_Form__["a" /* default */]({ id: this.formId }).fields().$get();
 
               case 2:
                 this.formFields = _context2.sent;
 
               case 3:
-              case 'end':
+              case "end":
                 return _context2.stop();
             }
           }
@@ -1923,13 +1921,13 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                         case 0:
                           field.delete().then(function (response) {
                             _this2.formFields.splice(_this2.formFields.indexOf(field), 1);
-                            _this2.alertWarning('Successfully deleted the field!');
+                            _this2.alertWarning("Successfully deleted the field!");
                           }).catch(function (error) {
                             _this2.alertError(_this2.formatErrorMessage(error.response));
                           });
 
                         case 1:
-                        case 'end':
+                        case "end":
                           return _context3.stop();
                       }
                     }
@@ -1937,7 +1935,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
                 })), null, confirmation.title);
 
               case 2:
-              case 'end':
+              case "end":
                 return _context4.stop();
             }
           }
@@ -1954,7 +1952,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
     //Move this to vuex state
     getItems: function getItems() {
-      return ['Musonza\\Form\\Fields\\CheckBox', 'Musonza\\Form\\Fields\\Date', 'Musonza\\Form\\Fields\\File', 'Musonza\\Form\\Fields\\Password', 'Musonza\\Form\\Fields\\Radio', 'Musonza\\Form\\Fields\\Select', 'Musonza\\Form\\Fields\\Text', 'Musonza\\Form\\Fields\\TextArea', 'Musonza\\Form\\Fields\\Email', 'Musonza\\Form\\Fields\\Number'];
+      return ["Musonza\\Form\\Fields\\CheckBox", "Musonza\\Form\\Fields\\Date", "Musonza\\Form\\Fields\\File", "Musonza\\Form\\Fields\\Password", "Musonza\\Form\\Fields\\Radio", "Musonza\\Form\\Fields\\Select", "Musonza\\Form\\Fields\\Text", "Musonza\\Form\\Fields\\TextArea", "Musonza\\Form\\Fields\\Email", "Musonza\\Form\\Fields\\Number"];
     }
   },
 
@@ -2283,14 +2281,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_FieldsComponent__ = __webpack_require__("./resources/js/components/FieldsComponent.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_FieldsComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_FieldsComponent__);
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'FormsPage',
+  name: "FormsPage",
 
   components: {
     FieldsComponent: __WEBPACK_IMPORTED_MODULE_0__components_FieldsComponent___default.a
@@ -2316,6 +2310,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__event_bus_js__ = __webpack_require__("./resources/js/event-bus.js");
 
 
+var _name$$_veeValidate$c;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 
@@ -2323,9 +2321,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+/* harmony default export */ __webpack_exports__["default"] = (_name$$_veeValidate$c = {
   name: "FormEditPage",
-
   $_veeValidate: {
     validator: "new"
   },
@@ -2344,17 +2341,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         status: null
       },
       formModel: {
-<<<<<<< HEAD
         submissions_count: 0
-=======
-        'submissions_count': 0
->>>>>>> cac7ca342bc8bf6e77a5865ac5a4d1ff14e05f20
       },
       creatingForm: true,
       panel: [true]
     };
   },
-
   methods: {
     getForm: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(id) {
@@ -2499,22 +2491,23 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   created: function created() {
     var _this3 = this;
 
-<<<<<<< HEAD
     __WEBPACK_IMPORTED_MODULE_5__event_bus_js__["a" /* EventBus */].$on("delete_submission", function () {
-=======
-    __WEBPACK_IMPORTED_MODULE_5__event_bus_js__["a" /* EventBus */].$on('delete_submission', function () {
->>>>>>> cac7ca342bc8bf6e77a5865ac5a4d1ff14e05f20
       _this3.formModel.submissions_count--;
     });
-  },
-  mounted: function mounted() {
-    var id = this.$route.params.id;
-    if (id && id != 0) {
-      this.creatingForm = false;
-      this.getForm(id);
-    }
   }
-});
+}, _defineProperty(_name$$_veeValidate$c, "created", function created() {
+  var _this4 = this;
+
+  __WEBPACK_IMPORTED_MODULE_5__event_bus_js__["a" /* EventBus */].$on("delete_submission", function () {
+    _this4.formModel.submissions_count--;
+  });
+}), _defineProperty(_name$$_veeValidate$c, "mounted", function mounted() {
+  var id = this.$route.params.id;
+  if (id && id != 0) {
+    this.creatingForm = false;
+    this.getForm(id);
+  }
+}), _name$$_veeValidate$c);
 
 /***/ }),
 
@@ -50866,13 +50859,10 @@ var render = function() {
               _vm._v(" "),
               _vm.formModel.id
                 ? _c("v-tab-item", [_c("form-submissions-component")], 1)
-<<<<<<< HEAD
                 : _vm._e(),
               _vm._v(" "),
               _vm.formModel.id
                 ? _c("v-tab-item", [_vm._v("Settings here...")])
-=======
->>>>>>> cac7ca342bc8bf6e77a5865ac5a4d1ff14e05f20
                 : _vm._e()
             ],
             1
@@ -51244,53 +51234,13 @@ var render = function() {
                         _vm._v(":::")
                       ]),
                       _vm._v(
-                        " " +
+                        "\n            " +
                           _vm._s(field.label) +
                           " (" +
                           _vm._s(field.position) +
-                          ")\n                "
+                          ")\n            "
                       )
-<<<<<<< HEAD
                     ])
-=======
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "right" },
-                      [
-                        _c(
-                          "v-card-actions",
-                          [
-                            _c(
-                              "v-tooltip",
-                              { staticClass: "mr-3", attrs: { bottom: "" } },
-                              [
-                                _c(
-                                  "a",
-                                  {
-                                    attrs: { slot: "activator" },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.updateField(field)
-                                      }
-                                    },
-                                    slot: "activator"
-                                  },
-                                  [_c("v-icon", [_vm._v("save")])],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c("span", [_vm._v("Save")])
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
->>>>>>> cac7ca342bc8bf6e77a5865ac5a4d1ff14e05f20
                   ]),
                   _vm._v(" "),
                   _c(
@@ -51409,9 +51359,7 @@ var render = function() {
                                               _c("strong", [
                                                 _vm._v(_vm._s(data.item))
                                               ]),
-                                              _vm._v(
-                                                " \n                      "
-                                              )
+                                              _vm._v(" \n                  ")
                                             ]
                                           )
                                         ]

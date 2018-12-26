@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    use \Lookitsatravis\Listify\Listify;
+    // use \Lookitsatravis\Listify\Listify;
     protected $table = 'mc_questions';
     protected $fillable = [
         'title',
@@ -41,7 +41,7 @@ class Question extends Model
     public function __construct(array $attributes = array(), $exists = false) {
         parent::__construct($attributes, $exists);
 
-        $this->initListify();
+        // $this->initListify();
     }
 
     /**

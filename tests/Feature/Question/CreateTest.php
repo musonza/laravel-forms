@@ -33,27 +33,26 @@ class CreateTest extends TestCase
         $response
             ->assertStatus(200)
             ->assertJson([
-                'title' => 'First Name',
                 'label' => 'First Name Label',
                 'description' => 'Description',
                 'field_type' => 'Musonza\Form\Fields\Text',
             ]);
     }
 
-    public function testQuestionRequiresTitle()
-    {
-        $data = [
-            'label' => 'First Name Label',
-            'description' => 'Description',
-            'field_type' => Text::class,
-        ];
+    // public function testQuestionRequiresTitle()
+    // {
+    //     $data = [
+    //         'label' => 'First Name Label',
+    //         'description' => 'Description',
+    //         'field_type' => Text::class,
+    //     ];
 
-        $response = $this->postJson(route('forms.fields.store', $this->form->id), $data)
-            ->assertStatus(422)
-            ->assertJson([
-                'message' => 'The given data was invalid.',
-            ]);
-    }
+    //     $response = $this->postJson(route('forms.fields.store', $this->form->id), $data)
+    //         ->assertStatus(422)
+    //         ->assertJson([
+    //             'message' => 'The given data was invalid.',
+    //         ]);
+    // }
 
     public function testQuestionRequiresFieldType()
     {
