@@ -1741,8 +1741,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> cac7ca342bc8bf6e77a5865ac5a4d1ff14e05f20
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'FieldsComponent',
   data: function data() {
@@ -2339,7 +2344,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         status: null
       },
       formModel: {
+<<<<<<< HEAD
         submissions_count: 0
+=======
+        'submissions_count': 0
+>>>>>>> cac7ca342bc8bf6e77a5865ac5a4d1ff14e05f20
       },
       creatingForm: true,
       panel: [true]
@@ -2490,7 +2499,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   created: function created() {
     var _this3 = this;
 
+<<<<<<< HEAD
     __WEBPACK_IMPORTED_MODULE_5__event_bus_js__["a" /* EventBus */].$on("delete_submission", function () {
+=======
+    __WEBPACK_IMPORTED_MODULE_5__event_bus_js__["a" /* EventBus */].$on('delete_submission', function () {
+>>>>>>> cac7ca342bc8bf6e77a5865ac5a4d1ff14e05f20
       _this3.formModel.submissions_count--;
     });
   },
@@ -50853,10 +50866,13 @@ var render = function() {
               _vm._v(" "),
               _vm.formModel.id
                 ? _c("v-tab-item", [_c("form-submissions-component")], 1)
+<<<<<<< HEAD
                 : _vm._e(),
               _vm._v(" "),
               _vm.formModel.id
                 ? _c("v-tab-item", [_vm._v("Settings here...")])
+=======
+>>>>>>> cac7ca342bc8bf6e77a5865ac5a4d1ff14e05f20
                 : _vm._e()
             ],
             1
@@ -51234,7 +51250,47 @@ var render = function() {
                           _vm._s(field.position) +
                           ")\n                "
                       )
+<<<<<<< HEAD
                     ])
+=======
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "right" },
+                      [
+                        _c(
+                          "v-card-actions",
+                          [
+                            _c(
+                              "v-tooltip",
+                              { staticClass: "mr-3", attrs: { bottom: "" } },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: { slot: "activator" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.updateField(field)
+                                      }
+                                    },
+                                    slot: "activator"
+                                  },
+                                  [_c("v-icon", [_vm._v("save")])],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c("span", [_vm._v("Save")])
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+>>>>>>> cac7ca342bc8bf6e77a5865ac5a4d1ff14e05f20
                   ]),
                   _vm._v(" "),
                   _c(

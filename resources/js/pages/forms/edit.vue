@@ -1,4 +1,5 @@
 <script>
+<<<<<<< HEAD
 import Form from "@/models/Form";
 import FormActionsComponent from "@/components/FormActionsComponent";
 import FormFieldsComponent from "@/components/FormFieldsComponent";
@@ -6,6 +7,15 @@ import FormSubmissionsComponent from "@/components/FormSubmissionsComponent";
 import { EventBus } from "../../event-bus.js";
 export default {
   name: "FormEditPage",
+=======
+    import Form from '@/models/Form';
+    import FormActionsComponent from '@/components/FormActionsComponent';
+    import FormFieldsComponent from '@/components/FormFieldsComponent';
+    import FormSubmissionsComponent from '@/components/FormSubmissionsComponent';
+    import { EventBus } from '../../event-bus.js';
+    export default {
+      name: 'FormEditPage',
+>>>>>>> cac7ca342bc8bf6e77a5865ac5a4d1ff14e05f20
 
   $_veeValidate: {
     validator: "new"
@@ -17,6 +27,7 @@ export default {
     FormSubmissionsComponent
   },
 
+<<<<<<< HEAD
   data: () => ({
     payload: {
       title: "",
@@ -29,6 +40,20 @@ export default {
     creatingForm: true,
     panel: [true]
   }),
+=======
+      data: () => ({
+        payload: {
+          title: '',
+          description: '',
+          status: null,
+        },
+        formModel: {
+          'submissions_count': 0,
+        },
+        creatingForm: true,
+        panel: [true]
+      }),
+>>>>>>> cac7ca342bc8bf6e77a5865ac5a4d1ff14e05f20
 
   methods: {
     async getForm(id) {
@@ -94,11 +119,27 @@ export default {
     });
   },
 
+<<<<<<< HEAD
   mounted() {
     const id = this.$route.params.id;
     if (id && id != 0) {
       this.creatingForm = false;
       this.getForm(id);
+=======
+      created() {
+        EventBus.$on('delete_submission', () => {
+          this.formModel.submissions_count--;
+        });
+      },
+
+      mounted() {
+        const id = this.$route.params.id;
+        if (id && id != 0) {
+          this.creatingForm = false;
+          this.getForm(id);
+        }
+      },
+>>>>>>> cac7ca342bc8bf6e77a5865ac5a4d1ff14e05f20
     }
   }
 };
@@ -120,6 +161,7 @@ export default {
       <v-tabs-items>
         <v-tab-item>
           <v-expansion-panel v-model="panel" expand>
+<<<<<<< HEAD
             <v-expansion-panel-content>
               <div slot="header">
                 <h2 class="primary--text mb-1" v-if="formModel.id">Details</h2>
@@ -135,6 +177,23 @@ export default {
                     data-vv-name="title"
                     required
                   ></v-text-field>
+=======
+              <v-expansion-panel-content>
+                <div slot="header">
+                  <h2 class="primary--text mb-1" v-if="formModel.id">Details</h2>
+                </div>
+                <v-card class="pl-2 pr-2 pt-2 pb-2">
+                  <form>
+                    <v-text-field
+                      outline
+                      v-validate="'required'"
+                      v-model="payload.title"
+                      :error-messages="errors.collect('title')"
+                      label="Title"
+                      data-vv-name="title"
+                      required
+                    ></v-text-field>
+>>>>>>> cac7ca342bc8bf6e77a5865ac5a4d1ff14e05f20
 
                   <v-textarea
                     outline

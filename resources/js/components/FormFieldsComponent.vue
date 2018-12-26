@@ -117,6 +117,7 @@
                   <span class="sorting-handle">:::</span> {{ field.label }} ({{field.position}})
                   <!-- <strong><span class="handle">::</span></strong> {{ field.label }} -->
                 </div>
+<<<<<<< HEAD
 
               </div>
 
@@ -132,6 +133,21 @@
                     </v-tooltip>
                   </v-card-actions>
                 </div>
+=======
+                <div class="right">
+                  <v-card-actions>
+                    <v-tooltip bottom class="mr-3">
+                      <a slot="activator" @click="updateField(field)">
+                        <v-icon>save</v-icon>
+                      </a>
+                      <span>Save</span>
+                    </v-tooltip>
+                  </v-card-actions>
+                </div>
+              </div>
+
+              <v-card class="pl-2 pr-2 pt-2 pb-2">
+>>>>>>> cac7ca342bc8bf6e77a5865ac5a4d1ff14e05f20
                 <v-text-field
                   outline
                   v-model="field.label"
