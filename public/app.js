@@ -2149,11 +2149,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-
-  name: 'FormsComponent',
+  name: "FormsComponent",
   data: function data() {
     return {
-      headers: [{ text: 'ID', value: 'id' }, { text: 'Title', value: 'title' }, { text: 'Status', value: 'status.label', sortable: false }, { text: 'Submissions', value: 'submissions_count' }, { text: '', value: '', sortable: false }],
+      headers: [{ text: "ID", value: "id" }, { text: "Title", value: "title" }, { text: "Status", value: "status.label", sortable: false }, { text: "Submissions", value: "submissions_count" }, { text: "", value: "", sortable: false }],
       forms: []
     };
   },
@@ -2172,7 +2171,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 this.forms = _context.sent;
 
               case 3:
-              case 'end':
+              case "end":
                 return _context.stop();
             }
           }
@@ -2186,10 +2185,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       return getForms;
     }(),
     previewForm: function previewForm(form) {
-      alert('Preview Form');
+      window.open("/forms/" + form.id + "/submissions/create", "_blank");
     },
     editForm: function editForm(form) {
-      this.$router.push({ name: 'forms-edit', params: { id: form.id } });
+      this.$router.push({ name: "forms-edit", params: { id: form.id } });
     },
     deleteForm: function deleteForm(form) {
       var _this = this;
@@ -2209,13 +2208,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                 formModel.delete().then(function (response) {
                   _this.forms.splice(_this.forms.indexOf(form), 1);
-                  _this.alertWarning('Successfully deleted the form!');
+                  _this.alertWarning("Successfully deleted the form!");
                 }).catch(function (error) {
                   _this.alertError(_this.formatErrorMessage(error.response));
                 });
 
               case 4:
-              case 'end':
+              case "end":
                 return _context2.stop();
             }
           }
@@ -2223,7 +2222,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       })), null, confirmation.title);
     },
     newForm: function newForm() {
-      this.$router.push({ name: 'forms-edit', params: { id: 0 } });
+      this.$router.push({ name: "forms-edit", params: { id: 0 } });
     }
   },
 
@@ -50936,13 +50935,7 @@ var render = function() {
                           "text-color": "white"
                         }
                       },
-                      [
-                        _vm._v(
-                          "\n          " +
-                            _vm._s(props.item.status.label) +
-                            "\n        "
-                        )
-                      ]
+                      [_vm._v(_vm._s(props.item.status.label))]
                     )
                   ],
                   1
@@ -50964,7 +50957,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("\n          visibility\n        ")]
+                      [_vm._v("visibility")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -50978,7 +50971,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("\n          edit\n        ")]
+                      [_vm._v("edit")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -50991,7 +50984,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("\n          delete\n        ")]
+                      [_vm._v("delete")]
                     )
                   ],
                   1
