@@ -35,6 +35,10 @@ abstract class FormField
         $this->attributes['placeholder'] = $this->question->placeholder;
         $this->attributes = $this->attributes($this->attributes);
 
+        $input = '<input' . $this->attributes . '>';
+
+        //dd($input);
+
         return '<input' . $this->attributes . '>';
     }
 
@@ -75,6 +79,10 @@ abstract class FormField
     {
         if (!isset($this->attributes['name'])) {
             $this->attributes['name'] = $this->name;
+        }
+
+        if ($this->question->is_required) {
+            $this->attributes['required'] = true;
         }
 
         if (!isset($this->attributes['id'])) {

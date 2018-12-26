@@ -117,7 +117,12 @@
                   <span class="sorting-handle">:::</span> {{ field.label }} ({{field.position}})
                   <!-- <strong><span class="handle">::</span></strong> {{ field.label }} -->
                 </div>
-                <div class="right">
+
+              </div>
+
+              <v-card class="pl-2 pr-2 pt-2 pb-2">
+                <!-- move this -->
+                <div class="">
                   <v-card-actions>
                     <v-tooltip bottom class="mr-3">
                       <a slot="activator" @click="updateField(field)">
@@ -127,9 +132,6 @@
                     </v-tooltip>
                   </v-card-actions>
                 </div>
-              </div>
-
-              <v-card class="pl-2 pr-2 pt-2 pb-2">
                 <v-text-field
                   outline
                   v-model="field.label"

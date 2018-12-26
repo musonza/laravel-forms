@@ -1,5 +1,5 @@
 export default [
-  { path: '/', redirect: '/dashboard' },
+  { path: '/', redirect: '/forms' },
   {
     path: '/dashboard',
     name: 'dashboard',
