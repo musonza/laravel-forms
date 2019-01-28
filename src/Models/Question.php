@@ -6,14 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
+    // use \Lookitsatravis\Listify\Listify;
     protected $table = 'mc_questions';
     protected $fillable = [
-        'title',
         'label',
+        'placeholder',
+        'help_text',
         'description',
         'is_required',
         'properties',
         'field_type',
+        'options',
+        'default_value',
+        'columns_count',
         'form_id',
     ];
     /**
@@ -24,7 +29,20 @@ class Question extends Model
     protected $casts = [
         'is_required' => 'boolean',
         'properties' => 'array',
+        'options' => 'array',
+        'position' => 'integer',
     ];
+
+    protected $attributes = [
+        'options' => '{}',
+    ];
+
+    public function __construct(array $attributes = array(), $exists = false)
+    {
+        parent::__construct($attributes, $exists);
+
+        // $this->initListify();
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -46,8 +64,18 @@ class Question extends Model
         return $this;
     }
 
+    /**
+     * Get prefilled value for the field.
+     *
+     * @return mixed
+     */
+    public function getValueAttribute()
+    {
+        return "";
+    }
+
     public function field()
     {
-        return app($this->field_type);
+        return new $this->field_type($this, $this->options);
     }
 }

@@ -4,6 +4,7 @@ namespace Musonza\Form\Tests\Unit;
 
 use Form;
 use Musonza\Form\Fields\Text;
+use Musonza\Form\Fields\TextArea;
 use Musonza\Form\Tests\TestCase;
 
 class QuestionTest extends TestCase
@@ -17,7 +18,6 @@ class QuestionTest extends TestCase
         $this->form = Form::create(['title' => 'Contact Form']);
         $this->question = Form::createQuestion(
             [
-                'title' => 'First Name',
                 'label' => 'First Name',
                 'description' => 'Description',
                 'field_type' => Text::class,
@@ -42,6 +42,17 @@ class QuestionTest extends TestCase
         $this->assertInstanceOf(\Musonza\Form\Models\Form::class, $this->question->form);
     }
 
+    public function testUpdatesQuestion()
+    {
+        $this->question->update([
+            'label' => 'New Label',
+            'field_type' => TextArea::class,
+        ]);
+
+        $this->assertEquals('New Label', $this->question->label);
+        $this->assertInstanceOf(TextArea::class, $this->question->field());
+    }
+
     public function testDeleteQuestion()
     {
         $this->assertDatabaseHas($this->tablePrefix . 'questions', ['id' => 1]);
@@ -60,7 +71,6 @@ class QuestionTest extends TestCase
 
     public function testResolvesQuestionField()
     {
-        $field = $this->question->field();
-        $this->assertInstanceOf(Text::class, $field);
+        $this->assertInstanceOf(Text::class, $this->question->field());
     }
 }

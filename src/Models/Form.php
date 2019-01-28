@@ -10,6 +10,11 @@ class Form extends Model
     protected $fillable = [
         'title',
         'description',
+        'status',
+    ];
+
+    protected $with = [
+        'submissions',
     ];
 
     /**
@@ -19,6 +24,21 @@ class Form extends Model
      */
     public function questions()
     {
-        return $this->hasMany(Question::class);
+        return $this->hasMany(Question::class)->orderBy('position');
+    }
+
+    /**
+     * A form has many submissions.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function submissions()
+    {
+        return $this->hasMany(Submission::class);
+    }
+
+    public function addSubmission($submission)
+    {
+        return $this->submissions()->create($submission);
     }
 }
