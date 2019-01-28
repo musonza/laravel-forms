@@ -1,6 +1,23 @@
-[![Build Status](https://travis-ci.org/musonza/laravel-forms.svg?branch=master)](https://travis-ci.org/musonza/laravel-forms)
-
 Laravel Forms
+
+## Installation
+
+```bash
+composer require musonza/laravel-forms
+```
+
+Publish Assets
+
+```bash
+php artisan vendor:publish
+```
+
+## Configuration
+Check the published file config/laravel_forms.php
+
+- You can enable / disable captcha
+- You can configure the path for your forms dashboard
+- You can add custom field types
 
 ## Forms List
 <img src="screenshots/forms_list.png" alt="forms list">
