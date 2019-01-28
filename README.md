@@ -2,22 +2,19 @@ Laravel Forms
 
 ## Installation
 1. Install composer package
-```sh
-composer require musonza/laravel-forms
-```
+    ```sh
+    composer require musonza/laravel-forms
+    ```
 
 1. Publish Assets
+    ```sh
+    php artisan vendor:publish
+    ```
 
-```sh
-php artisan vendor:publish
-```
-
-## Configuration
-Check the published file config/laravel_forms.php
-
-- You can enable / disable captcha
-- You can configure the path for your forms dashboard
-- You can add custom field types
+1. Check the published file config/laravel_forms.php
+    - You can enable / disable captcha
+    - You can configure the path for your forms dashboard
+    - You can add custom field types
 
 ## Forms List
 <img src="screenshots/forms_list.png" alt="forms list">
