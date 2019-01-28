@@ -14,6 +14,10 @@
     ```sh
     php artisan vendor:publish
     ```
+1. Add Form facade to `config/app.php`
+    ```php
+    'Form' => Musonza\Form\Facades\FormFacade::class,
+    ```
 
 1. Check the published file config/laravel_forms.php
     - You can enable / disable captcha
