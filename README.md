@@ -1,14 +1,14 @@
 Laravel Forms
 
 ## Installation
-
-```bash
+1. Install composer package
+```sh
 composer require musonza/laravel-forms
 ```
 
-Publish Assets
+1. Publish Assets
 
-```bash
+```sh
 php artisan vendor:publish
 ```
 
