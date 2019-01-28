@@ -1,5 +1,7 @@
 Laravel Forms
 
+<img src="screenshots/forms_list.png" alt="forms list">
+
 ## Installation
 1. Install composer package
     ```sh
@@ -15,9 +17,6 @@ Laravel Forms
     - You can enable / disable captcha
     - You can configure the path for your forms dashboard
     - You can add custom field types
-
-## Forms List
-<img src="screenshots/forms_list.png" alt="forms list">
 
 ## Adding a Form
 <img src="screenshots/new_form.png" alt="adding a form">
