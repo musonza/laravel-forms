@@ -44,3 +44,6 @@
 
 ## TODO
 - Multi page forms
+
+## Credits
+https://github.com/laravel/telescope for some of the front-end structuring 
