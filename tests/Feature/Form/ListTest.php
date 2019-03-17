@@ -7,7 +7,7 @@ use Musonza\Form\Tests\TestCase;
 
 class ListTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         Form::create(['title' => 'Contact Form1']);

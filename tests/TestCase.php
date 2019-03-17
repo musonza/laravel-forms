@@ -8,7 +8,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     public $tablePrefix = 'mc_';
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

@@ -14,7 +14,7 @@ class AnswerTest extends TestCase
     protected $question;
     protected $answer;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->form = Form::create(['title' => 'Contact Form']);

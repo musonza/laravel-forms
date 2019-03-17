@@ -7,11 +7,6 @@ use Musonza\Form\Tests\TestCase;
 
 class CreateTest extends TestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
     public function testCreateSuccess()
     {
         $response = $this->postJson(route('forms.store'), ['title' => 'Contact Form', 'description' => 'Our Form']);

@@ -12,7 +12,7 @@ class UpdateTest extends TestCase
      */
     private $form;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->form = Form::create(['title' => 'Contact Form']);
@@ -21,9 +21,9 @@ class UpdateTest extends TestCase
     public function testUpdateSuccess()
     {
         $response = $this->putJson(route('forms.update', $this->form->id), [
-          'title' => 'Contact Form2',
-          'label' => 'Contact Form2',
-          'description' => 'Our Form2'
+            'title' => 'Contact Form2',
+            'label' => 'Contact Form2',
+            'description' => 'Our Form2',
         ]);
 
         $response

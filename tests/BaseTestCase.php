@@ -30,7 +30,7 @@ trait BaseTestCase
         $this->migrateTestTables();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->rollbackTestTables();
         (new CreateFormTables)->down();
