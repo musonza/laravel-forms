@@ -73393,7 +73393,7 @@ var getters = {
   }
 };
 
-var BASEURL = 'http://127.0.0.1:8000';
+var BASEURL = ''; //http://127.0.0.1:8000';
 
 var actions = {
   loadForms: function loadForms(_ref) {
