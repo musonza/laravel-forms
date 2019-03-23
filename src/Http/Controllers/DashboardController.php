@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 class DashboardController extends Controller
 {
     /**
-     * Display the Telescope view.
+     * Display the view.
      *
      * @return \Illuminate\Http\Response
      */
