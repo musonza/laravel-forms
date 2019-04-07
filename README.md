@@ -18,11 +18,20 @@
     ```php
     'Form' => Musonza\Form\Facades\FormFacade::class,
     ```
+    
+1. Run migrations
+    ```sh
+    php artisan migrate
+    ```  
 
 1. Check the published file config/laravel_forms.php
     - You can enable / disable captcha
     - You can configure the path for your forms dashboard
     - You can add custom field types
+    
+1. Access dashboard at
+
+    http//your-url.com/laravel-forms (you can change the path in config/laravel_forms.php)
 
 ## Adding a Form
 <img src="screenshots/new_form.png" alt="adding a form">
