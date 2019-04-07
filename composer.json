@@ -8,7 +8,8 @@
     }
   ],
   "require": {
-    "league/fractal": "^0.17.0"
+    "league/fractal": "^0.17.0",
+    "guzzlehttp/guzzle": "^6.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^5.7|6.2|^7.0",
