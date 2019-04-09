@@ -26,7 +26,6 @@ mix
     .js('resources/js/app.js', 'public')
     .sass('resources/sass/app.scss', 'public')
     .version()
-    // .copy('public', '../telescopetest/public/vendor/telescope')
     .webpackConfig({
         resolve: {
             symlinks: false,
