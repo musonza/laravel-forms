@@ -1,6 +1,7 @@
 # Laravel Forms
 
 [![Build Status](https://travis-ci.org/musonza/laravel-forms.svg?branch=master)](https://travis-ci.org/musonza/laravel-forms)
+[![Packagist](https://img.shields.io/packagist/v/musonza/laravel-forms.svg)](https://packagist.org/packages/musonza/laravel-forms)
 
 <img src="screenshots/forms_list.png" alt="forms list">
 
