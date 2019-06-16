@@ -2,7 +2,6 @@
 
 namespace Musonza\Form\Http\Controllers;
 
-use Form;
 use Illuminate\Http\Request;
 use Musonza\Form\Http\Requests\CreateFormQuestionRequest;
 use Musonza\Form\Http\Requests\UpdateFormQuestionRequest;
@@ -13,6 +12,16 @@ use Musonza\Form\Transformers\FieldTypeTransformer;
 
 class FormFieldController extends Controller
 {
+    /**
+     * @var FieldTypeTransformer
+     */
+    private $fieldTypeTransformer;
+
+    /**
+     * @var FieldTransformer
+     */
+    private $fieldTransformer;
+
     public function __construct(FieldTransformer $fieldTransformer, FieldTypeTransformer $fieldTypeTransformer)
     {
         $this->fieldTransformer = $fieldTransformer;
