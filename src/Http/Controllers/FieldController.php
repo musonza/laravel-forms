@@ -2,11 +2,15 @@
 
 namespace Musonza\Form\Http\Controllers;
 
-use Form;
 use Musonza\Form\Transformers\FieldTypeTransformer;
 
 class FieldController extends Controller
 {
+    /**
+     * @var FieldTypeTransformer
+     */
+    private $fieldTransformer;
+
     public function __construct(FieldTypeTransformer $fieldTransformer)
     {
         $this->fieldTransformer = $fieldTransformer;

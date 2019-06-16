@@ -2,7 +2,7 @@
 
 namespace Musonza\Form\Http\Controllers;
 
-use Form;
+use Musonza\Form\Form;
 use Musonza\Form\Http\Requests\CreateFormRequest;
 use Musonza\Form\Http\Requests\DeleteFormRequest;
 use Musonza\Form\Http\Requests\ListFormRequest;
@@ -13,15 +13,20 @@ use Musonza\Form\Transformers\FormTransformer;
 class FormController extends Controller
 {
     private $formTransformer;
+    /**
+     * @var Form
+     */
+    private $form;
 
     /**
      * FormController constructor.
      *
      * @param FormTransformer $formTransformer
      */
-    public function __construct(FormTransformer $formTransformer)
+    public function __construct(FormTransformer $formTransformer, Form $form)
     {
         $this->formTransformer = $formTransformer;
+        $this->form = $form;
     }
 
     /**
@@ -58,7 +63,7 @@ class FormController extends Controller
      */
     public function store(CreateFormRequest $request)
     {
-        $form = Form::create($request->validated());
+        $form = $this->form->create($request->validated());
 
         return response($this->formTransformer->transformItem($form));
     }
@@ -80,9 +85,10 @@ class FormController extends Controller
     /**
      * Deletes a form.
      *
-     * @param  DeleteFormRequest $request
-     * @param  FormModel         $form
+     * @param DeleteFormRequest $request
+     * @param FormModel $form
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(DeleteFormRequest $request, FormModel $form)
     {

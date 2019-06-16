@@ -2,8 +2,8 @@
 
 namespace Musonza\Form\Http\Controllers;
 
-use Form;
 use Illuminate\Http\Request;
+use Musonza\Form\Form;
 use Musonza\Form\Http\Requests\CreateFormSubmissionRequest;
 use Musonza\Form\Models\Form as FormModel;
 use Musonza\Form\Models\Submission;
@@ -12,12 +12,29 @@ use Musonza\Form\Transformers\SubmissionTransformer;
 
 class FormSubmissionController extends Controller
 {
+    /**
+     * @var FormTransformer
+     */
     protected $formTransformer;
 
-    public function __construct(FormTransformer $formTransformer, SubmissionTransformer $submissionTransformer)
-    {
+    /**
+     * @var SubmissionTransformer
+     */
+    private $submissionTransformer;
+
+    /**
+     * @var Form
+     */
+    private $form;
+
+    public function __construct(
+        FormTransformer $formTransformer,
+        SubmissionTransformer $submissionTransformer,
+        Form $form
+    ){
         $this->formTransformer = $formTransformer;
         $this->submissionTransformer = $submissionTransformer;
+        $this->form = $form;
     }
 
     public function index(FormModel $form)
@@ -38,7 +55,7 @@ class FormSubmissionController extends Controller
             return response($form);
         }
 
-        $googleRecaptchaEnabled = Form::googleRecaptchaEnabled();
+        $googleRecaptchaEnabled = $this->form->googleRecaptchaEnabled();
 
         return view('laravel-forms::submissions.edit', compact('form', 'googleRecaptchaEnabled'));
     }
