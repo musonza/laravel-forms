@@ -2,7 +2,7 @@
 
 namespace Musonza\Form\Http\Requests;
 
-use Form;
+use Musonza\Form\Form;
 use Illuminate\Foundation\Http\FormRequest;
 use Musonza\Form\Rules\ReCaptcha;
 
@@ -25,9 +25,12 @@ class CreateFormSubmissionRequest extends FormRequest
      */
     public function rules()
     {
+        /** @var  $form Form */
+        $form = app(Form::class);
+
         return [
             'g-recaptcha-response' => [
-                Form::googleRecaptchaEnabled() ? 'required' : '',
+                $form->googleRecaptchaEnabled() ? 'required' : '',
                 new ReCaptcha,
             ],
         ];
