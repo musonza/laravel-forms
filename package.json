@@ -24,7 +24,7 @@
     "laravel-mix": "^2.0",
     "lodash": "^4.17.4",
     "moment": "^2.10.6",
-    "moment-timezone": "^0.5.21",
+    "moment-timezone": "^0.5.35",
     "popper.js": "^1.14.5",
     "sql-formatter": "^2.3.1",
     "stylus": "^0.54.5",
