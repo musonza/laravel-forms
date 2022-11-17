@@ -12,7 +12,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.1.1",
     "@vue/cli-plugin-eslint": "^3.1.5",
-    "@vue/cli-service": "^3.1.4",
+    "@vue/cli-service": "^5.0.8",
     "axios": "^0.18",
     "babel-eslint": "^10.0.1",
     "bootstrap": "^4.0.0",
